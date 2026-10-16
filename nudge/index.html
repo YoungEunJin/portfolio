@@ -1,0 +1,1000 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>진영은 · Nudge Healthcare Portfolio</title>
+<meta name="description" content="넛지헬스케어 서비스 기획 채용전환형 인턴십 지원 포트폴리오 · 진영은">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  :root {
+    --bg: #ffffff; --card: #f8f9fa; --card-2: #f1f3f5; --line: #e9ecef; --line-2: #dee2e6;
+    --ink: #111418; --ink-2: #3d434b; --mute: #6b7280; --faint: #9aa1ab;
+    --dark: #16191d; --dark-2: #22262c; --dark-line: #343a42; --on-dark: #f1f3f5; --on-dark-2: #a9b0ba;
+    --y: #ffd400; --y-soft: #fff6cc; --y-ink: #8a6d00;
+    --gray-mark: #adb5bd;
+    --r: 20px; --r-sm: 12px;
+    --gut: max(16px, 4vw);
+    --f: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--f); line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+  .num { font-variant-numeric: tabular-nums; letter-spacing: -0.03em; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-inline: var(--gut); }
+
+  /* nav */
+  .nav { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; gap: 20px; height: 64px; }
+  .nav .me { font-weight: 800; letter-spacing: -0.02em; text-decoration: none; white-space: nowrap; }
+  .nav .me i { font-style: normal; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--y); margin-right: 8px; box-shadow: 0 0 0 3px var(--y-soft); vertical-align: 1px; }
+  .nav ul { list-style: none; display: flex; gap: 2px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav ul a { display: block; padding: 8px 12px; font-size: 14px; font-weight: 600; color: var(--mute); text-decoration: none; border-radius: 999px; white-space: nowrap; }
+  .nav ul a:hover { color: var(--ink); background: var(--card); }
+  .nav ul a.on { color: var(--ink); background: var(--y-soft); }
+  .nav .cta { flex: none; padding: 9px 16px; border-radius: 999px; background: var(--ink); color: #fff; font-size: 14px; font-weight: 700; text-decoration: none; }
+  @media (max-width: 760px) { .nav .cta { display: none; } .nav ul { margin-left: 0; } .nav .me { display: none; } }
+
+  /* section frame */
+  section { padding-block: clamp(72px, 9vw, 120px); }
+  section + section { border-top: 1px solid var(--line); }
+  .eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+  .eyebrow b { color: var(--ink); background: var(--y); padding: 2px 8px; border-radius: 6px; margin-right: 8px; letter-spacing: .06em; }
+  h1, h2, h3 { letter-spacing: -0.035em; line-height: 1.22; text-wrap: balance; }
+  h2 { font-size: clamp(30px, 4.2vw, 48px); font-weight: 800; margin-top: 14px; }
+  h3 { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
+  .lede { font-size: clamp(17px, 1.6vw, 19px); color: var(--ink-2); margin-top: 16px; max-width: 46em; line-height: 1.75; }
+  mark { background: linear-gradient(transparent 58%, var(--y) 58%, var(--y) 92%, transparent 92%); color: inherit; padding: 0 2px; }
+  .muted { color: var(--mute); }
+  .small { font-size: 13.5px; color: var(--mute); line-height: 1.55; }
+
+  /* layout helpers */
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .s3 { grid-column: span 3; } .s4 { grid-column: span 4; } .s5 { grid-column: span 5; } .s6 { grid-column: span 6; } .s7 { grid-column: span 7; } .s8 { grid-column: span 8; } .s12 { grid-column: span 12; }
+  @media (max-width: 960px) { .s3 { grid-column: span 6; } .s4, .s5, .s6, .s7, .s8 { grid-column: span 12; } }
+  @media (max-width: 560px) { .s3 { grid-column: span 12; } }
+  .card { background: var(--card); border-radius: var(--r); padding: clamp(20px, 2.4vw, 28px); min-width: 0; }
+  .card.line { background: var(--bg); border: 1px solid var(--line-2); }
+  .card.dark { background: var(--dark); color: var(--on-dark); }
+  .card.yellow { background: var(--y); }
+  .card h3 + * { margin-top: 12px; }
+  .card p { color: var(--ink-2); }
+  .card.dark p { color: var(--on-dark-2); }
+  .card-k { font-size: 12.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--mute); margin-bottom: 10px; }
+  .card.dark .card-k { color: var(--on-dark-2); }
+  .stack { display: flex; flex-direction: column; gap: 16px; }
+
+  /* chips */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--bg); border: 1px solid var(--line-2); color: var(--ink-2); white-space: nowrap; }
+  .chip.y { background: var(--y); border-color: var(--y); color: var(--ink); }
+  .chip.d { background: var(--dark); border-color: var(--dark); color: #fff; }
+  .card.dark .chip { background: var(--dark-2); border-color: var(--dark-line); color: var(--on-dark); }
+
+  /* metric */
+  .metric .v { font-size: clamp(44px, 5.6vw, 72px); font-weight: 900; line-height: 1; letter-spacing: -0.05em; }
+  .metric .v small { font-size: .34em; font-weight: 700; letter-spacing: -0.01em; margin-left: 4px; color: var(--mute); }
+  .metric .l { margin-top: 10px; font-size: 14.5px; font-weight: 600; color: var(--ink-2); }
+  .metric.sm .v { font-size: clamp(34px, 3.6vw, 46px); }
+  .card.dark .metric .v small, .card.dark .metric .l { color: var(--on-dark-2); }
+  .card.yellow .metric .v small, .card.yellow .metric .l { color: rgba(17,20,24,.7); }
+  .hl { box-shadow: inset 0 -0.18em 0 var(--y); }
+
+  /* HERO */
+  .hero { padding-top: clamp(56px, 8vw, 104px); }
+  .hero h1 { font-size: clamp(38px, 6vw, 76px); font-weight: 900; margin-top: 20px; letter-spacing: -0.05em; line-height: 1.12; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(28px, 4vw, 56px); align-items: end; margin-top: 8px; }
+  .hero .who { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14.5px; color: var(--mute); }
+  .hero .who b { color: var(--ink); }
+  .board { background: var(--dark); border-radius: 28px; padding: 10px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .board > a { display: block; background: var(--dark-2); border-radius: 20px; padding: 22px 22px 20px; text-decoration: none; color: var(--on-dark); transition: transform .2s ease, background .2s ease; }
+  .board > a:hover { background: #2b3038; transform: translateY(-2px); }
+  .board > a:first-child { background: var(--y); color: var(--ink); }
+  .board .v { white-space: nowrap; font-size: clamp(34px, 3.6vw, 52px); font-weight: 900; line-height: 1; letter-spacing: -0.05em; }
+  .board .v small { font-size: .38em; font-weight: 700; margin-left: 3px; opacity: .7; }
+  .board .l { margin-top: 12px; font-size: 13.5px; font-weight: 600; color: var(--on-dark-2); line-height: 1.45; }
+  .board > a:first-child .l { color: rgba(17,20,24,.72); }
+  .board .t { font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: var(--on-dark-2); margin-bottom: 14px; }
+  .board > a:first-child .t { color: rgba(17,20,24,.6); }
+  @media (max-width: 900px) { .hero-grid { grid-template-columns: minmax(0, 1fr); } }
+
+  .comp { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: clamp(40px, 5vw, 64px); }
+  .comp a { display: block; text-decoration: none; border: 1px solid var(--line-2); border-radius: 16px; padding: 18px; transition: border-color .2s ease; }
+  .comp a:hover { border-color: var(--ink); }
+  .comp .n { font-size: 12.5px; font-weight: 800; color: var(--y-ink); letter-spacing: .08em; }
+  .comp .t { font-size: 17px; font-weight: 800; margin-top: 6px; letter-spacing: -0.02em; }
+  .comp .p { font-size: 14px; color: var(--mute); margin-top: 4px; line-height: 1.5; }
+  @media (max-width: 900px) { .comp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 480px) { .comp { grid-template-columns: minmax(0, 1fr); } }
+
+  /* fit table */
+  .fit { width: 100%; border-collapse: collapse; }
+  .fit th, .fit td { text-align: left; padding: 16px 12px; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 15px; }
+  .fit th { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); padding-top: 0; }
+  .fit td:first-child { font-weight: 800; white-space: nowrap; }
+  .fit tr:last-child td { border-bottom: 0; }
+  .fit .go { color: var(--ink-2); }
+  @media (max-width: 640px) { .fit thead { display: none; } .fit tr { display: block; padding: 12px 0; border-bottom: 1px solid var(--line); } .fit td { display: block; border: 0; padding: 2px 0; } }
+
+  /* project header */
+  .ph { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-bottom: clamp(32px, 4vw, 48px); }
+  .ph .tldr { margin-top: 18px; display: flex; gap: 12px; align-items: baseline; font-size: 17px; font-weight: 700; color: var(--ink); max-width: 44em; }
+  .ph .tldr span { flex: none; font-size: 12px; font-weight: 800; letter-spacing: .12em; padding: 3px 8px; border-radius: 6px; background: var(--ink); color: #fff; }
+  .ph .big-no { font-size: clamp(80px, 12vw, 160px); font-weight: 900; line-height: .8; letter-spacing: -0.06em; color: var(--card-2); user-select: none; }
+  @media (max-width: 760px) { .ph { grid-template-columns: minmax(0, 1fr); } .ph .big-no { display: none; } .ph .tldr { flex-direction: column; gap: 6px; } }
+
+  /* reframe */
+  .reframe { display: grid; grid-template-columns: minmax(0, 1fr) 44px minmax(0, 1.25fr); align-items: stretch; gap: 0; }
+  .reframe > div { border-radius: 16px; padding: 18px 20px; }
+  .reframe .from { background: var(--bg); border: 1px dashed var(--line-2); color: var(--mute); }
+  .reframe .from s { text-decoration-thickness: 2px; text-decoration-color: var(--faint); }
+  .reframe .to { background: var(--dark); color: #fff; }
+  .reframe .to b { color: var(--y); }
+  .reframe .k { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .12em; margin-bottom: 6px; color: var(--mute); }
+  .reframe .to .k { color: var(--on-dark-2); }
+  .reframe .q { font-size: 19px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.4; }
+  .reframe .arr { display: grid; place-items: center; font-size: 22px; color: var(--ink); font-weight: 900; }
+  @media (max-width: 640px) { .reframe { grid-template-columns: minmax(0, 1fr); } .reframe .arr { transform: rotate(90deg); padding: 6px 0; } }
+
+  /* bars */
+  .bars { display: flex; flex-direction: column; gap: 12px; }
+  .bar { display: grid; grid-template-columns: minmax(96px, 150px) minmax(0, 1fr) 60px; gap: 12px; align-items: center; font-size: 14.5px; position: relative; }
+  .bar .nm { color: var(--ink-2); font-weight: 600; }
+  .bar .tr { height: 14px; background: var(--card-2); border-radius: 4px; overflow: hidden; }
+  .card:not(.line) .bar .tr { background: #e7eaee; }
+  .bar .fl { display: block; height: 100%; width: var(--w); background: var(--gray-mark); border-radius: 0 4px 4px 0; transform-origin: left; }
+  .bar.top .fl { background: var(--y); box-shadow: inset 0 0 0 1px rgba(138,109,0,.35); }
+  .bar.top .nm { color: var(--ink); font-weight: 800; }
+  .bar .vv { text-align: right; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .bar:hover .tr { outline: 2px solid var(--line-2); outline-offset: 2px; }
+  .reveal .fl { transform: scaleX(0); transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in .fl { transform: scaleX(1); }
+
+  /* priority matrix */
+  .matrix-wrap { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 16px; }
+  @media (max-width: 960px) { .matrix-wrap { grid-template-columns: minmax(0, 1fr); } }
+  .mx { display: grid; grid-template-columns: 64px repeat(3, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(118px, auto)) 30px; gap: 8px; }
+  .mx .ylab { grid-column: 1; display: grid; place-items: center; text-align: center; font-size: 12.5px; font-weight: 800; color: var(--mute); line-height: 1.35; }
+  .mx .xlab { grid-row: 3; display: grid; place-items: center; font-size: 12.5px; font-weight: 800; color: var(--mute); }
+  .mx .cell { background: var(--bg); border: 1px solid var(--line-2); border-radius: 14px; padding: 10px; display: flex; flex-direction: column; gap: 8px; justify-content: flex-start; min-width: 0; }
+  .mx .cell.sweet { background: var(--y-soft); border-color: #f2d65a; }
+  .mx .cell .zone { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--faint); }
+  .mx .cell.sweet .zone { color: var(--y-ink); }
+  .mx button { font: inherit; text-align: left; cursor: pointer; border-radius: 10px; padding: 9px 10px; font-size: 13.5px; font-weight: 700; line-height: 1.35; border: 1.5px solid var(--line-2); background: var(--bg); color: var(--ink); transition: border-color .15s ease, transform .15s ease; min-height: 44px; }
+  .mx button:hover { border-color: var(--ink); }
+  .mx button em { display: block; font-style: normal; font-size: 11.5px; font-weight: 800; margin-top: 3px; letter-spacing: .02em; }
+  .mx button[data-d="v1"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .mx button[data-d="v1"] em { color: var(--y); }
+  .mx button[data-d="hold"] em { color: var(--mute); }
+  .mx button[data-d="road"] { border-style: dashed; }
+  .mx button[data-d="road"] em { color: var(--mute); }
+  .mx button[aria-pressed="true"] { box-shadow: 0 0 0 3px var(--y); transform: translateY(-1px); }
+  .mx.two { grid-template-columns: 64px repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(2, minmax(128px, auto)) 30px; }
+  .mx .zm { display: none; }
+  @media (max-width: 600px) {
+    .mx, .mx.two { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+    .mx .ylab, .mx .xlab, .mx > div:empty { display: none; }
+    .mx .cell { grid-row: auto !important; grid-column: auto !important; }
+    .mx .zm { display: inline; }
+  }
+  .mx-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 14px; font-size: 13px; color: var(--mute); font-weight: 600; }
+  .mx-legend i { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; border: 1.5px solid var(--line-2); }
+  .mx-legend .a i { background: var(--ink); border-color: var(--ink); }
+  .mx-legend .c i { border-style: dashed; }
+  .detail .dk { font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--on-dark-2); }
+  .detail h4 { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; margin-top: 8px; color: #fff; }
+  .detail .dec { display: inline-block; margin-top: 12px; font-size: 13px; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: var(--y); color: var(--ink); }
+  .detail .dec.hold, .detail .dec.road { background: var(--dark-2); color: var(--on-dark); border: 1px solid var(--dark-line); }
+  .detail dl { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 10px 14px; margin-top: 18px; font-size: 14.5px; }
+  .detail dt { color: var(--on-dark-2); font-weight: 700; }
+  .detail dd { color: var(--on-dark); }
+  .detail .why { margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--dark-line); color: var(--on-dark); font-size: 15px; line-height: 1.65; }
+
+  /* flow */
+  .flow { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; counter-reset: st; }
+  .flow > div { position: relative; padding: 0 10px 0 0; }
+  .flow > div::before { counter-increment: st; content: counter(st, decimal-leading-zero); display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--bg); border: 2px solid var(--ink); font-size: 12px; font-weight: 800; position: relative; z-index: 1; }
+  .flow > div::after { content: ""; position: absolute; left: 34px; right: 0; top: 16px; height: 2px; background: var(--line-2); }
+  .flow > div:last-child::after { display: none; }
+  .flow > div.on::before { background: var(--y); border-color: var(--y); }
+  .flow b { display: block; font-size: 15px; margin-top: 12px; letter-spacing: -0.02em; }
+  .flow span { display: block; font-size: 13.5px; color: var(--mute); margin-top: 2px; line-height: 1.45; }
+  @media (max-width: 760px) {
+    .flow { grid-auto-flow: row; gap: 14px; }
+    .flow > div { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 14px; padding: 0; }
+    .flow > div::before { grid-row: span 2; }
+    .flow > div::after { left: 16px; right: auto; top: 34px; bottom: -14px; width: 2px; height: auto; }
+    .flow b { margin-top: 5px; }
+  }
+
+  /* role */
+  .role { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .role > div { border-radius: 16px; padding: 18px 20px; border: 1px solid var(--line-2); }
+  .role > div.me { background: var(--y-soft); border-color: #f2d65a; }
+  .role h4 { font-size: 14px; font-weight: 800; margin-bottom: 8px; }
+  .role ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .role li { font-size: 14.5px; color: var(--ink-2); padding-left: 14px; position: relative; line-height: 1.5; }
+  .role li::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 2px; background: var(--ink); }
+  @media (max-width: 760px) { .role { grid-template-columns: minmax(0, 1fr); } }
+
+  .shot { border-radius: 16px; overflow: hidden; border: 1px solid var(--line-2); background: #fff; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .cap { font-size: 13px; color: var(--mute); margin-top: 8px; }
+  .fitline { display: flex; gap: 14px; align-items: baseline; margin-top: 16px; padding: 18px 22px; border-radius: 16px; background: var(--card); border-left: 4px solid var(--y); }
+  .fitline small { flex: none; font-size: 11.5px; font-weight: 900; letter-spacing: .14em; color: var(--y-ink); }
+  .fitline p { font-size: 16px; font-weight: 700; color: var(--ink); line-height: 1.6; }
+  @media (max-width: 640px) { .fitline { flex-direction: column; gap: 4px; } }
+
+  /* PROJECT 02 dark */
+  .dark-sec { background: var(--dark); color: var(--on-dark); border-top: 0 !important; }
+  .dark-sec + section { border-top: 0; }
+  .dark-sec .eyebrow { color: var(--on-dark-2); }
+  .dark-sec .lede { color: var(--on-dark-2); }
+  .dark-sec .ph .big-no { color: var(--dark-2); }
+  .dark-sec .ph .tldr { color: #fff; }
+  .dark-sec .ph .tldr span { background: var(--y); color: var(--ink); }
+  .dark-sec .chip { background: var(--dark-2); border-color: var(--dark-line); color: var(--on-dark); }
+  .dark-sec .chip.y { background: var(--y); border-color: var(--y); color: var(--ink); }
+  .dark-sec .card { background: var(--dark-2); }
+  .dark-sec .card p { color: var(--on-dark-2); }
+  .dark-sec .card-k { color: var(--on-dark-2); }
+  .dark-sec .cap { color: var(--on-dark-2); }
+  .dark-sec .shot { border-color: var(--dark-line); }
+  .dark-sec .fitline { background: var(--dark-2); }
+  .dark-sec .fitline small { color: var(--y); }
+  .dark-sec .fitline p { color: #fff; }
+
+  .chain { display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px minmax(0, 1fr); align-items: stretch; }
+  .chain .node { border-radius: 16px; padding: 18px; border: 1.5px solid var(--dark-line); background: var(--dark); }
+  .chain .node .k { font-size: 11.5px; font-weight: 800; letter-spacing: .12em; color: var(--on-dark-2); }
+  .chain .node b { display: block; margin-top: 8px; font-size: 17px; color: #fff; letter-spacing: -0.02em; line-height: 1.35; }
+  .chain .node p { margin-top: 6px; font-size: 13.5px; }
+  .chain .node.root { border-color: var(--y); background: rgba(255,212,0,.08); }
+  .chain .node.root .k { color: var(--y); }
+  .chain .node.sym { border-style: dashed; }
+  .chain .ar { display: grid; place-items: center; color: var(--on-dark-2); font-size: 20px; font-weight: 900; }
+  .trace { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 13px; font-weight: 800; color: var(--y); letter-spacing: .04em; }
+  .trace i { flex: 1; height: 2px; background: repeating-linear-gradient(90deg, var(--y) 0 8px, transparent 8px 14px); }
+  @media (max-width: 860px) { .chain { grid-template-columns: minmax(0, 1fr); } .chain .ar { transform: rotate(90deg); padding: 4px 0; } }
+
+  .tl { list-style: none; position: relative; display: flex; flex-direction: column; gap: 0; }
+  .tl li { position: relative; display: grid; grid-template-columns: 26px minmax(0, 1fr); column-gap: 16px; padding-bottom: 18px; }
+  .tl li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--on-dark-2); background: var(--dark-2); margin: 5px auto 0; position: relative; z-index: 1; }
+  .tl li::after { content: ""; position: absolute; left: 12px; top: 22px; bottom: 0; width: 2px; background: var(--dark-line); }
+  .tl li:last-child { padding-bottom: 0; }
+  .tl li:last-child::after { display: none; }
+  .tl li.key::before { background: var(--y); border-color: var(--y); box-shadow: 0 0 0 5px rgba(255,212,0,.18); }
+  .tl li.done::before { background: var(--on-dark); border-color: var(--on-dark); }
+  .tl .tt { font-size: 15.5px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+  .tl .tt small { font-size: 12px; font-weight: 800; color: var(--on-dark-2); margin-left: 8px; letter-spacing: .02em; }
+  .tl li.key .tt small { color: var(--y); }
+  .tl p { font-size: 14px; color: var(--on-dark-2); margin-top: 2px; line-height: 1.55; }
+
+  .vs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .vs > div { border-radius: 14px; padding: 16px 18px; }
+  .vs .no { border: 1.5px dashed var(--dark-line); }
+  .vs .yes { border: 1.5px solid var(--y); background: rgba(255,212,0,.07); }
+  .vs .k { font-size: 11.5px; font-weight: 800; letter-spacing: .1em; color: var(--on-dark-2); }
+  .vs .yes .k { color: var(--y); }
+  .vs b { display: block; font-size: 16px; color: #fff; margin-top: 6px; }
+  .vs p { font-size: 13.5px; margin-top: 4px; }
+  @media (max-width: 560px) { .vs { grid-template-columns: minmax(0, 1fr); } }
+
+  .res { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; align-items: end; }
+  .res .scr { border: 2px solid var(--on-dark-2); border-radius: 8px; display: grid; place-items: center; font-weight: 900; color: #fff; letter-spacing: -0.02em; }
+  .res .fhd { aspect-ratio: 16/9; width: 62%; margin: 0 auto; font-size: 18px; }
+  .res .uhd { aspect-ratio: 16/9; width: 100%; border-color: var(--y); font-size: 26px; color: var(--y); }
+  .res .lb { text-align: center; font-size: 12.5px; color: var(--on-dark-2); margin-top: 8px; font-variant-numeric: tabular-nums; }
+
+  /* PROJECT 03 */
+  .asis { display: grid; grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr); align-items: stretch; }
+  .asis .col { border-radius: 18px; padding: 22px; }
+  .asis .col.a { background: var(--bg); border: 1px dashed var(--line-2); }
+  .asis .col.b { background: var(--dark); color: var(--on-dark); }
+  .asis .tag { display: inline-block; font-size: 11.5px; font-weight: 900; letter-spacing: .14em; padding: 3px 9px; border-radius: 6px; background: var(--card-2); color: var(--mute); }
+  .asis .col.b .tag { background: var(--y); color: var(--ink); }
+  .files { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 18px 0; }
+  .file { border: 1px solid var(--line-2); border-radius: 8px; padding: 10px 8px; font-size: 12.5px; font-weight: 700; color: var(--mute); background: var(--card); text-align: center; position: relative; }
+  .file::before { content: ""; display: block; height: 4px; width: 60%; margin: 0 auto 8px; border-radius: 2px; background: var(--line-2); }
+  .file:nth-child(2) { transform: rotate(-2deg); } .file:nth-child(4) { transform: rotate(1.5deg); } .file:nth-child(6) { transform: rotate(-1deg); }
+  .master { border-radius: 12px; margin: 18px 0; overflow: hidden; border: 1px solid var(--dark-line); }
+  .master .mh { background: var(--y); color: var(--ink); font-size: 13px; font-weight: 900; padding: 8px 12px; }
+  .master .mr { display: grid; grid-template-columns: 1.4fr 1fr 1fr; font-size: 12.5px; color: var(--on-dark-2); }
+  .master .mr span { padding: 7px 12px; border-top: 1px solid var(--dark-line); }
+  .master .sk { display: inline-block; width: 70%; height: 6px; border-radius: 3px; background: var(--dark-line); vertical-align: middle; }
+  .master .mr.hd span { color: #fff; font-weight: 800; background: var(--dark-2); border-top: 0; }
+  .asis ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .asis li { font-size: 14.5px; padding-left: 22px; position: relative; line-height: 1.5; }
+  .asis .col.a li { color: var(--mute); }
+  .asis .col.a li::before { content: "×"; position: absolute; left: 0; font-weight: 900; color: var(--faint); }
+  .asis .col.b li::before { content: "✓"; position: absolute; left: 0; font-weight: 900; color: var(--y); }
+  .asis .mid { display: grid; place-items: center; font-size: 24px; font-weight: 900; }
+  @media (max-width: 760px) { .asis { grid-template-columns: minmax(0, 1fr); } .asis .mid { transform: rotate(90deg); padding: 6px 0; } }
+
+  .gauge { display: flex; align-items: center; gap: 20px; }
+  .gauge svg { flex: none; width: 128px; height: 128px; }
+  .gauge .trk { stroke: #e7eaee; }
+  .gauge .val { stroke: var(--y); transition: stroke-dashoffset 1.2s cubic-bezier(.2,.7,.2,1); }
+  .split { display: flex; height: 14px; border-radius: 4px; overflow: hidden; gap: 2px; margin-top: 14px; }
+  .split span { display: block; height: 100%; }
+  .split-l { display: flex; justify-content: space-between; font-size: 13px; color: var(--mute); margin-top: 8px; font-weight: 600; }
+  .split-l b { color: var(--ink); }
+  .mini { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 16px; }
+  .mini div { background: var(--bg); border-radius: 12px; padding: 12px; }
+  .mini b { display: block; font-size: 22px; font-weight: 900; letter-spacing: -0.03em; }
+  .mini span { font-size: 12.5px; color: var(--mute); font-weight: 600; }
+
+  /* PROJECT 04 */
+  .bench { width: 100%; border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; }
+  .bench th, .bench td { padding: 14px 14px; text-align: right; border-bottom: 1px solid var(--line); font-size: 15px; white-space: nowrap; }
+  .bench th { font-size: 12px; font-weight: 800; letter-spacing: .08em; color: var(--mute); text-transform: uppercase; }
+  .bench th small { display: block; font-size: 11px; letter-spacing: 0; text-transform: none; color: var(--faint); font-weight: 600; margin-top: 2px; }
+  .bench th:first-child, .bench td:first-child { text-align: left; }
+  .bench td:first-child { font-weight: 800; }
+  .bench tr:last-child td { border-bottom: 0; }
+  .bench td.best { font-weight: 900; }
+  .bench td.best span { background: var(--y); padding: 3px 8px; border-radius: 6px; }
+  .bench .role-tag { display: inline-block; margin-left: 8px; font-size: 11px; font-weight: 800; padding: 2px 8px; border-radius: 999px; background: var(--ink); color: #fff; vertical-align: 1px; }
+  .bench .role-tag.alt { background: var(--bg); color: var(--ink); border: 1px solid var(--ink); }
+  .tbl { overflow-x: auto; }
+
+  .scatter { width: 100%; height: auto; display: block; overflow: visible; }
+  .scatter .grid-l { stroke: var(--line); stroke-width: 1; }
+  .scatter .ax { fill: var(--mute); font-size: 12px; font-family: var(--f); font-variant-numeric: tabular-nums; }
+  .scatter .axt { fill: var(--ink-2); font-size: 12.5px; font-weight: 700; font-family: var(--f); }
+  .scatter .ideal { fill: var(--y-soft); }
+  .scatter .ideal-t { fill: var(--y-ink); font-size: 11.5px; font-weight: 800; letter-spacing: .08em; font-family: var(--f); }
+  .scatter .pt { cursor: pointer; }
+  .scatter .pt circle.m { stroke: #fff; stroke-width: 2; }
+  .scatter .pt .lab { font-size: 13.5px; font-weight: 800; fill: var(--ink); font-family: var(--f); }
+  .scatter .pt .sub { font-size: 12px; font-weight: 600; fill: var(--mute); font-family: var(--f); font-variant-numeric: tabular-nums; }
+  .scatter .hit { fill: transparent; }
+  .chart-box { position: relative; }
+  .tip { position: absolute; pointer-events: none; background: var(--dark); color: #fff; font-size: 13px; padding: 10px 12px; border-radius: 10px; line-height: 1.55; opacity: 0; transform: translate(-50%, calc(-100% - 14px)); transition: opacity .12s ease; white-space: nowrap; z-index: 5; font-variant-numeric: tabular-nums; }
+  .tip b { color: var(--y); }
+  .tip.show { opacity: 1; }
+
+  .pick { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .pick > div { border-radius: 14px; padding: 16px; background: var(--bg); }
+  .pick .k { font-size: 12px; font-weight: 800; color: var(--mute); letter-spacing: .04em; }
+  .pick b { display: block; font-size: 20px; font-weight: 900; letter-spacing: -0.03em; margin-top: 4px; }
+  .pick p { font-size: 13.5px; margin-top: 4px; }
+  @media (max-width: 480px) { .pick { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ecosystem */
+  .eco { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 16px; align-items: stretch; }
+  .eco .hub { background: var(--y); border-radius: var(--r); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; gap: 18px; }
+  .eco .hub .k { font-size: 12px; font-weight: 800; letter-spacing: .12em; color: rgba(17,20,24,.65); }
+  .eco .hub b { font-size: clamp(26px, 2.8vw, 34px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.15; }
+  .eco .hub p { font-size: 14px; color: rgba(17,20,24,.75); }
+  .eco .sat { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .eco .sat div { border: 1px solid var(--line-2); border-radius: 16px; padding: 16px 18px; display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 800; letter-spacing: -0.02em; }
+  .eco .sat div::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--ink); flex: none; }
+  .eco .note { grid-column: 1 / -1; }
+  @media (max-width: 860px) { .eco { grid-template-columns: minmax(0, 1fr); } }
+  @media (max-width: 520px) { .eco .sat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .cmp { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+  .cmp > div { background: var(--card); border-radius: var(--r); padding: 22px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .cmp .n { font-size: 12px; font-weight: 800; letter-spacing: .1em; color: var(--y-ink); }
+  .cmp h3 { font-size: 20px; }
+  .cmp .ev { font-size: 13.5px; color: var(--mute); }
+  .cmp .ev a { color: var(--ink); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--y); }
+  .cmp .at { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line-2); font-size: 14.5px; color: var(--ink-2); line-height: 1.6; }
+  .cmp .at b { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; color: var(--ink); margin-bottom: 4px; }
+  @media (max-width: 960px) { .cmp { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (max-width: 560px) { .cmp { grid-template-columns: minmax(0, 1fr); } }
+
+  /* platform proposals */
+  .bridge-hd { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 16px; align-items: center; margin-top: 36px; }
+  .bridge-hd > div { border-radius: var(--r); padding: 22px 24px; }
+  .bridge-hd .src { background: var(--card); }
+  .bridge-hd .dst { background: var(--dark); color: #fff; }
+  .bridge-hd .k { font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--mute); }
+  .bridge-hd .dst .k { color: var(--on-dark-2); }
+  .bridge-hd b { display: block; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; margin-top: 6px; line-height: 1.4; }
+  .bridge-hd .dst b em { font-style: normal; color: var(--y); }
+  .bridge-hd .ar { font-size: 26px; font-weight: 900; }
+  @media (max-width: 760px) { .bridge-hd { grid-template-columns: minmax(0, 1fr); } .bridge-hd .ar { transform: rotate(90deg); justify-self: center; } }
+  .props { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+  .prop { border: 1px solid var(--line-2); border-radius: var(--r); padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  .prop .top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .prop .svc { font-size: 22px; font-weight: 900; letter-spacing: -0.04em; }
+  .prop .dom { font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; background: var(--card-2); color: var(--ink-2); white-space: nowrap; }
+  .prop .q { background: var(--y-soft); border-radius: 12px; padding: 12px 14px; }
+  .prop .q small { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: var(--y-ink); }
+  .prop .q b { display: block; font-size: 16px; margin-top: 4px; line-height: 1.45; letter-spacing: -0.02em; }
+  .prop .hyp { font-size: 14.5px; color: var(--ink-2); line-height: 1.65; }
+  .prop .hyp b { font-size: 11.5px; letter-spacing: .1em; display: block; color: var(--ink); margin-bottom: 4px; }
+  .prop .kpi { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+  .prop .kpi small { display: block; font-size: 11.5px; font-weight: 800; letter-spacing: .1em; color: var(--mute); margin-bottom: 8px; }
+  @media (max-width: 960px) { .props { grid-template-columns: minmax(0, 1fr); } }
+  .caveat { margin-top: 16px; display: flex; gap: 12px; align-items: baseline; font-size: 14px; color: var(--mute); line-height: 1.6; }
+  .caveat b { flex: none; font-size: 11.5px; font-weight: 900; letter-spacing: .1em; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line-2); color: var(--ink-2); }
+
+  /* closing */
+  .closing h2 { font-size: clamp(32px, 5vw, 60px); font-weight: 900; letter-spacing: -0.05em; }
+  .pledge { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 40px; }
+  .pledge > div { border-top: 3px solid var(--ink); padding-top: 16px; }
+  .pledge .k { font-size: 12.5px; font-weight: 800; letter-spacing: .1em; color: var(--mute); }
+  .pledge b { display: block; font-size: 18px; margin-top: 6px; letter-spacing: -0.02em; }
+  .pledge p { font-size: 15px; color: var(--ink-2); margin-top: 6px; }
+  .pledge .from { display: block; font-size: 13px; color: var(--mute); margin-top: 10px; }
+  @media (max-width: 860px) { .pledge { grid-template-columns: minmax(0, 1fr); } }
+  .contact { margin-top: 56px; background: var(--y); border-radius: 28px; padding: clamp(24px, 4vw, 44px); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; }
+  .contact .t { font-size: clamp(24px, 3vw, 34px); font-weight: 900; letter-spacing: -0.04em; line-height: 1.25; }
+  .contact ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .contact a, .contact li > span { display: flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 700; font-size: 15.5px; }
+  .contact i { font-style: normal; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); color: var(--y); font-size: 12px; font-weight: 900; flex: none; }
+  .contact a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  @media (max-width: 760px) { .contact { grid-template-columns: minmax(0, 1fr); } }
+  footer { padding: 32px 0 48px; font-size: 13px; color: var(--mute); }
+
+  /* reveal */
+  .rv { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
+  .rv.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .rv, .reveal .fl, .gauge .val { transition: none !important; opacity: 1; transform: none; }
+  }
+  @media print {
+    .nav { display: none; }
+    .rv { opacity: 1; transform: none; }
+    .reveal .fl { transform: none; }
+    section { break-inside: avoid-page; padding-block: 40px; }
+    .dark-sec, .card.dark, .board, .contact, .chip.y, mark { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="섹션 이동">
+  <div class="wrap">
+    <a class="me" href="#top"><i></i>진영은</a>
+    <ul>
+      <li><a href="#how">Platform Fit</a></li>
+      <li><a href="#p1">01 여기옵서</a></li>
+      <li><a href="#p2">02 미디어월</a></li>
+      <li><a href="#p3">03 KUSSO</a></li>
+      <li><a href="#p4">04 S-CURT</a></li>
+      <li><a href="#platform">Platform</a></li>
+    </ul>
+    <a class="cta" href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============================================================ HERO -->
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow"><b>NUDGE HEALTHCARE</b>Service Planning Intern · 채용전환형</div>
+        <h1>사용자의 문제를 발견하고, <mark>실행 가능한 개선</mark>으로 연결합니다.</h1>
+        <p class="lede">문제를 정의하고, 우선순위를 정하고, 실제 환경에서 작동할 때까지 끝까지 확인하는 서비스 기획자 지원자 진영은입니다. 서비스가 달라도 반복되는 이 방식으로 넛지헬스케어의 여러 건강 서비스에 기여하고 싶습니다.</p>
+        <div class="who">
+          <span><b>고려대학교 세종캠퍼스</b> 디지털경영전공 · 2027.02 졸업예정</span>
+          <span><b>Kent State University</b> 교환학생 (CIS)</span>
+        </div>
+      </div>
+      <div class="board rv" aria-label="핵심 성과">
+        <a href="#p1"><div class="t">01 · AI HACKATHON</div><div class="v num">50<small>/200팀</small></div><div class="l">본선 진출 → 결승 진출</div></a>
+        <a href="#p2"><div class="t">02 · LEGACY RECOVERY</div><div class="v num">3<small>년</small></div><div class="l">멈춰 있던 미디어월 정상화 · 실제 전시</div></a>
+        <a href="#p3"><div class="t">03 · OPERATIONS</div><div class="v num">94.5<small>%</small></div><div class="l">Global KUSSO Day 만족도 · 참여 225명</div></a>
+        <a href="#p4"><div class="t">04 · RESEARCH</div><div class="v num">0.9555</div><div class="l">CatBoost NDCG · 인문사회계열 최우수</div></a>
+      </div>
+    </div>
+    <div class="comp">
+      <a href="#p1"><div class="n">01 · 문제 정의</div><div class="t">불편을 기능 우선순위로</div><div class="p">불만 데이터로 v1 범위를 결정</div></a>
+      <a href="#p2"><div class="n">02 · 이슈 해결</div><div class="t">증상이 아닌 원인을</div><div class="p">오류 메시지 없는 장애를 역추적</div></a>
+      <a href="#p3"><div class="n">03 · 운영 체계화</div><div class="t">흩어진 기록을 하나로</div><div class="p">활동 데이터를 단일 기록지로 통합</div></a>
+      <a href="#p4"><div class="n">04 · 데이터 판단</div><div class="t">1위가 아닌 기준으로</div><div class="p">정확도와 일관성의 트레이드오프</div></a>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================ HOW I WORK -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow">How I Work · Nudge Platform Fit</div>
+    <h2>서비스가 달라도 통하는 방식으로 일합니다.</h2>
+    <p class="lede">넛지헬스케어는 캐시워크를 중심으로 건강관리 · 챌린지 · 정신건강 영역으로 서비스를 넓히고 있습니다. 도메인이 달라도 기획자가 반복하는 일은 같다고 생각합니다. 문제를 정의하고, 원인을 찾고, 팀이 실행할 수 있게 전달하고, 운영 데이터를 정리하는 일입니다.</p>
+    <div class="eco rv" style="margin-top:40px">
+      <div class="hub"><div class="k">CORE SERVICE</div><b>캐시워크</b><p>걷기 · 리워드를 중심으로 한 넛지헬스케어의 대표 서비스</p></div>
+      <div class="sat" aria-label="넛지헬스케어의 확장 서비스">
+        <div>지니어트</div><div>캐시닥</div><div>러닝크루</div><div>팀워크</div><div>넛지EAP</div><div>트로스트</div>
+      </div>
+      <p class="small note">서비스 구성은 넛지헬스케어 채용 공고 기준 · 건강관리 · 챌린지 · 정신건강 영역</p>
+    </div>
+    <div class="cmp" style="margin-top:16px">
+      <div class="rv"><div class="n">01 · SERVICE PLANNING</div><h3>서비스 기획</h3><p class="ev">근거 · <a href="#p1">01 여기옵서</a> 불만 데이터로 v1 범위 결정</p><p class="at"><b>넛지에서는</b>챌린지 · 리워드 기능의 우선순위를 사용자 불편 데이터로 정리하겠습니다.</p></div>
+      <div class="rv"><div class="n">02 · ROOT-CAUSE ANALYSIS</div><h3>원인 분석</h3><p class="ev">근거 · <a href="#p2">02 미디어월</a> 오류 로그 없는 장애 역추적</p><p class="at"><b>넛지에서는</b>출시 후 이슈를 재현 조건 · 원인 · 영향 범위로 정리해 전달하겠습니다.</p></div>
+      <div class="rv"><div class="n">03 · CROSS-FUNCTIONAL</div><h3>협업 커뮤니케이션</h3><p class="ev">근거 · <a href="#p1">01</a> AI 전공 팀원과 우선순위 합의 · <a href="#p2">02</a> 개발 언어 이해</p><p class="at"><b>넛지에서는</b>기획 의도를 개발 · 디자인 · QA · CS가 바로 실행할 수 있는 형태로 전달하겠습니다.</p></div>
+      <div class="rv"><div class="n">04 · DATA OPERATIONS</div><h3>데이터 운영</h3><p class="ev">근거 · <a href="#p3">03 KUSSO</a> 기록 통합 · <a href="#p4">04 S-CURT</a> 지표 설계</p><p class="at"><b>넛지에서는</b>운영 기록을 하나의 체계로 모으고, 지표는 서비스 목적에 맞게 해석하겠습니다.</p></div>
+    </div>
+    <div class="chips" style="margin-top:20px"><span class="chip">Figma</span><span class="chip">PowerPoint</span><span class="chip">Excel</span><span class="chip">Python</span><span class="chip">Unity · C#</span><span class="chip">Django 구조 이해</span><span class="chip">CatBoost · LightGCN</span><span class="chip">Kakao Map API</span><span class="small" style="align-self:center">· 프로젝트에서 직접 다뤄 본 도구</span></div>
+  </div>
+</section>
+
+<!-- ============================================================ P1 -->
+<section id="p1">
+  <div class="wrap">
+    <div class="ph">
+      <div>
+        <div class="eyebrow"><b>01</b>Problem Definition · 제주 런케이션 AI 해커톤</div>
+        <h2>이미지 기반 관광지 추천 서비스 '여기옵서'</h2>
+        <div class="chips" style="margin-top:16px"><span class="chip">2025.02</span><span class="chip">5인 팀 · 기여도 33%</span><span class="chip">문제 정의 · 데이터 운영 · 피칭</span><span class="chip y">200팀 중 결승 진출</span></div>
+        <p class="tldr"><span>3초 요약</span>'비싼 물가'를 '예산에 맞는 곳을 비교하는 탐색 비용'으로 재정의하고, 데이터로 팀을 설득해 가격 필터를 v1에 먼저 넣었습니다.</p>
+      </div>
+      <div class="big-no" aria-hidden="true">01</div>
+    </div>
+
+    <div class="grid">
+      <div class="card s7 rv">
+        <div class="card-k">Data · 제주 여행객 불만 사항</div>
+        <div class="bars reveal">
+          <div class="bar top"><span class="nm">비싼 물가</span><span class="tr"><span class="fl" style="--w:89%"></span></span><span class="vv">53.4%</span></div>
+          <div class="bar"><span class="nm">대중교통 불편</span><span class="tr"><span class="fl" style="--w:20.2%"></span></span><span class="vv">12.1%</span></div>
+          <div class="bar"><span class="nm">한정된 쇼핑 품목</span><span class="tr"><span class="fl" style="--w:18.5%"></span></span><span class="vv">11.1%</span></div>
+          <div class="bar"><span class="nm">관광종사원 불친절</span><span class="tr"><span class="fl" style="--w:9.7%"></span></span><span class="vv">5.8%</span></div>
+          <div class="bar"><span class="nm">부정확한 관광 정보</span><span class="tr"><span class="fl" style="--w:9.5%"></span></span><span class="vv">5.7%</span></div>
+        </div>
+        <p class="small" style="margin-top:14px">막대 축 0–60% · 출처: 제주 관광 동향 공개 통계 (프로젝트 보고서 시장조사)</p>
+        <p class="small" style="margin-top:6px">대회 기간 안에 실제 사용자 인터뷰는 진행하지 못해, 공개 통계와 직접 수집 · 라벨링한 관광지 이미지 약 120장을 근거로 판단했습니다.</p>
+      </div>
+      <div class="s5 stack">
+        <div class="card yellow metric rv"><div class="v num">3.16<small>점</small></div><div class="l">외국인 여행 경비 만족도 · 조사 항목 중 최저</div></div>
+        <div class="card line rv">
+          <div class="card-k">Reframe · 문제를 다시 정의하다</div>
+          <div class="reframe">
+            <div class="from"><span class="k">흔한 정의</span><div class="q"><s>제주는 물가가 비싸다</s></div></div>
+            <div class="arr" aria-hidden="true">→</div>
+            <div class="to"><span class="k">제가 내린 정의</span><div class="q">취향과 <b>예산에 맞는 곳을 비교해 찾는</b> 탐색 비용이 크다</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="s12" style="margin-top:24px">
+        <div class="eyebrow">Prioritization · Impact × Feasibility</div>
+        <h3 style="font-size:clamp(22px,2.4vw,28px);margin-top:10px">기능 후보 5개를 임팩트와 기간 내 구현 가능성으로 나눠, v1 범위를 잘랐습니다.</h3>
+      </div>
+      <div class="s12 matrix-wrap">
+        <div class="card line rv">
+          <div class="mx two" role="group" aria-label="기능 우선순위 2×2 매트릭스. 버튼을 누르면 결정 근거를 볼 수 있습니다.">
+            <div class="ylab" style="grid-row:1">임팩트<br>높음</div>
+            <div class="cell sweet" style="grid-row:1;grid-column:2"><span class="zone">MVP · v1<span class="zm"> · 임팩트 높음 · 기간 내 구현 가능</span></span>
+              <button type="button" data-k="filter" data-d="v1" aria-pressed="true">'저렴이' 가격 필터<em>v1 탑재</em></button>
+              <button type="button" data-k="photo" data-d="v1" aria-pressed="false">사진 기반 Top-3 추천<em>v1 탑재</em></button>
+            </div>
+            <div class="cell" style="grid-row:1;grid-column:3"><span class="zone">BIG BET<span class="zm"> · 임팩트 높음 · 기간 내 구현 어려움</span></span>
+              <button type="button" data-k="realtime" data-d="road" aria-pressed="false">실시간 대체 옵션<em>로드맵</em></button>
+            </div>
+            <div class="ylab" style="grid-row:2">임팩트<br>중간</div>
+            <div class="cell" style="grid-row:2;grid-column:2"></div>
+            <div class="cell" style="grid-row:2;grid-column:3"><span class="zone">LATER<span class="zm"> · 임팩트 중간 · 기간 내 구현 어려움</span></span>
+              <button type="button" data-k="model" data-d="hold" aria-pressed="false">모델 고도화<em>보류</em></button>
+              <button type="button" data-k="review" data-d="road" aria-pressed="false">여행 기록 · 리뷰 재추천<em>로드맵</em></button>
+            </div>
+            <div></div>
+            <div class="xlab" style="grid-column:2">기간 내 구현 가능</div>
+            <div class="xlab" style="grid-column:3">기간 내 구현 어려움</div>
+          </div>
+          <div class="mx-legend"><span class="a"><i></i>v1 탑재</span><span><i></i>보류</span><span class="c"><i></i>로드맵</span><span>· 발표 자료 슬라이드 12 · 17의 임팩트 · 난이도 · 리스크 평가 기준</span></div>
+        </div>
+        <div class="card dark detail rv" aria-live="polite" id="mx-detail"></div>
+      </div>
+
+      <div class="card s12 rv" style="margin-top:8px">
+        <div class="card-k">User Flow · 사진 한 장에서 지도까지</div>
+        <div class="flow">
+          <div><b>메인 진입</b><span>"just upload your favorite photos!"</span></div>
+          <div><b>사진 업로드</b><span>텍스트 검색 없이 시작</span></div>
+          <div><b>이미지 유사도</b><span>ResNet-18 특징 추출</span></div>
+          <div><b>Top-3 결과</b><span>비슷한 관광지 3곳</span></div>
+          <div class="on"><b>'저렴이' 필터</b><span>가격 범위로 좁히기</span></div>
+          <div><b>지도 확인</b><span>카카오맵 API</span></div>
+        </div>
+      </div>
+
+      <div class="s7 rv">
+        <div class="role">
+          <div><h4>팀 전체 (5인)</h4><ul><li>ResNet-18 학습 (AI 전공 팀원)</li><li>Django · SQLite 웹 데모</li><li>본선 · 결승 발표</li></ul></div>
+          <div class="me"><h4>제가 판단한 일</h4><ul><li>문제를 '탐색 비용'으로 정의</li><li>불만 1위 데이터로 우선순위 합의</li><li>특징 없는 · 어두운 사진 제외 기준</li></ul></div>
+          <div><h4>제가 실행한 일</h4><ul><li>이미지 수집 · 라벨링 · 전처리</li><li>카카오맵 API 연동</li><li>PPT · 최종 발표</li></ul></div>
+        </div>
+        <div class="fitline"><small>NUDGE FIT</small><p>사용자의 문제를 기능으로 구체화하고, 팀이 실행할 수 있는 형태로 전달하는 경험을 쌓았습니다.</p></div>
+      </div>
+      <figure class="s5 rv">
+        <div class="shot" style="aspect-ratio:16/9"><img src="img/jeju_home.jpg" alt="'여기옵서' 데모 웹 메인 화면 — Where Do You Want To Go" loading="lazy"></div>
+        <figcaption class="cap">팀이 완성한 데모 웹 메인 화면 (발표 자료)</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ P2 -->
+<section id="p2" class="dark-sec">
+  <div class="wrap">
+    <div class="ph">
+      <div>
+        <div class="eyebrow"><b>02</b>Issue Resolution · 고려대학교 미디어월 복구</div>
+        <h2 style="color:#fff">3년간 멈춘 인터랙티브 미디어월, 원인을 찾아 되살렸습니다.</h2>
+        <div class="chips" style="margin-top:16px"><span class="chip">2025.03 – 2025.12</span><span class="chip">1인 프로젝트</span><span class="chip">Unity · C#</span><span class="chip y">실제 교내 전시</span></div>
+        <p class="tldr"><span>3초 요약</span>오류 메시지 없는 장애를 실패 지점부터 거꾸로 추적해, 증상이 아닌 실행 순서를 고쳤습니다.</p>
+      </div>
+      <div class="big-no" aria-hidden="true">02</div>
+    </div>
+
+    <div class="card rv">
+      <div class="card-k">Root Cause · 원인 사슬</div>
+      <div class="chain">
+        <div class="node root"><div class="k">ROOT CAUSE · 찾아낸 원인</div><b>NetworkManager가 비활성 상태로 초기화</b><p>화면 전환을 담당하는 부품이 꺼진 채 시작</p></div>
+        <div class="ar" aria-hidden="true">→</div>
+        <div class="node"><div class="k">MECHANISM</div><b>Prefab 로딩 순서가 꼬임</b><p>화면 구성 요소를 불러오는 순서가 엉킴</p></div>
+        <div class="ar" aria-hidden="true">→</div>
+        <div class="node sym"><div class="k">SYMPTOM · 보이던 증상</div><b>UI 패널이 전환되지 않음</b><p>오류 메시지 없음 · 문서 · 인수인계 없음</p></div>
+      </div>
+      <div class="trace"><span>역추적 방향</span><i></i><span>← 증상에서 원인으로</span></div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="card s7 rv">
+        <div class="card-k">Debugging Timeline</div>
+        <ol class="tl">
+          <li class="done"><div><div class="tt">미디어월 인수<small>2025.03</small></div><p>3년간 멈춘 Unity 프로젝트 · 문서도 인수인계도 없음</p></div></li>
+          <li class="done"><div><div class="tt">증상 확인</div><p>UI 패널이 오류 메시지 없이 전환되지 않음</p></div></li>
+          <li class="done"><div><div class="tt">레거시 코드 분석</div><p>코드와 실제 동작을 직접 대조하며 구조 파악</p></div></li>
+          <li class="done"><div><div class="tt">실패 지점부터 역추적</div><p>증상을 우회하지 않고 전환이 실패하는 지점에서 거꾸로</p></div></li>
+          <li class="key"><div><div class="tt">원인 특정<small>ROOT CAUSE</small></div><p>NetworkManager 비활성 초기화 → Prefab 로딩 순서 꼬임</p></div></li>
+          <li class="done"><div><div class="tt">실행 순서 수정</div><p>활성 상태 전환 · 로딩 순서 재설계</p></div></li>
+          <li class="done"><div><div class="tt">해상도 대응</div><p>Canvas Scaler · Anchor 재설계로 Full HD · 4K 대응</p></div></li>
+          <li class="key"><div><div class="tt">정상화 · 실제 전시<small>2025.12</small></div><p>교내 전시 환경에서 작동 확인</p></div></li>
+        </ol>
+      </div>
+      <div class="s5 stack">
+        <div class="card rv">
+          <div class="card-k">Decision · 무엇을 고쳤나</div>
+          <div class="vs">
+            <div class="no"><div class="k">택하지 않은 방법</div><b>증상 우회</b><p>패널 전환만 억지로 맞추면 원인이 남습니다.</p></div>
+            <div class="yes"><div class="k">택한 방법</div><b>실행 순서 수정</b><p>초기화와 로딩 순서 자체를 바로잡았습니다.</p></div>
+          </div>
+        </div>
+        <div class="card rv">
+          <div class="card-k">Real Environment · 전시 장비 해상도</div>
+          <div class="res">
+            <div><div class="scr fhd">FHD</div><div class="lb">1920 × 1080</div></div>
+            <div><div class="scr uhd">4K</div><div class="lb">3840 × 2160</div></div>
+          </div>
+          <p style="margin-top:14px;font-size:14.5px">수정에 그치지 않고, 실제 전시 장비 두 가지 해상도에서 모두 작동하도록 맞췄습니다.</p>
+        </div>
+        <div class="card rv" style="border:1.5px solid var(--y)">
+          <div class="card-k" style="color:var(--y)">PM Insight · 개발자와 같은 언어</div>
+          <p style="color:var(--on-dark);font-size:15.5px;line-height:1.7">제주 해커톤에서 개발 문제를 돕지 못했던 아쉬움을 이 프로젝트에서 직접 풀었습니다. 이슈를 원인까지 추적할 수 있으면 <b style="color:#fff">엔지니어와 같은 언어로 우선순위를 정할 수 있다</b>는 것을 확인했습니다.</p>
+        </div>
+      </div>
+      <figure class="s6 rv">
+        <div class="shot" style="aspect-ratio:16/10"><img src="img/unity_home.jpg" alt="복구한 미디어월 메인 내비게이션 화면" loading="lazy"></div>
+        <figcaption class="cap">복구한 미디어월 · 메인 내비게이션</figcaption>
+      </figure>
+      <figure class="s6 rv">
+        <div class="shot" style="aspect-ratio:16/10"><img src="img/unity_theme.jpg" alt="복구한 미디어월 주제별 탐색 화면" loading="lazy"></div>
+        <figcaption class="cap">복구한 미디어월 · 주제별 탐색</figcaption>
+      </figure>
+    </div>
+    <div class="fitline rv"><small>NUDGE FIT</small><p>현상만 임시로 해결하는 데 그치지 않고, 원인을 추적하고 실제 사용 환경에서 작동하는지 확인하는 과정을 경험했습니다.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ P3 -->
+<section id="p3">
+  <div class="wrap">
+    <div class="ph">
+      <div>
+        <div class="eyebrow"><b>03</b>Operations · 고려대학교 세종사회봉사단 KUSSO 6기</div>
+        <h2>흩어진 운영 기록을 하나의 체계로 통합했습니다.</h2>
+        <div class="chips" style="margin-top:16px"><span class="chip">2025.03 – 2025.12</span><span class="chip">정보부원</span><span class="chip d">13건 기획</span><span class="chip d">107h 봉사</span><span class="chip d">225명 · 94.5% 만족</span><span class="chip y">6기 우수봉사자</span></div>
+        <p class="tldr"><span>3초 요약</span>여러 자료에 흩어진 활동 기록을 엑셀 '최종 기록지' 하나로 모으고, 직접 기획한 행사를 225명 규모로 운영했습니다.</p>
+      </div>
+      <div class="big-no" aria-hidden="true">03</div>
+    </div>
+
+    <div class="asis rv">
+      <div class="col a">
+        <span class="tag">AS-IS</span>
+        <div class="files" aria-hidden="true"><div class="file">활동 A</div><div class="file">활동 B</div><div class="file">활동 C</div><div class="file">기획 기록</div><div class="file">시간 기록</div><div class="file">…</div></div>
+        <ul><li>활동별로 따로 남은 기록</li><li>현황을 보려면 자료를 하나씩 확인</li><li>누적 수치를 볼 때마다 다시 집계</li></ul>
+      </div>
+      <div class="mid" aria-hidden="true">→</div>
+      <div class="col b">
+        <span class="tag">TO-BE</span>
+        <div class="master" aria-hidden="true">
+          <div class="mh">최종 기록지 (Excel) · 구조 예시</div>
+          <div class="mr hd"><span>활동</span><span>시간</span><span>구분</span></div>
+          <div class="mr"><span>Global KUSSO Day</span><span><i class="sk"></i></span><span><i class="sk"></i></span></div>
+          <div class="mr"><span>못난이 농산물</span><span><i class="sk"></i></span><span><i class="sk"></i></span></div>
+          <div class="mr"><span>…</span><span><i class="sk"></i></span><span><i class="sk"></i></span></div>
+        </div>
+        <ul><li>엑셀 '최종 기록지' 하나로 통합</li><li>활동 현황을 한곳에서 확인</li><li>같은 형식으로 계속 누적</li></ul>
+      </div>
+    </div>
+
+    <div class="grid" style="margin-top:16px">
+      <div class="card s3 metric rv"><div class="v num">13<small>건</small></div><div class="l">직접 기획한 봉사 프로그램</div></div>
+      <div class="card s3 metric rv"><div class="v num">107<small>시간</small></div><div class="l">봉사 활동 · 6기 시간왕</div></div>
+      <div class="card dark s6 rv">
+        <div class="card-k">Result</div>
+        <div style="font-size:clamp(30px,3.4vw,44px);font-weight:900;letter-spacing:-0.04em;color:#fff;line-height:1.15">우수봉사자 선정</div>
+        <p style="margin-top:10px">KUSSO 6기 · 정보부원 · 시간왕</p>
+      </div>
+      <div class="card s7 rv">
+        <div class="card-k">Operated · Global KUSSO Day</div>
+        <div class="gauge">
+          <svg viewBox="0 0 128 128" role="img" aria-label="만족도 94.5%">
+            <circle class="trk" cx="64" cy="64" r="52" fill="none" stroke-width="14"/>
+            <circle class="val" id="gv" cx="64" cy="64" r="52" fill="none" stroke-width="14" stroke-linecap="round" transform="rotate(-90 64 64)" stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+            <text x="64" y="70" text-anchor="middle" font-size="22" font-weight="900" fill="#111418" font-family="Pretendard, sans-serif">94.5%</text>
+          </svg>
+          <div>
+            <div class="metric"><div class="v num">225<small>명 참여</small></div><div class="l">만족도 94.5% · 2025.05.07 – 05.08</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card s5 rv">
+        <div class="card-k">How it ran</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:8px;font-size:15px;color:var(--ink-2)">
+          <li>· 독일 · 중국 교환학생의 아이디어를 반영해 기획</li>
+          <li>· 생활 정보 팜플렛 제작 · 배포</li>
+        </ul>
+        <div class="mini">
+          <div><b class="num">20<small style="font-size:.55em">명</small></b><span>봉사자</span></div>
+          <div><b class="num">38.5<small style="font-size:.55em">h</small></b><span>활동</span></div>
+          <div><b class="num">20.5<small style="font-size:.55em">h</small></b><span>기획</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="fitline rv"><small>NUDGE FIT</small><p>반복적으로 발생하는 운영 업무를 구조화하고, 정보가 일관되게 관리될 수 있도록 체계를 개선했습니다.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ P4 -->
+<section id="p4">
+  <div class="wrap">
+    <div class="ph">
+      <div>
+        <div class="eyebrow"><b>04</b>Data-driven Judgment · S-CURT 학부연구</div>
+        <h2>'1위 모델'이 아니라, 목적에 맞는 선택 기준을 냈습니다.</h2>
+        <div class="chips" style="margin-top:16px"><span class="chip">2025.04.14 – 07.07</span><span class="chip">2인 공동연구 · 기여도 50%</span><span class="chip">연구 제안 · 실험 설계</span><span class="chip y">인문사회계열 최우수</span></div>
+        <p class="tldr"><span>3초 요약</span>세 모델을 같은 조건에서 20회 배깅 비교하고, 정확도(NDCG)와 일관성(Std)을 나눠 '목적별 선택 기준'으로 결론을 정리했습니다.</p>
+      </div>
+      <div class="big-no" aria-hidden="true">04</div>
+    </div>
+
+    <div class="grid">
+      <div class="card line s12 rv">
+        <div class="card-k">Benchmark · 20회 배깅 평균 · 동일 조건</div>
+        <div class="tbl">
+          <table class="bench">
+            <thead><tr><th>Model</th><th>NDCG<small>높을수록 좋음 · 주 지표</small></th><th>MAE<small>낮을수록 좋음</small></th><th>RMSE<small>낮을수록 좋음</small></th><th>예측 Std<small>낮을수록 일관적</small></th></tr></thead>
+            <tbody>
+              <tr><td>CatBoost<span class="role-tag">정확도 1위</span></td><td class="best"><span>0.9555</span></td><td class="best"><span>0.6890</span></td><td class="best"><span>0.8628</span></td><td>0.0784</td></tr>
+              <tr><td>LightGCN<span class="role-tag alt">일관성 1위</span></td><td>0.9528</td><td>0.7002</td><td>0.8693</td><td class="best"><span>0.0052</span></td></tr>
+              <tr><td>MF-SGD</td><td>0.9409</td><td>0.7003</td><td>0.8695</td><td>0.0189</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:12px">노란 칸 = 지표별 최고값 · AI Hub 국내 여행로그 약 2만 8천 세션 · 시간 · 경로 특성은 비교 조건 통일을 위해 제외</p>
+      </div>
+
+      <div class="card s7 rv">
+        <div class="card-k">Trade-off · 정확도 × 일관성</div>
+        <div class="chart-box" id="sc-box">
+          <svg class="scatter" viewBox="0 0 560 340" role="img" aria-labelledby="sc-t">
+            <title id="sc-t">모델별 NDCG와 예측 표준편차 산점도. CatBoost는 가장 정확하지만 편차가 크고, LightGCN은 정확도는 근소하게 낮지만 가장 일관적입니다.</title>
+            <rect class="ideal" x="60" y="30" width="140" height="100" rx="8"/>
+            <text class="ideal-t" x="70" y="48">이상적 영역</text>
+            <g>
+              <line class="grid-l" x1="60" x2="520" y1="30" y2="30"/><line class="grid-l" x1="60" x2="520" y1="82" y2="82"/><line class="grid-l" x1="60" x2="520" y1="134" y2="134"/><line class="grid-l" x1="60" x2="520" y1="186" y2="186"/><line class="grid-l" x1="60" x2="520" y1="238" y2="238"/><line class="grid-l" x1="60" x2="520" y1="290" y2="290" style="stroke:var(--line-2)"/>
+              <text class="ax" x="50" y="34" text-anchor="end">0.960</text><text class="ax" x="50" y="86" text-anchor="end">0.955</text><text class="ax" x="50" y="138" text-anchor="end">0.950</text><text class="ax" x="50" y="190" text-anchor="end">0.945</text><text class="ax" x="50" y="242" text-anchor="end">0.940</text><text class="ax" x="50" y="294" text-anchor="end">0.935</text>
+              <text class="ax" x="60" y="312" text-anchor="middle">0</text><text class="ax" x="162" y="312" text-anchor="middle">0.02</text><text class="ax" x="264" y="312" text-anchor="middle">0.04</text><text class="ax" x="367" y="312" text-anchor="middle">0.06</text><text class="ax" x="469" y="312" text-anchor="middle">0.08</text>
+              <text class="axt" x="290" y="334" text-anchor="middle">예측 표준편차 Std → 클수록 결과가 흔들림</text>
+              <text class="axt" x="0" y="12">NDCG ↑ (0.935부터 표시)</text>
+            </g>
+            <g class="pt" tabindex="0" data-n="CatBoost" data-a="0.9555" data-s="0.0784" data-x="461" data-y="77">
+              <circle class="hit" cx="461" cy="77" r="22"/>
+              <circle class="m" cx="461" cy="77" r="11" fill="#FFD400" style="stroke:#111418;stroke-width:1.5"/>
+              <text class="lab" x="446" y="60" text-anchor="end">CatBoost</text>
+              <text class="sub" x="446" y="104" text-anchor="end">가장 정확 · 편차 큼</text>
+            </g>
+            <g class="pt" tabindex="0" data-n="LightGCN" data-a="0.9528" data-s="0.0052" data-x="87" data-y="105">
+              <circle class="hit" cx="87" cy="105" r="22"/>
+              <circle class="m" cx="87" cy="105" r="11" fill="#111418"/>
+              <text class="lab" x="104" y="101">LightGCN</text>
+              <text class="sub" x="104" y="119">가장 일관적</text>
+            </g>
+            <g class="pt" tabindex="0" data-n="MF-SGD" data-a="0.9409" data-s="0.0189" data-x="157" data-y="229">
+              <circle class="hit" cx="157" cy="229" r="22"/>
+              <circle class="m" cx="157" cy="229" r="10" fill="#ADB5BD"/>
+              <text class="lab" x="174" y="225">MF-SGD</text>
+              <text class="sub" x="174" y="243">추천 품질에서 배제</text>
+            </g>
+          </svg>
+          <div class="tip" id="sc-tip" role="status"></div>
+        </div>
+        <p class="small" style="margin-top:6px">NDCG 차이는 0.9555 vs 0.9528로 근소했고, 편차는 약 15배 차이가 났습니다. 그래서 '1위'가 아닌 목적별 기준으로 정리했습니다.</p>
+      </div>
+
+      <div class="s5 stack">
+        <div class="card rv">
+          <div class="card-k">Decision Rule · 선택 기준</div>
+          <div class="pick">
+            <div><div class="k">순위 정확도가 중요하면</div><b>CatBoost</b><p>NDCG · MAE · RMSE 모두 1위</p></div>
+            <div><div class="k">예측 안정성이 중요하면</div><b>LightGCN</b><p>Std 0.0052 · 가장 일관적</p></div>
+          </div>
+        </div>
+        <div class="card dark rv">
+          <div class="card-k">Why NDCG</div>
+          <p style="color:var(--on-dark);font-size:15.5px;line-height:1.65">추천은 '점수'가 아니라 '순서' 문제입니다. 점수를 잘 맞혀도 순서가 틀리면 사용자는 엉뚱한 장소부터 봅니다. 그래서 RMSE가 아닌 NDCG를 주 지표로 정했습니다.</p>
+        </div>
+      </div>
+
+      <div class="card s7 rv">
+        <div class="card-k">Insight · 만족도를 가른 변수 (CatBoost 특성 중요도)</div>
+        <div class="bars reveal">
+          <div class="bar top"><span class="nm">여행 목적</span><span class="tr"><span class="fl" style="--w:100%"></span></span><span class="vv">11.93</span></div>
+          <div class="bar"><span class="nm">여행 스타일 8</span><span class="tr"><span class="fl" style="--w:80.2%"></span></span><span class="vv">9.57</span></div>
+          <div class="bar"><span class="nm">여행 동기</span><span class="tr"><span class="fl" style="--w:77.6%"></span></span><span class="vv">9.26</span></div>
+          <div class="bar"><span class="nm">연령대</span><span class="tr"><span class="fl" style="--w:52.2%"></span></span><span class="vv">6.23</span></div>
+          <div class="bar"><span class="nm">성별</span><span class="tr"><span class="fl" style="--w:7.3%"></span></span><span class="vv">0.87</span></div>
+        </div>
+        <p class="small" style="margin-top:14px">전체 14개 변수 중 발췌 · 특성 중요도는 상관 기반 기여도이며 인과를 증명하지 않습니다.</p>
+      </div>
+      <div class="card yellow s5 rv">
+        <div class="card-k" style="color:rgba(17,20,24,.65)">Product Insight</div>
+        <div style="font-size:clamp(22px,2.4vw,28px);font-weight:900;letter-spacing:-0.035em;line-height:1.35">개인화 온보딩의 첫 질문은 '성별'이 아니라 '여행 목적 · 스타일'이어야 합니다.</div>
+        <p style="margin-top:12px;color:rgba(17,20,24,.78)">여행 목적의 중요도는 성별의 약 14배였습니다. 데이터가 질문의 우선순위를 정해 준다는 것을 확인했습니다.</p>
+      </div>
+    </div>
+    <div class="fitline rv"><small>NUDGE FIT</small><p>서비스 지표를 해석할 때 단일 수치에 의존하기보다, 지표의 의미와 서비스 목적을 함께 고려하는 태도를 갖추었습니다.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ PLATFORM -->
+<section id="platform">
+  <div class="wrap">
+    <div class="eyebrow"><b>+</b>Platform Insight · 연구 결과를 넛지 생태계로 옮겨 본다면</div>
+    <h2>개인화의 첫 질문은 '누구인가'보다<br><mark>'무엇을 원하는가'</mark>입니다.</h2>
+    <p class="lede">S-CURT에서 만족도를 가른 변수는 여행 목적 · 스타일이었고, 성별은 거의 영향이 없었습니다. 이 원리를 넛지헬스케어의 서비스에 옮겨 본 아이디어입니다. 모두 검증 전 가설이며, 각각 어떤 지표로 확인할지까지 함께 적었습니다.</p>
+
+    <div class="bridge-hd rv">
+      <div class="src"><div class="k">연구에서 확인한 것 · 여행 도메인</div><b>여행 목적 <span class="num hl">11.93</span> vs 성별 <span class="num">0.87</span> · 특성 중요도 약 14배 차이</b></div>
+      <div class="ar" aria-hidden="true">→</div>
+      <div class="dst"><div class="k">헬스케어에서 세울 가설</div><b>사용자의 <em>목표 · 상황</em>을 먼저 묻는 온보딩이 인구통계 기반 기본값보다 성과가 좋을 것이다</b></div>
+    </div>
+
+    <div class="props">
+      <article class="prop rv">
+        <div class="top"><span class="svc">지니어트</span><span class="dom">다이어트</span></div>
+        <div class="q"><small>온보딩 첫 질문</small><b>"이번에 이루고 싶은 건강 목표는 무엇인가요?"</b></div>
+        <p class="hyp"><b>가설</b>사용자가 고른 건강 목표에 맞춰 일일 챌린지 기준을 개인화하면, 동일한 기본 챌린지보다 리텐션이 높을 것이다.</p>
+        <div class="kpi"><small>확인할 지표</small><div class="chips"><span class="chip">D7 · D30 리텐션</span><span class="chip">챌린지 완료율</span><span class="chip y">A/B 온보딩</span></div></div>
+      </article>
+      <article class="prop rv">
+        <div class="top"><span class="svc">트로스트</span><span class="dom">정신건강</span></div>
+        <div class="q"><small>온보딩 첫 질문</small><b>"요즘 가장 부담되는 상황은 무엇인가요?"</b></div>
+        <p class="hyp"><b>가설</b>일상의 스트레스 요인을 먼저 묻고 명상 · 상담 콘텐츠를 매칭하면, 일반 피드보다 콘텐츠 시작률과 상담 전환율이 높을 것이다.</p>
+        <div class="kpi"><small>확인할 지표</small><div class="chips"><span class="chip">첫 콘텐츠 시작률</span><span class="chip">상담 예약 전환율</span><span class="chip y">A/B 피드</span></div></div>
+      </article>
+      <article class="prop rv">
+        <div class="top"><span class="svc">넛지EAP</span><span class="dom">기업 · B2B</span></div>
+        <div class="q"><small>도입 시 첫 질문</small><b>"임직원은 어떤 환경에서, 무엇을 위해 참여하나요?"</b></div>
+        <p class="hyp"><b>가설</b>기업별 근무 환경과 참여 목적에 맞춰 웰니스 챌린지를 구성하면, 동일한 기본 프로그램보다 임직원 참여율이 높을 것이다.</p>
+        <div class="kpi"><small>확인할 지표</small><div class="chips"><span class="chip">임직원 참여율</span><span class="chip">프로그램 유지율</span><span class="chip y">기업별 비교</span></div></div>
+      </article>
+    </div>
+    <p class="caveat"><b>전제</b>특성 중요도는 상관 기반 기여도이며 인과를 증명하지 않습니다. 여행 도메인의 결과가 헬스케어에서도 성립하는지는 실험으로 먼저 확인해야 합니다. S-CURT에서처럼 지표 하나가 아니라, 서비스 목적에 맞는 지표로 판단하겠습니다.</p>
+    <div class="fitline rv"><small>NUDGE FIT</small><p>하나의 서비스에서 얻은 인사이트를 다른 서비스로 옮길 때, 가설과 검증 지표를 먼저 세우는 방식으로 일하겠습니다.</p></div>
+  </div>
+</section>
+
+<!-- ============================================================ CLOSING -->
+<section class="closing" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Closing</div>
+    <h2>기획을 배우는 데서 멈추지 않고,<br><mark>서비스가 실제로 작동하는 과정</mark>까지 경험하겠습니다.</h2>
+    <p class="lede">넛지헬스케어의 서비스가 기획에서 출시와 운영으로 이어지는 과정에서, 문제와 이슈를 정확하게 파악하고 유관 부서와 명확하게 소통하며 실행을 지원하겠습니다.</p>
+    <div class="pledge">
+      <div class="rv"><div class="k">서비스 기획 · 운영</div><b>불편을 데이터로 확인하고</b><p>기능 우선순위의 근거를 정리하겠습니다.</p><span class="from">← 01 여기옵서 · 03 KUSSO</span></div>
+      <div class="rv"><div class="k">출시 · 이슈 파악</div><b>원인과 영향 범위부터</b><p>이슈가 생기면 재현 조건과 원인, 영향 범위부터 정리하겠습니다.</p><span class="from">← 02 미디어월</span></div>
+      <div class="rv"><div class="k">유관 부서 협업</div><b>바로 실행할 수 있는 형태로</b><p>기획 의도를 개발 · 디자인 · QA · CS가 바로 실행할 수 있게 전달하겠습니다.</p><span class="from">← 01 여기옵서 · 04 S-CURT</span></div>
+    </div>
+    <div class="contact rv">
+      <div class="t">함께 일할 기회를<br>기다리고 있습니다.</div>
+      <ul>
+        <li><a href="mailto:ryqkr@naver.com"><i>@</i>ryqkr@naver.com</a></li>
+        <li><span><i>☎</i>010-5693-3560</span></li>
+        <li><a href="https://github.com/YoungEunJin" target="_blank" rel="noopener"><i>G</i>github.com/YoungEunJin</a></li>
+        <li><a href="https://blog.naver.com/my_daily_life0724" target="_blank" rel="noopener"><i>B</i>blog.naver.com/my_daily_life0724</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">© 2026 진영은 · 넛지헬스케어 서비스 기획 채용전환형 인턴십 지원 포트폴리오</div></footer>
+
+<script>
+(function () {
+  /* Priority matrix detail */
+  var data = {
+    filter:   { t: "'저렴이' 가격 필터", d: "v1", dl: "v1 탑재", imp: "높음 · 불만 1위 '비싼 물가'에 직접 대응", dif: "낮음 · 기간 내 구현 가능", risk: "가격 데이터 수집", why: "기간 내 구현 가능성과 불만 1위 데이터를 기준으로 팀과 합의해, 모델 고도화보다 먼저 넣었습니다. 사용자 불만에 가장 가까운 기능이었습니다." },
+    photo:    { t: "사진 기반 Top-3 추천", d: "v1", dl: "v1 탑재", imp: "높음 · 서비스의 핵심 가치", dif: "중간 · 기간 내 구현 가능", risk: "이미지 데이터 품질", why: "한국어 검색이 어려운 여행자도 사진 한 장으로 탐색을 시작할 수 있게 하는 핵심 기능입니다. 특징 없는 사진과 어두운 사진을 빼는 기준을 직접 세웠습니다." },
+    realtime: { t: "실시간 대체 옵션", d: "road", dl: "로드맵", imp: "높음 · 즉흥형 여행자의 니즈", dif: "높음 (교통 · 혼잡 API)", risk: "대회 기간 부족", why: "니즈는 컸지만 외부 API 연동이 필요해 기간 안에 완성하기 어렵다고 판단해 로드맵으로 분리했습니다." },
+    model:    { t: "모델 고도화", d: "hold", dl: "보류", imp: "중간 · 정확도 향상", dif: "높음", risk: "기간 내 미완성", why: "기간 내 구현 가능성을 기준으로 가격 필터를 먼저 넣고 보류했습니다. 이후 '비슷한 곳 ≠ 만족할 곳'이라는 한계는 S-CURT 연구로 이어졌습니다." },
+    review:   { t: "여행 기록 · 리뷰 재추천", d: "road", dl: "로드맵", imp: "중간 · 재방문 유도", dif: "높음", risk: "데이터 누적 필요", why: "사용 데이터가 쌓여야 의미가 생기는 기능이라 첫 버전 범위에서 제외했습니다." }
+  };
+  var box = document.getElementById('mx-detail');
+  var btns = document.querySelectorAll('.mx button');
+  function show(k) {
+    var x = data[k];
+    box.innerHTML = '<div class="dk">SELECTED FEATURE</div><h4>' + x.t + '</h4><span class="dec ' + x.d + '">' + x.dl + '</span>' +
+      '<dl><dt>임팩트</dt><dd>' + x.imp + '</dd><dt>난이도</dt><dd>' + x.dif + '</dd><dt>리스크</dt><dd>' + x.risk + '</dd></dl>' +
+      '<p class="why">' + x.why + '</p>';
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.k === k ? 'true' : 'false'); });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.k); }); });
+  show('filter');
+
+  /* Scatter tooltip */
+  var tip = document.getElementById('sc-tip');
+  var sbox = document.getElementById('sc-box');
+  var svg = sbox.querySelector('svg');
+  function place(g) {
+    var r = svg.getBoundingClientRect(), k = r.width / 560;
+    tip.style.left = (g.dataset.x * k) + 'px';
+    tip.style.top = (g.dataset.y * k) + 'px';
+    tip.innerHTML = '<b>' + g.dataset.n + '</b><br>NDCG ' + g.dataset.a + ' · Std ' + g.dataset.s;
+    tip.classList.add('show');
+  }
+  sbox.querySelectorAll('.pt').forEach(function (g) {
+    g.addEventListener('mouseenter', function () { place(g); });
+    g.addEventListener('focus', function () { place(g); });
+    g.addEventListener('mouseleave', function () { tip.classList.remove('show'); });
+    g.addEventListener('blur', function () { tip.classList.remove('show'); });
+  });
+
+  /* Reveal + gauge */
+  var gv = document.getElementById('gv');
+  var targets = document.querySelectorAll('.rv, .reveal');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('in');
+        if (e.target.contains(gv)) gv.style.strokeDashoffset = (326.73 * (1 - 0.945)).toFixed(2);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.15 });
+    targets.forEach(function (t) { io.observe(t); });
+  } else {
+    targets.forEach(function (t) { t.classList.add('in'); });
+    gv.style.strokeDashoffset = (326.73 * (1 - 0.945)).toFixed(2);
+  }
+  window.addEventListener('beforeprint', function () {
+    targets.forEach(function (t) { t.classList.add('in'); });
+    gv.style.strokeDashoffset = (326.73 * (1 - 0.945)).toFixed(2);
+  });
+
+  /* Active nav */
+  var links = document.querySelectorAll('.nav ul a');
+  var secs = Array.prototype.map.call(links, function (a) { return document.querySelector(a.getAttribute('href')); });
+  function onScroll() {
+    var y = window.scrollY + 120, cur = -1;
+    secs.forEach(function (s, i) { if (s && s.offsetTop <= y) cur = i; });
+    links.forEach(function (a, i) { a.classList.toggle('on', i === cur); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+</body>
+</html>
