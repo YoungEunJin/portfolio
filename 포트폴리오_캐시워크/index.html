@@ -1,0 +1,945 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>진영은 캐시워크 포트폴리오</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Layout: one section = one printed page (1440x1018). 12-column bento grid inside.
+     Cashwalk edition: black + lime palette. Component CSS is shared with the master portfolio. */
+  :root {
+    color-scheme: dark;
+    --mint: #c8f135; --mint-d: #d8f76f; --mint-bg: rgba(200,241,53,.10); --mint-glow: #161b09;
+    --bg: #0c0c0c; --bk: #060606; --panel: #141414; --panel-2: #181818; --track: #262626;
+    --tx: #f4f4f2; --tx-2: #d6d6d2; --sub: #a8a8a2; --mute: #807f79; --line: #232323; --line-2: #363636;
+    --warn: #f2b632; --warn-bg: rgba(242,182,50,.14);
+    --bad: #f07a66; --bad-bg: rgba(240,122,102,.14); --bad-tx: #f6a596;
+    --good: #8fdc5e; --good-bg: rgba(143,220,94,.14);
+    --ink: #0c0c0c; --soft: #1b1b1b; --bar2: #5d6b33; --navy: #c8f135; --on-navy: #1d2308; --on-navy-2: #3f4a16;
+    --teal: #c8f135; --teal-bg: rgba(200,241,53,.08);
+    --f-en: 'Jost', -apple-system, 'Segoe UI', 'Noto Sans KR', sans-serif;
+    --f-ko: 'Pretendard', 'Noto Sans KR', -apple-system, 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    --gut: max(16px, 5vw);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { background: var(--bk); color: var(--tx); font-family: var(--f-ko); line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; word-break: keep-all; overflow-wrap: anywhere; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 4px; }
+  q { quotes: "“" "”"; }
+
+  .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav ul { list-style: none; display: flex; gap: 4px; overflow-x: auto; padding: 10px var(--gut); scrollbar-width: none; max-width: 1440px; margin: 0 auto; }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav a { display: block; white-space: nowrap; text-decoration: none; font-family: var(--f-en); font-size: 14px; color: var(--sub); padding: 6px 12px; border-radius: 30px; }
+  .nav a:hover { color: var(--mint); background: var(--mint-bg); }
+
+  /* page frame */
+  .s { position: relative; background: var(--bg); padding-block: clamp(52px, 6vw, 84px); padding-inline: var(--gut); border-bottom: 1px solid var(--line); }
+  .s.alt { background: var(--bk); }
+  .w { max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  .pg { position: absolute; right: var(--gut); bottom: 14px; font-family: var(--f-en); font-size: 14px; color: var(--mute); letter-spacing: 1px; }
+  .pg b { color: var(--mint); }
+  .chn { position: absolute; left: var(--gut); bottom: 14px; font-family: var(--f-en); font-size: 13px; color: var(--mute); letter-spacing: 1px; }
+
+  /* heads */
+  .eyebrow { font-family: var(--f-en); font-size: 13.5px; letter-spacing: 3px; color: var(--mint); font-weight: 600; text-transform: uppercase; }
+  .h-big { font-family: var(--f-en); font-weight: 700; font-size: clamp(38px, 4.6vw, 54px); color: var(--tx); letter-spacing: -.5px; line-height: 1.08; }
+  .h-big em { font-style: normal; color: var(--mint); }
+  .ptitle { font-size: clamp(22px, 2.2vw, 28px); font-weight: 800; letter-spacing: -.5px; line-height: 1.3; color: var(--tx); margin-top: 4px; }
+  .ks { font-size: clamp(28px, 2.5vw, 32px); font-weight: 800; color: var(--mint); letter-spacing: -.6px; line-height: 1.35; margin-top: 8px; text-wrap: balance; max-width: 36em; }
+  .meta { font-size: 15px; color: var(--sub); margin-top: 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .t-p { font-family: var(--f-en); font-size: 12.5px; font-weight: 700; letter-spacing: 1px; padding: 4px 11px; border-radius: 20px; background: var(--navy); color: var(--ink); }
+  .t-s { font-size: 12.5px; font-weight: 700; padding: 4px 11px; border-radius: 20px; background: var(--teal-bg); color: var(--teal); border: 1px solid var(--teal); }
+  .lbl { display: inline-block; font-family: var(--f-en); font-size: 12px; font-weight: 700; letter-spacing: .5px; padding: 2px 9px; border-radius: 4px; border: 1px solid var(--line-2); color: var(--sub); background: var(--panel); white-space: nowrap; vertical-align: middle; }
+  .lbl.model { border-color: var(--mint); color: var(--mint-d); background: var(--mint-bg); }
+  .lbl.ops { border-color: var(--teal); color: var(--teal); background: var(--teal-bg); }
+  .lbl.demo, .lbl.plan, .lbl.prop { border-color: var(--warn); color: var(--warn); background: var(--warn-bg); }
+
+  /* bento */
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+  .c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c4 { grid-column: span 4; } .c5 { grid-column: span 5; } .c6 { grid-column: span 6; } .c7 { grid-column: span 7; } .c8 { grid-column: span 8; } .c9 { grid-column: span 9; } .c12 { grid-column: span 12; }
+  .card { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 18px 20px; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
+  .s.alt .card { background: var(--panel); }
+  .card h6 { font-family: var(--f-en); font-size: 15.5px; font-weight: 700; color: var(--tx); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .card h6 .k { color: var(--mint); }
+  .card p, .card li { font-size: 15px; color: var(--tx-2); line-height: 1.65; }
+  .card b { color: var(--tx); }
+  .card q { color: var(--tx); font-weight: 600; }
+  .card.navy { background: var(--navy); border-color: var(--navy); }
+  .card.navy h6, .card.navy b, .card.navy q, .card.navy .v { color: var(--ink); }
+  .card.navy p, .card.navy li { color: var(--on-navy); }
+  .card.navy .l { color: var(--on-navy-2); }
+  .card.tint { background: var(--mint-glow); border-color: var(--mint); }
+  .card.dash { border-style: dashed; background: var(--panel-2); }
+  ul.dot { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  ul.dot li { position: relative; padding-left: 16px; }
+  ul.dot li::before { content: ""; position: absolute; left: 2px; top: .72em; width: 5px; height: 5px; border-radius: 50%; background: var(--mint); }
+  .card.navy ul.dot li::before { background: var(--on-navy-2); }
+  .note { font-size: 14.5px; color: var(--mute); line-height: 1.55; }
+  .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .chips span { border: 1px solid var(--line-2); color: var(--tx-2); border-radius: 20px; padding: 3px 11px; font-size: 13px; background: var(--panel); }
+  .chips.blue span { border-color: var(--mint); color: var(--mint-d); background: var(--mint-bg); }
+  .kpi .v { font-family: var(--f-en); font-size: clamp(30px, 3vw, 40px); font-weight: 600; line-height: 1.05; color: #0f172a; font-variant-numeric: tabular-nums; }
+  .kpi .v small { font-size: .45em; color: var(--sub); margin-left: 4px; font-weight: 500; }
+  .kpi .l { font-size: 14.5px; color: var(--sub); line-height: 1.45; }
+  .kpi.blue .v { color: var(--mint); }
+  .card.navy.kpi .v small { color: var(--on-navy-2); }
+
+  /* project cover card (6-1) */
+  .pcover { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; }
+  .pcover .facts { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 6px 12px; font-size: 15px; }
+  .pcover .facts dt { color: var(--mute); font-family: var(--f-en); font-size: 13px; letter-spacing: 1px; padding-top: 2px; }
+  .pcover .facts dd { color: var(--tx); }
+  .psr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid var(--line-2); border-radius: 14px; overflow: hidden; background: var(--panel); }
+  .psr > div { padding: 14px 16px; border-left: 1px solid var(--line); min-width: 0; }
+  .psr > div:first-child { border-left: 0; }
+  .psr .k { font-family: var(--f-en); font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--mint); text-transform: uppercase; margin-bottom: 4px; }
+  .psr p { font-size: 15px; color: var(--tx-2); line-height: 1.6; }
+  .psr > div:last-child { background: var(--mint-glow); }
+  .pdef { border-left: 4px solid var(--navy); padding: 4px 0 4px 16px; font-size: 17px; line-height: 1.75; color: var(--tx); }
+  .pdef small { display: block; font-family: var(--f-en); font-size: 12px; letter-spacing: 2px; color: var(--mute); }
+  .hyp { border-left: 4px solid var(--mint); background: var(--mint-glow); border-radius: 0 10px 10px 0; padding: 12px 16px; font-size: 16.5px; font-weight: 700; color: var(--tx); line-height: 1.6; }
+  .hyp small { display: block; font-family: var(--f-en); font-size: 12px; letter-spacing: 2px; color: var(--mint); margin-bottom: 2px; }
+  .verdict { display: inline-block; font-size: 13px; font-weight: 800; padding: 2px 10px; border-radius: 4px; margin-right: 6px; }
+  .verdict.ok { background: var(--good-bg); color: var(--good); }
+  .verdict.part { background: var(--warn-bg); color: var(--warn); }
+  .verdict.no { background: var(--soft); color: var(--sub); border: 1px solid var(--line-2); }
+
+  /* role 3 columns (7-1) */
+  .role { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+  .role.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .role > div { border: 1px solid var(--line-2); border-radius: 12px; padding: 12px 14px; background: var(--panel); min-width: 0; }
+  .role > div:nth-child(2) { border-color: var(--mint); background: var(--mint-glow); }
+  .role h6 { font-size: 14px; font-weight: 800; color: var(--tx); margin-bottom: 6px; }
+  .role li { font-size: 15px; color: var(--tx-2); line-height: 1.6; }
+
+  /* dated steps (7-4) */
+  .steps { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 0; position: relative; }
+  .steps::before { content: ""; position: absolute; left: 6%; right: 6%; top: 11px; height: 2px; background: var(--line-2); }
+  .steps > div { position: relative; text-align: center; padding: 0 6px; }
+  .steps > div::before { content: ""; display: block; width: 14px; height: 14px; margin: 5px auto 8px; border-radius: 50%; background: var(--panel); border: 2px solid var(--mint); position: relative; }
+  .steps > div.on::before { background: var(--mint); }
+  .steps .d { font-family: var(--f-en); font-size: 13.5px; font-weight: 700; color: var(--mint); }
+  .steps .t { font-size: 14.5px; color: var(--tx-2); line-height: 1.45; }
+
+  /* flow */
+  .flow { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
+  .flow .st { flex: 1 1 130px; border: 1px solid var(--line-2); border-radius: 10px; padding: 10px 13px; background: var(--panel); min-width: 0; }
+  .flow .st b { display: block; color: var(--mint-d); font-size: 14.5px; margin-bottom: 3px; }
+  .flow .st span { font-size: 14.5px; line-height: 1.55; color: var(--tx-2); display: block; }
+  .flow .st.on { border-color: var(--mint); background: var(--mint-glow); }
+  .flow .ar { display: grid; place-items: center; color: var(--mint); font-size: 18px; flex: 0 0 auto; }
+  .flow.col { flex-direction: column; }
+
+  /* bars / tables */
+  .bars { display: flex; flex-direction: column; gap: 8px; }
+  .bar { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr) 70px; align-items: center; gap: 12px; font-size: 14.5px; }
+  .bar .nm { color: var(--tx-2); font-family: var(--f-en); min-width: 0; }
+  .bar .nm small { color: var(--mute); font-size: 12px; display: block; line-height: 1.2; }
+  .bar .tr { height: 12px; background: var(--track); border-radius: 3px; overflow: hidden; }
+  .bar .fl { display: block; height: 100%; background: var(--bar2); border-radius: 3px; }
+  .bar.top .fl { background: var(--mint); }
+  .bar.low .fl { background: var(--bad); }
+  .bar.low .nm, .bar.low .vv { color: var(--bad-tx); }
+  .bar .vv { text-align: right; font-family: var(--f-en); color: var(--tx); font-variant-numeric: tabular-nums; }
+  .tbl { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { padding: 8px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; color: var(--tx-2); }
+  th { font-weight: 700; color: var(--sub); font-size: 12.5px; letter-spacing: .4px; font-family: var(--f-en); background: var(--soft); white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td b { color: var(--tx); }
+  td.c { text-align: center; }
+  table.num td, table.num th { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-family: var(--f-en); }
+  table.num td:first-child, table.num th:first-child { text-align: left; }
+  td.hi { color: var(--mint); font-weight: 700; }
+  .dotm { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--mint); }
+  .doto { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--mint); }
+
+  /* document capture (8) */
+  .doc { display: flex; flex-direction: column; gap: 8px; min-width: 0; padding-top: 10px; margin: 0; }
+  .doc .frame { position: relative; background: var(--panel); border: 1px solid var(--line-2); border-radius: 6px; padding: 6px; box-shadow: 0 1px 2px rgba(15,23,42,.06), 0 10px 24px rgba(15,23,42,.10); }
+  .doc .frame img { width: 100%; height: auto; border-radius: 3px; }
+  .doc .tagdoc { position: absolute; top: -11px; left: 12px; z-index: 1; background: var(--navy); color: var(--ink); font-size: 12px; font-weight: 700; padding: 3px 9px; border-radius: 4px; box-shadow: 0 0 0 3px var(--bg); }
+  .doc figcaption { font-size: 15px; color: var(--tx); line-height: 1.5; font-weight: 600; }
+  .think { border: 1px dashed var(--mint); border-radius: 10px; padding: 10px 14px; background: var(--mint-glow); }
+  .think small { display: block; font-size: 12.5px; font-weight: 800; color: var(--mint-d); margin-bottom: 2px; }
+  .think p { font-size: 15px; color: var(--tx-2); line-height: 1.6; }
+
+  /* misc components */
+  .asis { display: grid; grid-template-columns: minmax(0, 1fr) 28px minmax(0, 1fr); align-items: stretch; }
+  .asis > div { border-radius: 10px; padding: 12px 14px; font-size: 14.5px; line-height: 1.8; }
+  .asis .a { background: var(--soft); color: var(--sub); }
+  .asis .b { background: var(--mint-glow); color: var(--tx); border: 1px solid var(--mint); }
+  .asis .x { display: grid; place-items: center; color: var(--mint); padding: 0; }
+  .asis b { display: block; font-family: var(--f-en); font-size: 12px; letter-spacing: 1.5px; margin-bottom: 4px; }
+  .lv { display: flex; align-items: center; gap: 14px; padding: 9px 14px; border-radius: 8px; font-size: 15px; color: var(--tx-2); }
+  .lv + .lv { margin-top: 6px; }
+  .lv b { width: 46px; color: var(--tx); }
+  .lv i { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+  .lv.g { background: var(--good-bg); } .lv.g i { background: var(--good); }
+  .lv.y { background: var(--warn-bg); } .lv.y i { background: var(--warn); }
+  .lv.r { background: var(--bad-bg); } .lv.r i { background: var(--bad); }
+  .stepper { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+  .stepper::before { content: ""; position: absolute; left: 10%; right: 10%; top: 17px; height: 2px; background: var(--mint); }
+  .stepper div { position: relative; text-align: center; font-size: 15px; color: var(--tx); font-weight: 700; padding: 0 4px; }
+  .stepper div::before { content: attr(data-n); display: grid; place-items: center; width: 36px; height: 36px; margin: 0 auto 8px; border-radius: 50%; background: var(--panel); border: 2px solid var(--mint); color: var(--mint); font-family: var(--f-en); position: relative; }
+  .stepper div:last-child::before { background: var(--mint); color: var(--ink); }
+  .stepper small { display: block; color: var(--sub); font-size: 13.5px; font-weight: 400; margin-top: 2px; }
+  .band { position: relative; height: 32px; background: var(--bad-bg); border: 1px solid var(--line-2); border-radius: 6px; overflow: hidden; }
+  .band span { position: absolute; top: 0; bottom: 0; background: var(--good); display: grid; place-items: center; color: var(--ink); font-size: 12px; font-weight: 700; font-family: var(--f-en); }
+  .ticks { display: flex; justify-content: space-between; font-family: var(--f-en); font-size: 12px; color: var(--mute); margin-top: 4px; }
+  .cal { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+  .cal div { border-radius: 6px; background: var(--teal-bg); border: 1px solid var(--teal); padding: 7px 3px; text-align: center; font-family: var(--f-en); min-width: 0; }
+  .cal .d { font-size: 15px; font-weight: 700; color: var(--tx); display: block; }
+  .cal .wd { font-size: 11px; color: var(--sub); display: block; }
+  .cal .hol { border-color: var(--warn); background: var(--warn-bg); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tabs button { font: inherit; font-size: 14px; cursor: pointer; border-radius: 30px; padding: 7px 16px; border: 1px solid var(--line-2); background: var(--panel); color: var(--tx-2); }
+  .tabs button[aria-selected="true"] { background: var(--navy); color: var(--ink); border-color: var(--navy); font-weight: 700; }
+  .tabp { border: 1px solid var(--line-2); border-radius: 10px; background: var(--panel); padding: 14px 16px; display: flex; flex-direction: column; gap: 8px; }
+  .qt { padding-left: 12px; border-left: 3px solid var(--mint); font-size: 15.5px; color: var(--tx); font-weight: 600; line-height: 1.6; }
+  .card.navy .qt { color: var(--ink); border-color: #93b4f8; }
+  .cities { display: flex; flex-wrap: wrap; gap: 7px; }
+  .cities span { font-family: var(--f-en); font-size: 14px; padding: 4px 12px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); color: var(--tx-2); }
+  .cities span b { color: var(--mint); margin-right: 6px; }
+  .disrupt { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--panel); }
+  .disrupt > div { padding: 12px 15px; border-left: 1px solid var(--line); min-width: 0; }
+  .disrupt > div:first-child { border-left: 0; }
+  .disrupt .d { font-family: var(--f-en); color: var(--mint); font-size: 13px; font-weight: 600; }
+  .disrupt .t { font-size: 15px; font-weight: 700; color: var(--tx); margin-top: 3px; }
+  .disrupt .p { font-size: 14.5px; color: var(--sub); margin-top: 3px; line-height: 1.5; }
+  .disrupt .x { background: var(--bad-bg); }
+  .disrupt .x .d { color: var(--bad-tx); }
+  .check { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 16px; }
+  .check li { display: flex; gap: 10px; align-items: baseline; font-size: 15px; color: var(--tx-2); }
+  .check li::before { content: "✓"; flex: none; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 4px; background: var(--mint); color: var(--ink); font-size: 12px; font-weight: 800; }
+  .placeholder { border: 1px dashed var(--line-2); border-radius: 10px; padding: 12px 16px; color: #94a3b8; font-size: 16px; background: var(--panel-2); }
+
+  /* cover / toc / divider */
+  .cover { min-height: min(88vh, 820px); display: flex; flex-direction: column; justify-content: center; background: radial-gradient(ellipse at 85% 10%, #e6eefc 0%, #f4f7fd 45%, #ffffff 100%); }
+  .cover .w { align-items: center; text-align: center; gap: 18px; }
+  .cover-k { font-family: var(--f-en); letter-spacing: 6px; color: var(--sub); font-size: 15px; }
+  .cover-title { font-family: var(--f-en); font-weight: 700; font-size: clamp(64px, 12vw, 150px); letter-spacing: 2px; color: var(--tx); line-height: 1; }
+  .cover-title em { font-style: normal; color: var(--mint); }
+  .cover-line { display: flex; align-items: center; gap: 28px; color: var(--mint); font-size: clamp(17px, 1.8vw, 22px); width: min(720px, 100%); font-weight: 600; }
+  .cover-line i { flex: 1; height: 1.5px; background: var(--mint); }
+  .brand { font-size: clamp(20px, 2vw, 24px); font-weight: 800; color: var(--tx); letter-spacing: -.4px; line-height: 1.5; }
+  .brand em { font-style: normal; color: var(--mint); }
+  .contact { list-style: none; font-family: var(--f-en); font-size: 15px; color: var(--tx-2); display: flex; flex-wrap: wrap; gap: 10px 24px; justify-content: center; }
+  .contact a { text-decoration: none; }
+  .contact a:hover { color: var(--mint); }
+  .contact li { display: flex; align-items: center; gap: 9px; }
+  .contact .ic { width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: var(--ink); display: grid; place-items: center; font-size: 11px; font-weight: 800; flex: none; }
+  .toc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px 28px; }
+  .toc .grp h6 { font-family: var(--f-en); font-size: 14px; font-weight: 700; color: var(--mint); letter-spacing: 1px; border-bottom: 2px solid var(--mint); padding-bottom: 6px; margin-bottom: 4px; }
+  .toc a { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 10px; align-items: baseline; text-decoration: none; padding: 5px 2px; border-bottom: 1px dotted var(--line-2); font-size: 15px; color: var(--tx); }
+  .toc a:hover { color: var(--mint); }
+  .toc a .pn { font-family: var(--f-en); color: var(--mint); font-weight: 600; }
+  .toc a.star { font-weight: 700; }
+  .divider { background: var(--navy); }
+  .divider .h-big, .divider .ks { color: var(--ink); }
+  .divider .ks { color: #93b4f8; }
+  .divider .eyebrow { color: #93b4f8; }
+  .divider .chn, .divider .pg { color: var(--on-navy-2); }
+  .divider .pg b { color: #93b4f8; }
+  .divider .card { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.18); }
+  .divider .card h6, .divider .card b { color: var(--ink); }
+  .divider .card p, .divider .card li { color: var(--on-navy); }
+  .divider .card a { color: var(--ink); text-decoration: none; }
+  .divider .card .pn { color: #93b4f8; font-family: var(--f-en); font-weight: 600; margin-left: 6px; }
+  .divider ul.dot li::before { background: #93b4f8; }
+  .prof { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 28px; align-items: center; }
+  .prof .ph { width: 140px; aspect-ratio: 200/255; border: 1px solid var(--line-2); border-radius: 8px; overflow: hidden; max-width: 100%; }
+  .prof .ph img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .conv-core { display: grid; place-items: center; text-align: center; border-radius: 50%; aspect-ratio: 1; width: min(220px, 100%); margin: auto; background: var(--navy); color: var(--ink); padding: 26px; font-size: 18px; font-weight: 800; line-height: 1.5; box-shadow: 0 0 0 12px rgba(37,99,235,.10); }
+  .conv-core em { font-style: normal; color: #93b4f8; }
+
+  /* activity chronology (5-A) */
+  .chrono { display: grid; grid-template-columns: 140px repeat(4, minmax(0, 1fr)); border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--panel); }
+  .chrono > div { padding: 8px 10px; border-left: 1px solid var(--line); border-top: 1px solid var(--line); min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+  .chrono .yh { background: var(--soft); font-family: var(--f-en); font-weight: 700; color: var(--tx); text-align: center; border-top: 0; font-size: 16px; }
+  .chrono .lane { background: var(--soft); font-weight: 800; font-size: 14px; color: var(--tx); border-left: 0; justify-content: center; }
+  .chrono .corner { background: var(--soft); border-left: 0; border-top: 0; }
+  .chrono a { display: block; text-decoration: none; border: 1px solid var(--line-2); border-left: 3px solid var(--mint); border-radius: 6px; padding: 3px 7px; font-size: 13px; line-height: 1.4; color: var(--tx-2); background: var(--panel); }
+  .chrono a:hover { border-color: var(--mint); }
+  .chrono a b { font-family: var(--f-en); color: var(--mint); margin-right: 4px; }
+  .chrono a i { font-style: normal; color: var(--teal); font-weight: 700; }
+  .chrono a .pn { color: var(--mute); font-family: var(--f-en); font-size: 11.5px; margin-left: 3px; }
+
+  /* responsive (screen only, so print keeps the desktop layout) */
+  @media screen and (max-width: 1100px) {
+    .c2, .c3 { grid-column: span 6; } .c4, .c5, .c6 { grid-column: span 6; } .c7, .c8, .c9 { grid-column: span 12; }
+    .toc { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .chrono { grid-template-columns: 110px repeat(4, minmax(160px, 1fr)); overflow-x: auto; }
+  }
+  @media screen and (max-width: 720px) {
+    .bento > * { grid-column: span 12; }
+    .pcover, .psr, .role, .role.two, .toc, .prof, .check { grid-template-columns: minmax(0, 1fr); }
+    .psr > div { border-left: 0; border-top: 1px solid var(--line); }
+    .psr > div:first-child { border-top: 0; }
+    .steps { grid-auto-flow: row; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .steps::before { display: none; }
+    .steps > div { display: grid; grid-template-columns: 20px 90px minmax(0, 1fr); text-align: left; align-items: baseline; gap: 8px; }
+    .steps > div::before { margin: 0; }
+    .stepper { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+    .stepper::before { display: none; }
+    .stepper div { display: flex; gap: 12px; align-items: center; text-align: left; }
+    .stepper div::before { margin: 0; flex: none; }
+    .disrupt { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .disrupt > div:nth-child(3) { border-left: 0; }
+    .disrupt > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .cal { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .asis { grid-template-columns: minmax(0, 1fr); }
+    .asis .x { transform: rotate(90deg); padding: 4px 0; }
+    .bar { grid-template-columns: minmax(92px, 120px) minmax(0, 1fr) 62px; font-size: 13.5px; }
+    .chrono-wrap { overflow-x: auto; }
+    .chrono { min-width: 760px; }
+  }
+
+  /* print: one section = one 1440x1018 page; --z is set by the fit script */
+  @page { size: 1440px 1018px; margin: 0; }
+  .pm .s { width: 1440px; padding: 52px 72px 60px; min-height: 0; }
+  .pm .s > .w { max-width: none; }
+  @media print {
+    html, body { background: var(--bg); }
+    .nav { display: none; }
+    .s { width: 1440px; height: 1018px; padding: 52px 72px 60px; overflow: hidden; display: flex; flex-direction: column; justify-content: center; border: 0; break-inside: avoid; page-break-inside: avoid; break-after: page; page-break-after: always; min-height: 0; }
+    .s:last-of-type { break-after: auto; page-break-after: auto; }
+    .s > .w { max-width: none; width: 100%; zoom: var(--z, 1); }
+    .pg { right: 72px; bottom: 20px; }
+    .chn { left: 72px; bottom: 20px; }
+  }
+
+  /* ---- Cashwalk edition: dark-theme overrides ---- */
+  .nav { background: rgba(6,6,6,.9); }
+  .cover { background: radial-gradient(ellipse at 82% 0%, #1f270a 0%, #0c0c0c 52%, #060606 100%); }
+  .kpi .v { color: var(--tx); }
+  .kpi.blue .v { color: var(--mint); }
+  .card.navy.kpi .v, .card.navy .kpi .v { color: var(--ink); }
+  .card.navy .qt { color: var(--ink); border-color: var(--ink); }
+  .card.navy a { color: var(--ink); }
+  .doc .frame { box-shadow: 0 10px 28px rgba(0,0,0,.55); }
+  .card a, .toc a, a.card { text-decoration: none; }
+  a.card { color: inherit; }
+  a.card:hover { border-color: var(--mint); }
+  .s.alt .card.navy { background: var(--navy); }
+  .s.alt .card.tint { background: var(--mint-glow); }
+  .pj .th.fit img { object-fit: contain; object-position: center; padding: 8px; }
+  .pledge { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 8px 16px; border-top: 1px solid var(--line-2); padding-top: 14px; margin-top: 6px; }
+  .pledge dt { font-size: 14.5px; font-weight: 800; color: var(--mint); }
+  .pledge dd { font-size: 15px; color: var(--tx-2); line-height: 1.6; }
+  @media screen and (max-width: 720px) { .pledge { grid-template-columns: minmax(0, 1fr); } }
+
+  /* ---- Cashwalk edition: new components ---- */
+  .lead p { font-size: 17px; line-height: 1.85; color: var(--tx-2); }
+  .lead p + p { margin-top: 10px; }
+  .lead b { color: var(--tx); }
+  .bridge { display: flex; gap: 16px; align-items: baseline; border: 1px solid var(--mint); background: var(--mint-glow); border-radius: 14px; padding: 14px 20px; }
+  .bridge small { flex: none; font-family: var(--f-en); font-size: 12px; font-weight: 700; letter-spacing: 2px; color: var(--mint); text-transform: uppercase; }
+  .bridge p { font-size: 16.5px; font-weight: 700; color: var(--tx); line-height: 1.6; }
+  .pj { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 16px; text-decoration: none; }
+  .pj:hover { border-color: var(--mint); }
+  .pj .th { border-radius: 10px; overflow: hidden; background: #fff; aspect-ratio: 16/10; }
+  .pj .th img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .pj .th.type { background: var(--mint-glow); border: 1px solid var(--line-2); display: grid; place-items: center; text-align: center; font-family: var(--f-en); color: var(--mint); font-size: 30px; font-weight: 700; line-height: 1.15; }
+  .pj .th.type small { display: block; font-size: 13px; color: var(--sub); font-weight: 500; letter-spacing: 1px; margin-top: 6px; }
+  .pj .no { font-family: var(--f-en); font-size: 13px; letter-spacing: 2px; color: var(--mint); font-weight: 700; }
+  .pj h6 { font-size: 18px; font-weight: 800; color: var(--tx); margin: 2px 0 4px; }
+  .pj .cap { font-size: 14px; color: var(--sub); }
+  .pj .res { font-size: 15px; color: var(--tx); font-weight: 600; margin-top: 6px; }
+  .pj .pgref { font-family: var(--f-en); font-size: 13px; color: var(--mute); margin-top: 6px; }
+  .flowline { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line-2); border-radius: 12px; overflow: hidden; }
+  .flowline > div { padding: 12px 16px; border-left: 1px solid var(--line); background: var(--panel); min-width: 0; }
+  .flowline > div:first-child { border-left: 0; }
+  .flowline .n { font-family: var(--f-en); font-size: 12.5px; font-weight: 700; letter-spacing: 1.5px; color: var(--mint); }
+  .flowline .t { font-size: 16px; font-weight: 800; color: var(--tx); margin-top: 2px; }
+  .flowline .p { font-size: 14px; color: var(--sub); margin-top: 2px; line-height: 1.5; }
+  .plain { border: 1px dashed var(--line-2); border-radius: 10px; padding: 10px 14px; }
+  .plain small { display: block; font-size: 12.5px; font-weight: 800; color: var(--mint); margin-bottom: 2px; }
+  .plain p { font-size: 15px; color: var(--tx-2); line-height: 1.6; }
+  .closing-line { font-size: clamp(26px, 2.6vw, 34px); font-weight: 800; color: var(--tx); letter-spacing: -.6px; line-height: 1.4; text-wrap: balance; }
+  .closing-line em { font-style: normal; color: var(--mint); }
+  @media screen and (max-width: 720px) {
+    .pj, .flowline { grid-template-columns: minmax(0, 1fr); }
+    .flowline > div { border-left: 0; border-top: 1px solid var(--line); }
+    .flowline > div:first-child { border-top: 0; }
+    .bridge { flex-direction: column; gap: 4px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="섹션 이동">
+  <ul>
+    <li><a href="#about">기획자로서의 관점</a></li>
+    <li><a href="#skills">직무 역량</a></li>
+    <li><a href="#overview">Projects</a></li>
+    <li><a href="#jeju">01 제주 해커톤</a></li>
+    <li><a href="#mediawall">02 미디어월</a></li>
+    <li><a href="#kusso">03 KUSSO</a></li>
+    <li><a href="#scurt">04 S-CURT</a></li>
+    <li><a href="#closing">Closing</a></li>
+  </ul>
+</nav>
+
+<!-- ======================================================= 01 COVER -->
+<section class="s cover" id="cover" data-ch="Cover">
+  <div class="w">
+    <div class="cover-k">SERVICE PLANNING · OPERATION · DATA</div>
+    <div class="cover-title">PORT<em>FOLIO</em></div>
+    <div class="cover-line"><i></i><span>진영은 · 서비스 기획 직무 지원</span><i></i></div>
+    <p class="ks">사용자의 문제를 발견하고,<br>실행 가능한 개선으로 연결합니다.</p>
+    <p class="brand">넛지헬스케어 · <em>캐시워크</em> 서비스 기획 인턴십 지원 포트폴리오</p>
+    <p class="meta">고려대학교 세종캠퍼스 디지털경영전공 · 2027.02 졸업예정</p>
+    <ul class="contact">
+      <li><span class="ic">@</span><span>ryqkr@naver.com</span></li>
+      <li><span class="ic">☎</span><span>010-5693-3560</span></li>
+      <li><span class="ic">G</span><a href="https://github.com/YoungEunJin" target="_blank" rel="noopener">github.com/YoungEunJin</a></li>
+      <li><span class="ic">B</span><a href="https://blog.naver.com/my_daily_life0724" target="_blank" rel="noopener">blog.naver.com/my_daily_life0724</a></li>
+    </ul>
+  </div>
+  <div class="chn">Cover</div>
+  <div class="pg"><b>01</b> / 12</div>
+</section>
+
+<!-- ======================================================= 02 ABOUT -->
+<section class="s alt" id="about" data-ch="기획자로서의 관점">
+  <div class="w">
+    <div class="prof">
+      <div class="ph"><img src="img/photo.jpg" alt="진영은 증명사진"></div>
+      <div>
+        <div class="eyebrow">About · 기획자로서의 관점</div>
+        <p class="ks">문제를 발견하는 데서 멈추지 않고, 해결 과정까지 구체화합니다.</p>
+        <div class="tags" style="margin-top:10px"><span class="t-p">서비스 기획</span><span class="t-p">이슈 해결</span><span class="t-p">운영 체계화</span><span class="t-p">데이터 기반 판단</span></div>
+      </div>
+    </div>
+    <div class="bento">
+      <div class="card c8 lead">
+        <p>프로젝트를 진행할 때 결과물을 만드는 것뿐 아니라, <b>무엇이 문제인지 정의하고 어떤 기준으로 해결할지 결정하는 과정</b>을 중요하게 생각합니다. 사용자의 불편과 운영 과정의 문제를 구체화하고, 데이터와 기술을 활용해 실행 가능한 개선안으로 연결해 왔습니다.</p>
+        <p><b>제주 런케이션 AI 해커톤</b>에서는 사용자 문제를 기능과 결과물로 연결했고, <b>교내 미디어월 복구</b>에서는 원인을 파악해 실제 사용 가능한 시스템으로 되살렸습니다. 이러한 경험을 바탕으로 서비스의 기획부터 운영까지 배우고 기여하고자 합니다.</p>
+      </div>
+      <div class="card c4">
+        <h6>학력 · 어학</h6>
+        <ul class="dot">
+          <li>고려대학교 세종캠퍼스 디지털경영전공 · 2027.02 졸업예정</li>
+          <li>Kent State University 교환학생 (CIS)</li>
+          <li>IELTS Academic Overall 6.0 (2025.08)</li>
+          <li>Unity Certified User (2024.11)</li>
+        </ul>
+      </div>
+      <div class="c12">
+        <div class="flowline">
+          <div><div class="n">01 · 문제 발견</div><div class="t">불편을 문제로 정의</div><div class="p">누가 · 어떤 상황에서 · 왜 불편한지 데이터로 확인합니다.</div></div>
+          <div><div class="n">02 · 개선안 설계</div><div class="t">기준을 정하고 범위를 자름</div><div class="p">임팩트와 구현 가능성으로 먼저 할 일을 고릅니다.</div></div>
+          <div><div class="n">03 · 실행 · 검증</div><div class="t">작동하는 결과물까지</div><div class="p">데모 · 수정 · 테스트로 실제 환경에서 확인합니다.</div></div>
+          <div><div class="n">04 · 운영 관점</div><div class="t">기록하고 다음으로 연결</div><div class="p">한계와 운영 데이터를 정리해 다음 개선으로 넘깁니다.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chn">기획자로서의 관점</div>
+  <div class="pg"><b>02</b> / 12</div>
+</section>
+
+<!-- ======================================================= 03 SKILLS -->
+<section class="s" id="skills" data-ch="직무 역량 요약">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Skills · 직무 역량 요약</div>
+      <p class="ks">서비스 기획 · 이슈 해결 · 운영 · 데이터, 네 가지 역량을 프로젝트로 증명합니다.</p>
+    </div>
+    <div class="bento">
+      <div class="card c6">
+        <h6><span class="k">①</span> 서비스 문제 정의</h6>
+        <p>사용자 불편을 구체적인 문제로 정의하고, 해결 방향과 기능 우선순위를 정리합니다.</p>
+        <p class="note"><b>근거</b> · 제주 해커톤 · 불만 1위 '비싼 물가' 데이터로 팀과 우선순위를 합의해 가격 필터를 v1에 탑재</p>
+      </div>
+      <div class="card c6">
+        <h6><span class="k">②</span> 이슈 분석과 실행</h6>
+        <p>시스템 오류의 원인을 추적하고, 수정과 테스트를 거쳐 실제 사용 환경에 적용합니다.</p>
+        <p class="note"><b>근거</b> · 미디어월 복구 · 오류 메시지 없는 장애를 NetworkManager 초기화 순서까지 역추적</p>
+      </div>
+      <div class="card c6">
+        <h6><span class="k">③</span> 운영 데이터 체계화</h6>
+        <p>흩어진 정보를 하나의 기록 체계로 통합하고, 반복적인 관리 업무를 정리합니다.</p>
+        <p class="note"><b>근거</b> · KUSSO 정보부 · 흩어진 활동 데이터를 엑셀 '최종 기록지'로 통합</p>
+      </div>
+      <div class="card c6">
+        <h6><span class="k">④</span> 데이터 기반 판단</h6>
+        <p>성능을 하나의 수치로 단정하지 않고, 목적에 맞는 지표를 선정해 결과를 비교합니다.</p>
+        <p class="note"><b>근거</b> · S-CURT · 추천을 순위 문제로 보고 NDCG를 주 지표로, 예측 Std로 일관성을 따로 확인</p>
+      </div>
+      <div class="card c7">
+        <h6>캐시워크 업무와 연결되는 경험</h6>
+        <div class="tbl"><table>
+          <thead><tr><th>공고의 업무</th><th>연결되는 경험</th></tr></thead>
+          <tbody>
+            <tr><td><b>서비스 기획 · 운영</b></td><td>사용자 불편 → 기능 우선순위 (제주) · 운영 기록 통합 (KUSSO)</td></tr>
+            <tr><td><b>출시 일정 · 이슈 파악</b></td><td>원인 추적 → 수정 → 실제 환경 확인 (미디어월)</td></tr>
+            <tr><td><b>유관 부서 협업</b></td><td>AI 전공 팀원과 데이터로 우선순위 합의 · 기획 발표 (제주)</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="card c5">
+        <h6>실제로 사용한 도구</h6>
+        <div class="chips blue"><span>Figma</span><span>PowerPoint</span><span>Excel (VLOOKUP)</span><span>Python</span><span>Unity · C#</span></div>
+        <div class="chips"><span>Django 구조 이해</span><span>CatBoost · LightGCN</span><span>Kakao Map API</span><span>Miro</span></div>
+        <p class="note">프로젝트에서 직접 사용한 도구만 적었습니다.</p>
+      </div>
+    </div>
+  </div>
+  <div class="chn">직무 역량 요약</div>
+  <div class="pg"><b>03</b> / 12</div>
+</section>
+
+<!-- ======================================================= 04 PROJECT OVERVIEW -->
+<section class="s alt" id="overview" data-ch="Project Overview">
+  <div class="w">
+    <div>
+      <div class="h-big">Pro<em>jects</em></div>
+      <p class="ks">서로 다른 문제를 해결하며 쌓은 네 가지 역량</p>
+    </div>
+    <div class="bento">
+      <a class="card c6 pj" href="#jeju">
+        <div class="th"><img src="img/jeju_home.jpg" alt="'여기옵서' 데모 웹 메인 화면"></div>
+        <div>
+          <div class="no">01 · 문제 정의</div>
+          <h6>제주 런케이션 AI 해커톤</h6>
+          <p class="cap">사용자 문제 정의와 기능 우선순위 · 2025.02 · 5인 · 기여도 33%</p>
+          <p class="res">200팀 중 본선 50팀 → 결승 진출</p>
+          <p class="pgref">p.05 – 06</p>
+        </div>
+      </a>
+      <a class="card c6 pj" href="#mediawall">
+        <div class="th"><img src="img/unity_home.jpg" alt="고려대학교 미디어월 메인 화면"></div>
+        <div>
+          <div class="no">02 · 이슈 해결</div>
+          <h6>고려대학교 미디어월 복구</h6>
+          <p class="cap">원인 분석과 이슈 해결 · 2025.03 – 2025.12 · 1인</p>
+          <p class="res">3년 멈춘 시스템 정상화 · 실제 전시</p>
+          <p class="pgref">p.07 – 08</p>
+        </div>
+      </a>
+      <a class="card c6 pj" href="#kusso">
+        <div class="th type"><div>13<span style="font-size:.6em">건</span> · 107<span style="font-size:.6em">h</span><small>KUSSO 6기 · 정보부</small></div></div>
+        <div>
+          <div class="no">03 · 운영 체계화</div>
+          <h6>KUSSO 운영 체계화</h6>
+          <p class="cap">데이터 통합과 반복 업무 개선 · 2025.03 – 2025.12</p>
+          <p class="res">활동 기록 통합 · 우수봉사자 선정</p>
+          <p class="pgref">p.09</p>
+        </div>
+      </a>
+      <a class="card c6 pj" href="#scurt">
+        <div class="th fit"><img src="img/doc_scurt_02_model.png" alt="S-CURT 모델 성능 비교표"></div>
+        <div>
+          <div class="no">04 · 데이터 기반 판단</div>
+          <h6>S-CURT 추천 모델 연구</h6>
+          <p class="cap">지표 설계와 데이터 기반 판단 · 2025.04 – 07 · 2인 · 기여도 50%</p>
+          <p class="res">NDCG 0.9555 · 인문사회계열 최우수</p>
+          <p class="pgref">p.10 – 11</p>
+        </div>
+      </a>
+    </div>
+    <p class="note">각 프로젝트는 Problem → Action → Result 순서로 정리했고, 마지막에 캐시워크 직무와의 연결을 한 줄로 적었습니다.</p>
+  </div>
+  <div class="chn">Project Overview</div>
+  <div class="pg"><b>04</b> / 12</div>
+</section>
+
+<!-- ======================================================= 05 JEJU 1 -->
+<section class="s" id="jeju" data-ch="Project 01 · 제주 런케이션 AI 해커톤">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 01 · 제주 런케이션 AI 해커톤 · 1 / 2 문제 정의</div>
+      <h2 class="ptitle">이미지 기반 관광지 추천 서비스 '여기옵서'</h2>
+      <p class="ks">사용자가 실제로 겪는 여행 문제에서 기능의 우선순위를 정했습니다.</p>
+    </div>
+    <div class="psr">
+      <div><div class="k">Problem</div><p>제주를 찾는 외국인 관광객은 늘었지만 소비는 줄었고, 불만 1위는 '비싼 물가'였습니다.</p></div>
+      <div><div class="k">Insight</div><p>가격 자체보다 '내 취향과 예산에 맞는 곳을 비교해 찾기 어려운 구조'가 문제라고 봤습니다.</p></div>
+      <div><div class="k">Solution</div><p>사진 기반 유사 관광지 Top-3 · '저렴이' 가격 필터 · Django 웹 데모</p></div>
+    </div>
+    <div class="bento">
+      <div class="c5" style="display:flex;flex-direction:column;gap:16px">
+        <div class="bento" style="gap:12px">
+          <div class="card c6 kpi blue"><div class="v">3.16<small>점</small></div><div class="l">외국인 여행 경비 만족도 · 항목 중 최저</div></div>
+          <div class="card c6 kpi"><div class="v">53.4%</div><div class="l">불만 1위 '비싼 물가'</div></div>
+        </div>
+        <p class="note">출처 · 제주 관광 동향 공개 통계 (프로젝트 보고서 시장조사). 실제 사용자 인터뷰는 진행하지 못했습니다.</p>
+        <div class="card">
+          <h6>페르소나의 불편 → 기능 요구</h6>
+          <div class="tbl"><table>
+            <thead><tr><th>불편</th><th>도출한 기능</th></tr></thead>
+            <tbody>
+              <tr><td>정확한 정보 부족</td><td><b>사진 기반 유사 관광지 Top-3</b></td></tr>
+              <tr><td>지출 부담 (대학생)</td><td><b>'저렴이' 인증 · 가격대 필터</b></td></tr>
+              <tr><td>언어 장벽</td><td><b>사진 업로드로 탐색</b></td></tr>
+              <tr><td>계획 없는 즉흥 여행</td><td>실시간 대체 옵션 (로드맵)</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+      </div>
+      <div class="c7" style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <h6>기능 후보 비교 · 무엇을 먼저 하고 무엇을 뺐나</h6>
+          <div class="tbl"><table>
+            <thead><tr><th>후보</th><th>임팩트</th><th>난이도</th><th>결정</th></tr></thead>
+            <tbody>
+              <tr><td><b>사진 기반 Top-3</b></td><td>높음 · 핵심 가치</td><td>중</td><td><b style="color:var(--mint)">v1 탑재</b></td></tr>
+              <tr><td><b>'저렴이' 가격 필터</b></td><td>높음 · 불만 1위 대응</td><td>낮음</td><td><b style="color:var(--mint)">v1 탑재</b></td></tr>
+              <tr><td><b>모델 고도화</b></td><td>중 · 정확도 향상</td><td>높음</td><td>보류</td></tr>
+              <tr><td><b>실시간 대체 옵션</b></td><td>높음 · 즉흥형 니즈</td><td>높음</td><td>로드맵</td></tr>
+              <tr><td><b>여행 기록 · 리뷰 재추천</b></td><td>중 · 재방문</td><td>높음</td><td>로드맵</td></tr>
+            </tbody>
+          </table></div>
+          <p class="note">기능 목록은 발표 자료 슬라이드 12 · 17 기준</p>
+        </div>
+        <div class="card navy">
+          <h6>제가 내린 판단</h6>
+          <p>모델 고도화와 가성비 필터 중, 기간 내 구현 가능성과 불만 1위 '비싼 물가' 데이터를 기준으로 <b>팀과 우선순위를 데이터로 합의</b>해 필터를 먼저 넣었습니다. 모델 고도화는 보류하고, 나머지는 로드맵으로 분리했습니다.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chn">Project 01 · 제주 런케이션 AI 해커톤</div>
+  <div class="pg"><b>05</b> / 12</div>
+</section>
+
+<!-- ======================================================= 06 JEJU 2 -->
+<section class="s alt" id="jeju-2" data-ch="Project 01 · 제주 런케이션 AI 해커톤">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 01 · 제주 런케이션 AI 해커톤 · 2 / 2 실행 · 결과</div>
+      <p class="ks">아이디어를 기능으로 구체화하고, 시연 가능한 결과물까지 연결했습니다.</p>
+    </div>
+    <div class="bento">
+      <figure class="doc c7">
+        <div class="frame"><span class="tagdoc">실제 발표자료</span><img src="img/doc_jeju_03_howto.png" alt="해커톤 발표자료: 데모 웹 메인 화면 Where Do You Want To Go, How To Use"></div>
+        <figcaption>팀이 완성한 데모 웹 메인 화면입니다.</figcaption>
+        <div class="think"><small>이 화면에서 고민한 것</small><p>한국어 검색이 어려운 여행자가 첫 화면에서 할 일을 바로 알도록, 첫 문장을 "just upload your favorite photos!"로 두었습니다.</p></div>
+      </figure>
+      <div class="c5" style="display:flex;flex-direction:column;gap:16px">
+        <div class="card kpi blue"><div class="v">50<small>/ 200팀</small></div><div class="l">본선 → 결승 진출 (수상 없음) · Django 웹 데모 시연</div></div>
+        <div class="card">
+          <h6>예외 케이스까지 정의</h6>
+          <ul class="dot"><li><b>저화질 업로드</b> · "다른 사진을 올려 주세요" 안내</li><li><b>주변 저렴이 없음</b> · 필터 해제 제안 + 가장 가까운 저렴이 1곳</li><li><b>영업 종료</b> · 비슷한 분위기의 다른 곳 추천 제안</li></ul>
+        </div>
+        <div class="card">
+          <h6>멘토 피드백</h6>
+          <p class="qt">"수집 전처리 과정을 진행했다는 내용이 굉장히 좋음"</p>
+        </div>
+      </div>
+      <div class="card c12">
+        <h6>User Flow</h6>
+        <div class="flow">
+          <div class="st"><b>메인</b><span>Where Do You Want To Go</span></div><div class="ar">›</div>
+          <div class="st"><b>사진 업로드</b><span>Search</span></div><div class="ar">›</div>
+          <div class="st"><b>이미지 유사도</b><span>ResNet-18 특징 추출</span></div><div class="ar">›</div>
+          <div class="st"><b>Top-3 결과</b></div><div class="ar">›</div>
+          <div class="st on"><b>'저렴이' 필터</b><span>가격 범위</span></div><div class="ar">›</div>
+          <div class="st"><b>지도 확인</b><span>카카오맵 API</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="role">
+      <div><h6>팀 전체가 한 일 (5인)</h6><ul class="dot"><li>ResNet-18 모델 학습 (AI 전공 팀원)</li><li>Django · SQLite 웹 데모 구현</li><li>본선 · 결승 발표</li></ul></div>
+      <div><h6>제가 직접 판단한 일</h6><ul class="dot"><li>문제를 '탐색 비용'으로 정의</li><li>불만 1위 데이터로 팀과 우선순위 합의 → 필터 v1</li><li>특징 없는 · 어두운 사진 제외 기준</li></ul></div>
+      <div><h6>제가 실행한 일</h6><ul class="dot"><li>관광지 이미지 수집 · 라벨링 · 전처리</li><li>카카오맵 API 연동</li><li>PPT 제작 · 최종 발표로 기획 내용 전달</li></ul></div>
+    </div>
+    <div class="bridge"><small>Cashwalk Fit</small><p>사용자의 문제를 기능으로 구체화하고, 팀이 실행할 수 있는 형태로 전달하는 경험을 쌓았습니다.</p></div>
+  </div>
+  <div class="chn">Project 01 · 제주 런케이션 AI 해커톤</div>
+  <div class="pg"><b>06</b> / 12</div>
+</section>
+
+<!-- ======================================================= 07 MEDIA WALL 1 -->
+<section class="s" id="mediawall" data-ch="Project 02 · 고려대학교 미디어월 복구">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 02 · 고려대학교 미디어월 시스템 복구 · 1 / 2 이슈 진단</div>
+      <h2 class="ptitle">3년간 멈춘 인터랙티브 미디어월 레거시 시스템 복구</h2>
+      <p class="ks">3년간 멈춰 있던 시스템의 원인을 추적해 정상화했습니다.</p>
+    </div>
+    <div class="psr">
+      <div><div class="k">Problem</div><p>UI 패널이 오류 메시지 없이 전환되지 않아 전시에 쓸 수 없었습니다. 문서도 인수인계도 없었습니다.</p></div>
+      <div><div class="k">Action</div><p>레거시 코드 분석 · 전환 실패 지점부터 역추적 · NetworkManager 초기화 순서 수정 · Canvas 재설계</p></div>
+      <div><div class="k">Result</div><p>시스템 정상화 · Full HD · 4K 대응 · 실제 교내 전시</p></div>
+    </div>
+    <div class="bento">
+      <div class="card c5">
+        <dl class="facts" style="display:grid;grid-template-columns:92px minmax(0,1fr);gap:6px 12px;font-size:15px">
+          <dt style="color:var(--mute);font-size:13px">작업 성격</dt><dd>레거시 Unity 프로젝트 디버깅 · 전시 대응</dd>
+          <dt style="color:var(--mute);font-size:13px">제 역할</dt><dd>원인 추적 · 코드 수정 · 해상도 대응</dd>
+          <dt style="color:var(--mute);font-size:13px">작업 시기</dt><dd>2025.03 – 2025.12</dd>
+          <dt style="color:var(--mute);font-size:13px">팀 규모</dt><dd>1인</dd>
+        </dl>
+        <div class="plain"><small>쉽게 말하면</small><p>화면 전환을 담당하는 부품이 꺼진 채로 시작되면서, 화면 구성 요소를 불러오는 순서가 엉켜 있었습니다. 증상을 우회하지 않고 이 순서를 바로잡았습니다.</p></div>
+      </div>
+      <figure class="doc c7">
+        <div class="frame"><span class="tagdoc">복구한 시스템</span><img src="img/unity_home.jpg" alt="고려대학교 미디어월 메인 내비게이션 화면"></div>
+        <figcaption>미디어월 메인 내비게이션 화면입니다.</figcaption>
+      </figure>
+      <div class="card c12">
+        <h6>원인을 좁혀 간 과정</h6>
+        <div class="flow">
+          <div class="st"><b>증상 확인</b><span>UI 패널 전환 실패 · 오류 메시지 없음</span></div><div class="ar">›</div>
+          <div class="st"><b>레거시 코드 분석</b><span>문서 없이 코드와 동작을 직접 확인</span></div><div class="ar">›</div>
+          <div class="st"><b>역추적</b><span>전환 실패 지점부터 거꾸로</span></div><div class="ar">›</div>
+          <div class="st on"><b>원인 특정</b><span>NetworkManager 비활성 초기화 → Prefab 로딩 순서 꼬임</span></div><div class="ar">›</div>
+          <div class="st"><b>수정</b><span>활성 상태 전환 · 로딩 순서 재설계</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chn">Project 02 · 고려대학교 미디어월 복구</div>
+  <div class="pg"><b>07</b> / 12</div>
+</section>
+
+<!-- ======================================================= 08 MEDIA WALL 2 -->
+<section class="s alt" id="mediawall-2" data-ch="Project 02 · 고려대학교 미디어월 복구">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 02 · 고려대학교 미디어월 시스템 복구 · 2 / 2 결과 · 운영 관점</div>
+      <p class="ks">수정에 그치지 않고 실제 전시 환경에서 사용할 수 있도록 완성했습니다.</p>
+    </div>
+    <div class="bento">
+      <div class="card c4 kpi blue"><div class="v">3<small>년 만에</small></div><div class="l">멈춰 있던 시스템 정상화</div></div>
+      <div class="card c4 kpi"><div class="v">FHD · 4K</div><div class="l">전시 장비 해상도 모두 대응</div></div>
+      <div class="card c4 kpi navy"><div class="v">실제 전시</div><div class="l">교내 전시에 적용</div></div>
+      <figure class="doc c7">
+        <div class="frame"><span class="tagdoc">복구한 시스템</span><img src="img/unity_theme.jpg" alt="미디어월 주제별 탐색 화면: 역대 교사, 교우회, 축제, 고연전, 학생활동, 스포츠"></div>
+        <figcaption>미디어월 주제별 탐색 화면입니다.</figcaption>
+      </figure>
+      <div class="c5" style="display:flex;flex-direction:column;gap:16px">
+        <div class="card">
+          <h6>실제 사용 환경까지 확인</h6>
+          <p>전시 장비 해상도에 맞춰 Canvas Scaler와 Anchor를 다시 설계해 Full HD와 4K 모두에서 쓸 수 있게 했습니다.</p>
+          <div class="chips"><span>Unity</span><span>C#</span><span>NetworkManager</span><span>Canvas Scaler</span></div>
+        </div>
+        <div class="card">
+          <h6>진행 타임라인</h6>
+          <div class="steps"><div><div class="d">2024.11</div><div class="t">Unity Certified User</div></div><div><div class="d">2025.03</div><div class="t">미디어월 인수</div></div><div><div class="d">원인 추적</div><div class="t">초기화 순서 수정</div></div><div class="on"><div class="d">2025.12</div><div class="t">정상화 · 전시</div></div></div>
+        </div>
+        <div class="card tint">
+          <h6>배운 점</h6>
+          <p>제주 해커톤에서 개발 문제를 돕지 못했던 아쉬움을 직접 풀었습니다. 이슈를 원인까지 추적할 수 있으면 엔지니어와 같은 언어로 우선순위를 정할 수 있다는 것을 확인했습니다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bridge"><small>Cashwalk Fit</small><p>현상만 임시로 해결하는 데 그치지 않고, 원인을 추적하고 실제 사용 환경에서 작동하는지 확인하는 과정을 경험했습니다.</p></div>
+  </div>
+  <div class="chn">Project 02 · 고려대학교 미디어월 복구</div>
+  <div class="pg"><b>08</b> / 12</div>
+</section>
+
+<!-- ======================================================= 09 KUSSO -->
+<section class="s" id="kusso" data-ch="Project 03 · KUSSO 운영 체계화">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 03 · 고려대학교 세종사회봉사단 KUSSO 6기 · 정보부원</div>
+      <h2 class="ptitle">KUSSO 운영 체계화</h2>
+      <p class="ks">흩어진 운영 데이터를 통합해 반복 업무를 체계화했습니다.</p>
+    </div>
+    <div class="psr">
+      <div><div class="k">Problem</div><p>봉사단 활동 기록이 여러 자료에 흩어져 있어, 활동 현황을 한곳에서 확인하기 어려웠습니다.</p></div>
+      <div><div class="k">Action</div><p>정보부원으로서 흩어진 활동 데이터를 엑셀 '최종 기록지'로 통합하는 체계를 만들었습니다.</p></div>
+      <div><div class="k">Result</div><p>활동 기록을 하나의 체계로 관리 · 13건 기획 · 107시간 활동 · 우수봉사자 선정</p></div>
+    </div>
+    <div class="bento">
+      <div class="card c4 kpi blue"><div class="v">13<small>건</small></div><div class="l">직접 기획한 봉사 프로그램</div></div>
+      <div class="card c4 kpi"><div class="v">107<small>시간</small></div><div class="l">봉사 활동 · 6기 시간왕</div></div>
+      <div class="card c4 kpi navy"><div class="v">우수봉사자</div><div class="l">KUSSO 6기 선정</div></div>
+      <div class="card c7">
+        <h6>기록 체계 · 흩어진 자료를 하나로</h6>
+        <div class="asis">
+          <div class="a"><b>AS-IS</b>활동별로 따로 남은 기록<br>현황을 보려면 자료를 하나씩 확인<br>누적 수치를 매번 다시 집계</div>
+          <div class="x">→</div>
+          <div class="b"><b>TO-BE</b>엑셀 '최종 기록지' 하나로 통합<br>활동 현황을 한곳에서 확인<br>같은 형식으로 계속 누적</div>
+        </div>
+        <!-- 확인 필요: 최종 기록지 실제 캡처가 있으면 이 카드 옆에 추가 -->
+      </div>
+      <div class="card c5">
+        <h6>운영 사례 · Global KUSSO Day</h6>
+        <ul class="dot"><li>독일 · 중국 교환학생의 아이디어를 반영해 기획</li><li>2025.05.07 – 05.08 · 생활 정보 팜플렛 제작 · 배포</li><li>봉사자 20명 · 활동 38.5시간 · 기획 20.5시간</li><li><b>참여 225명 · 만족도 94.5%</b></li></ul>
+      </div>
+      <div class="card c12">
+        <h6>기획한 봉사 프로그램</h6>
+        <div class="chips"><span>Global KUSSO Day</span><span>못난이 농산물</span><span>사랑의 ABO</span><span>플라링 · 병뚜껑 키링</span><span>그린 인큐베이터</span><span>문화유산 한입 쏙!</span></div>
+      </div>
+    </div>
+    <div class="bridge"><small>Cashwalk Fit</small><p>반복적으로 발생하는 운영 업무를 구조화하고, 정보가 일관되게 관리될 수 있도록 체계를 개선했습니다.</p></div>
+  </div>
+  <div class="chn">Project 03 · KUSSO 운영 체계화</div>
+  <div class="pg"><b>09</b> / 12</div>
+</section>
+
+<!-- ======================================================= 10 S-CURT 1 -->
+<section class="s alt" id="scurt" data-ch="Project 04 · S-CURT 추천 모델 연구">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 04 · S-CURT 추천 모델 연구 · 1 / 2 지표 · 비교 기준 설계</div>
+      <h2 class="ptitle">여행 로그 데이터를 활용한 개인화 추천 · 만족도 예측 연구</h2>
+      <p class="ks">하나의 성능 수치가 아닌, 목적에 맞는 기준으로 결과를 비교했습니다.</p>
+    </div>
+    <div class="psr">
+      <div><div class="k">Problem</div><p>정확도 하나만으로 모델을 고르면 결과의 안정성을 충분히 고려하기 어렵다고 판단했습니다.</p></div>
+      <div><div class="k">Action</div><p>CatBoost · LightGCN · MF-SGD를 같은 조건에서 20회 배깅 비교 · NDCG를 주 지표로 MAE · RMSE · Std를 함께 확인</p></div>
+      <div><div class="k">Result</div><p>NDCG 0.9555 · 정확도와 일관성을 나눠 해석 · 인문사회계열 최우수</p></div>
+    </div>
+    <div class="bento">
+      <div class="card c5">
+        <dl class="facts" style="display:grid;grid-template-columns:92px minmax(0,1fr);gap:6px 12px;font-size:15px">
+          <dt style="color:var(--mute);font-size:13px">작업 성격</dt><dd>학부연구 (S-CURT) · 추천 모델 비교 실험</dd>
+          <dt style="color:var(--mute);font-size:13px">제 역할</dt><dd>연구 제안 · 실험 설계 · 모델 비교 · 분석 · 보고서</dd>
+          <dt style="color:var(--mute);font-size:13px">작업 시기</dt><dd>2025.04.14 – 2025.07.07</dd>
+          <dt style="color:var(--mute);font-size:13px">팀 규모</dt><dd>2인 공동연구 · 기여도 50% · 지도교수 면담 10회</dd>
+        </dl>
+        <p>제주 해커톤의 사진 추천은 '비슷한 곳'은 찾았지만 '만족할 곳'은 예측하지 못했습니다. 이 한계를 해커톤 직후 지도교수님께 연구로 제안했습니다.</p>
+      </div>
+      <div class="card c7">
+        <h6>Why NDCG · 지표 선택의 판단</h6>
+        <div class="tbl"><table>
+          <thead><tr><th>지표</th><th>여행 추천에서의 의미</th></tr></thead>
+          <tbody>
+            <tr><td><b>RMSE · MAE</b></td><td>점수는 맞혀도 순서가 틀릴 수 있음</td></tr>
+            <tr><td><b>NDCG</b> (주 지표)</td><td>사용자에게 먼저 보이는 장소가 맞는가</td></tr>
+            <tr><td><b>P@5 · R@5</b></td><td>추천 목록의 정확도 · 포괄성</td></tr>
+            <tr><td><b>예측 Std</b></td><td>예측의 일관성</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="card c12">
+        <h6>실험 설계 · 같은 조건에서 비교</h6>
+        <div class="flow">
+          <div class="st"><b>데이터 정제</b><span>AI Hub 여행로그 · 약 2만 8천 세션</span></div><div class="ar">›</div>
+          <div class="st"><b>비교 조건 통일</b><span>시간 · 경로 특성 제외</span></div><div class="ar">›</div>
+          <div class="st"><b>3개 모델 학습</b><span>트리 · 행렬 분해 · 그래프</span></div><div class="ar">›</div>
+          <div class="st on"><b>20회 배깅</b><span>우연한 결과 배제</span></div><div class="ar">›</div>
+          <div class="st"><b>지표 비교 · 해석</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="chn">Project 04 · S-CURT 추천 모델 연구</div>
+  <div class="pg"><b>10</b> / 12</div>
+</section>
+
+<!-- ======================================================= 11 S-CURT 2 -->
+<section class="s" id="scurt-2" data-ch="Project 04 · S-CURT 추천 모델 연구">
+  <div class="w">
+    <div>
+      <div class="eyebrow">Project 04 · S-CURT 추천 모델 연구 · 2 / 2 결과 해석</div>
+      <p class="ks">결과를 단순한 순위가 아니라 선택 기준으로 정리했습니다.</p>
+    </div>
+    <div class="bento">
+      <div class="card c3 kpi blue"><div class="v">0.9555</div><div class="l">CatBoost NDCG · 가장 정확 <span class="lbl model">모델 지표</span></div></div>
+      <div class="card c3 kpi"><div class="v">0.0052</div><div class="l">LightGCN 예측 Std · 가장 일관적 <span class="lbl model">모델 지표</span></div></div>
+      <div class="card c3 kpi"><div class="v">11.93<small>vs 0.87</small></div><div class="l">여행 목적 vs 성별 · 특성 중요도</div></div>
+      <div class="card c3 kpi navy"><div class="v">최우수</div><div class="l">S-CURT 인문사회계열</div></div>
+      <figure class="doc c7">
+        <div class="frame"><span class="tagdoc">실제 연구 보고서</span><img src="img/doc_scurt_02_model.png" alt="S-CURT 연구 보고서 표: 모델별 NDCG, MAE, RMSE, Precision@K, Recall@K, Std 비교"></div>
+        <figcaption>직접 설계한 실험의 모델 성능 비교표입니다.</figcaption>
+        <div class="think"><small>이 표에서 고민한 것</small><p>NDCG 차이는 0.9555 vs 0.9528로 근소했습니다. 그래서 정확도만으로 고르지 않고 Std 열을 함께 놓아 '정확도는 CatBoost, 일관성은 LightGCN'이라는 선택 기준으로 정리했습니다.</p></div>
+      </figure>
+      <div class="c5" style="display:flex;flex-direction:column;gap:16px">
+        <div class="card tint">
+          <h6>20회 배깅 평균 <span class="lbl model">모델 지표</span></h6>
+          <div class="tbl"><table class="num">
+            <thead><tr><th>Model</th><th>NDCG</th><th>MAE</th><th>RMSE</th><th>Std</th></tr></thead>
+            <tbody>
+              <tr><td>CatBoost</td><td class="hi">0.9555</td><td class="hi">0.6890</td><td class="hi">0.8628</td><td>0.0784</td></tr>
+              <tr><td>LightGCN</td><td>0.9528</td><td>0.7002</td><td>0.8693</td><td class="hi">0.0052</td></tr>
+              <tr><td>MF-SGD</td><td>0.9409</td><td>0.7003</td><td>0.8695</td><td>0.0189</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="card">
+          <h6>한계도 함께 기록</h6>
+          <ul class="dot"><li>세 모델 모두 극단 만족(5.0)을 4.2점대로 낮춰 예측</li><li>수도권 중심 데이터 · 다른 지역은 추가 검증 필요</li></ul>
+        </div>
+        <div class="card navy">
+          <h6>제품 관점의 시사점</h6>
+          <p>개인화 온보딩의 첫 질문은 성별이 아니라 <b>여행 목적 · 스타일</b>이어야 한다는 결론을 냈습니다.</p>
+        </div>
+      </div>
+    </div>
+    <div class="bridge"><small>Cashwalk Fit</small><p>서비스 지표를 해석할 때 단일 수치에 의존하기보다, 지표의 의미와 서비스 목적을 함께 고려하는 태도를 갖추었습니다.</p></div>
+  </div>
+  <div class="chn">Project 04 · S-CURT 추천 모델 연구</div>
+  <div class="pg"><b>11</b> / 12</div>
+</section>
+
+<!-- ======================================================= 12 CLOSING -->
+<section class="s cover" id="closing" data-ch="Closing">
+  <div class="w" style="align-items:stretch;text-align:left">
+    <div>
+      <div class="eyebrow">Closing</div>
+      <p class="closing-line" style="margin-top:8px">기획을 배우는 데서 멈추지 않고,<br><em>서비스가 실제로 작동하는 과정</em>까지 경험하겠습니다.</p>
+    </div>
+    <div class="bento">
+      <div class="card c8 lead">
+        <p>사용자 문제를 기능으로 구체화한 경험, 시스템의 원인을 분석해 실제 환경에서 정상화한 경험, 운영 데이터를 체계화한 경험을 바탕으로 <b>서비스 기획과 운영의 실무</b>를 배우고 싶습니다.</p>
+        <p>캐시워크 서비스가 기획에서 출시와 운영으로 이어지는 과정에서 <b>문제와 이슈를 정확하게 파악</b>하고, <b>유관 부서와 명확하게 소통</b>하며 실행을 지원하겠습니다.</p>
+        <dl class="pledge">
+          <dt>서비스 기획 · 운영</dt><dd>사용자 불편을 데이터로 확인하고, 기능 우선순위의 근거를 정리하겠습니다.</dd>
+          <dt>출시 · 이슈 파악</dt><dd>이슈가 생기면 재현 조건과 원인, 영향 범위부터 정리하겠습니다.</dd>
+          <dt>유관 부서 협업</dt><dd>기획 의도를 개발 · 디자인 · QA · CS가 바로 실행할 수 있는 형태로 전달하겠습니다.</dd>
+        </dl>
+      </div>
+      <div class="c4" style="display:flex;flex-direction:column;gap:12px">
+        <a class="card" href="#jeju"><h6><span class="k">01</span> 문제를 기능으로</h6><p>제주 해커톤 · 200팀 중 결승</p></a>
+        <a class="card" href="#mediawall"><h6><span class="k">02</span> 원인을 끝까지</h6><p>미디어월 · 3년 멈춘 시스템 정상화</p></a>
+        <a class="card" href="#kusso"><h6><span class="k">03</span> 운영을 체계로</h6><p>KUSSO · 활동 기록 통합 · 우수봉사자</p></a>
+      </div>
+    </div>
+    <ul class="contact" style="justify-content:flex-start">
+      <li><span class="ic">@</span><span>ryqkr@naver.com</span></li>
+      <li><span class="ic">☎</span><span>010-5693-3560</span></li>
+      <li><span class="ic">G</span><a href="https://github.com/YoungEunJin" target="_blank" rel="noopener">github.com/YoungEunJin</a></li>
+      <li><span class="ic">B</span><a href="https://blog.naver.com/my_daily_life0724" target="_blank" rel="noopener">블로그 '모든 Records'</a></li>
+    </ul>
+  </div>
+  <div class="chn">Closing · 진영은</div>
+  <div class="pg"><b>12</b> / 12</div>
+</section>
+
+<script>
+/* Print fit: a zoomed block is laid out at (content width / zoom), so for each section
+   find the largest zoom whose reflowed height still fits one 1440x1018 page. */
+(function () {
+  var PAGE_H = 1018, PAD = 52 + 60 + 18, CONTENT_W = 1440 - 72 * 2;
+  function fit() {
+    var root = document.documentElement;
+    root.classList.add('pm');
+    document.querySelectorAll('section.s').forEach(function (s) {
+      var w = s.querySelector(':scope > .w');
+      if (!w) return;
+      var avail = PAGE_H - PAD;
+      var fits = function (z) { w.style.width = (CONTENT_W / z) + 'px'; return w.scrollHeight * z <= avail; };
+      var z = 1;
+      if (!fits(1)) {
+        var lo = 0.25, hi = 1;
+        for (var i = 0; i < 14; i++) { var mid = (lo + hi) / 2; if (fits(mid)) lo = mid; else hi = mid; }
+        z = lo;
+      }
+      w.style.width = '';
+      s.style.setProperty('--z', z.toFixed(4));
+      s.setAttribute('data-z', z.toFixed(3));
+    });
+    root.classList.remove('pm');
+  }
+  window.addEventListener('beforeprint', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  window.addEventListener('load', fit);
+})();
+</script>
+</body>
+</html>
