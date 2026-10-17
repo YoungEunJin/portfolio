@@ -1,0 +1,1289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>진영은 Master Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Layout: full-bleed dark "slides" stacked as a scroll; each section keeps the 16:9 deck rhythm on desktop and collapses to one column on phones. */
+  :root {
+    color-scheme: dark;
+    --mint: #9fe3a1; --mint-d: #6fbf72; --mint-bg: rgba(159,227,161,.10); --mint-glow: #1e2b1f;
+    --bg: #1b1b1b; --bk: #050505; --panel: #121212; --panel-2: #161616; --track: #262626;
+    --tx: #f2f2f2; --tx-2: #d8d8d8; --sub: #b9b9b9; --mute: #8a8a8a; --line: #333333; --line-2: #4a4a4a;
+    --warn: #e3b52f; --warn-bg: rgba(230,180,40,.15);
+    --bad: #e0614d; --bad-bg: rgba(220,90,70,.16); --bad-tx: #f0a090;
+    --good: #4fbf72; --good-bg: rgba(70,170,100,.16);
+    --ink: #111111; --paper: #f4f4f6;
+    --f-en: 'Jost', 'Pretendard', 'Noto Sans KR', sans-serif;
+    --f-ko: 'Pretendard', 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+    --gut: max(16px, 5vw);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { background: var(--bk); color: var(--tx); font-family: var(--f-ko); line-height: 1.6; -webkit-print-color-adjust: exact; print-color-adjust: exact; word-break: keep-all; overflow-wrap: anywhere; }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--mint); outline-offset: 3px; border-radius: 4px; }
+  .en { font-family: var(--f-en); }
+  .mint { color: var(--mint); }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* nav */
+  .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 50; background: rgba(5,5,5,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav ul { list-style: none; display: flex; gap: 4px; overflow-x: auto; padding: 10px var(--gut); scrollbar-width: none; max-width: 1440px; margin: 0 auto; }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav a { display: block; white-space: nowrap; text-decoration: none; font-family: var(--f-en); font-size: 13.5px; letter-spacing: .5px; color: var(--sub); padding: 6px 12px; border-radius: 30px; }
+  .nav a:hover { color: var(--mint); background: var(--mint-bg); }
+
+  /* section frame */
+  .s { position: relative; background: var(--bg); padding-block: clamp(56px, 7vw, 96px); padding-inline: var(--gut); border-bottom: 1px solid #0c0c0c; }
+  .s.bk { background: var(--bk); }
+  .w { max-width: 1280px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 3.5vw, 44px); }
+  .grain { background: radial-gradient(ellipse at 85% 10%, #3a3a3a 0%, #222 45%, #161616 100%); overflow: hidden; }
+  .grain::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .55;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='320' height='320'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .22 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+  .grain > * { position: relative; }
+
+  .lbl { font-family: var(--f-en); font-size: 14px; letter-spacing: 3px; color: var(--mint); font-weight: 500; text-transform: uppercase; }
+  .hl { font-size: clamp(28px, 3.6vw, 44px); font-weight: 800; letter-spacing: -1px; line-height: 1.3; margin-top: 10px; text-wrap: balance; }
+  .lead { font-size: clamp(16px, 1.4vw, 18px); color: #cfcfcf; margin-top: 14px; line-height: 1.75; max-width: 70ch; }
+  .h-big { font-family: var(--f-en); font-weight: 700; font-size: clamp(40px, 5vw, 60px); color: var(--mint); letter-spacing: -.5px; line-height: 1.05; }
+  .h-sec { font-family: var(--f-en); font-weight: 600; font-size: 22px; color: var(--mint); padding-bottom: 12px; border-bottom: 2px solid var(--mint-d); }
+  .note { font-size: 13px; color: var(--mute); line-height: 1.6; }
+  ul.dot { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  ul.dot li { position: relative; padding-left: 16px; }
+  ul.dot li::before { content: ""; position: absolute; left: 2px; top: .7em; width: 5px; height: 5px; border-radius: 50%; background: var(--mint); }
+
+  .g2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .g3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .g4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .panel { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: clamp(18px, 2vw, 28px); min-width: 0; }
+  .panel h6 { font-family: var(--f-en); font-size: 17px; font-weight: 600; color: var(--mint); margin-bottom: 14px; letter-spacing: .3px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips span { border: 1px solid var(--line-2); color: #ddd; border-radius: 20px; padding: 4px 12px; font-size: 13px; }
+  .chips.m span { border-color: var(--mint-d); color: var(--mint); }
+  .tag { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-en); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; border: 1px solid var(--line-2); color: var(--sub); white-space: nowrap; }
+  .tag.live { border-color: var(--mint-d); color: var(--mint); }
+  .tag.live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+  .tag.plan { border-style: dashed; }
+  .tag.sim { border-color: var(--warn); color: var(--warn); }
+
+  /* KPI tiles */
+  .kc { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; min-width: 0; }
+  .kc .v { font-family: var(--f-en); font-size: clamp(30px, 3.4vw, 44px); font-weight: 600; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+  .kc .v small { font-size: .5em; color: var(--sub); margin-left: 4px; font-weight: 500; }
+  .kc .l { font-size: 13.5px; color: var(--sub); margin-top: 8px; line-height: 1.5; }
+  .kc.hi .v { color: var(--mint); }
+
+  /* bars */
+  .bars { display: flex; flex-direction: column; gap: 10px; }
+  .bar { display: grid; grid-template-columns: minmax(110px, 200px) minmax(0, 1fr) 56px; align-items: center; gap: 12px; font-size: 14px; }
+  .bar .nm { color: #d0d0d0; font-family: var(--f-en); min-width: 0; }
+  .bar .nm small { color: var(--mute); font-size: 11.5px; display: block; line-height: 1.2; }
+  .bar .tr { height: 12px; background: var(--track); border-radius: 3px; overflow: hidden; }
+  .bar .fl { height: 100%; background: #5d7f5f; border-radius: 3px; }
+  .bar.top .fl { background: var(--mint); }
+  .bar.low .fl { background: var(--bad); }
+  .bar.low .nm, .bar.low .vv { color: var(--bad-tx); }
+  .bar .vv { text-align: right; font-family: var(--f-en); color: #e5e5e5; font-variant-numeric: tabular-nums; }
+
+  /* cover */
+  .cover { min-height: min(92vh, 860px); display: flex; flex-direction: column; justify-content: center; }
+  .cover .w { align-items: center; text-align: center; gap: 22px; }
+  .cover-k { font-family: var(--f-en); letter-spacing: 6px; color: var(--sub); font-size: 15px; }
+  .cover-title { font-family: var(--f-en); font-weight: 700; font-size: clamp(64px, 12vw, 150px); letter-spacing: 2px; color: var(--mint); line-height: 1; }
+  .cover-line { display: flex; align-items: center; gap: 28px; color: var(--mint); font-size: clamp(17px, 1.8vw, 22px); width: min(720px, 100%); }
+  .cover-line i { flex: 1; height: 1.5px; background: var(--mint-d); }
+  .cover-tag { color: #cfcfcf; font-size: clamp(15px, 1.5vw, 19px); max-width: 52ch; }
+  .contact { list-style: none; font-family: var(--f-en); font-size: 15px; color: #ddd; display: flex; flex-wrap: wrap; gap: 10px 26px; justify-content: center; margin-top: 22px; }
+  .contact a { text-decoration: none; }
+  .contact a:hover { color: var(--mint); }
+  .contact li { display: flex; align-items: center; gap: 10px; }
+  .contact .ic { width: 22px; height: 22px; border-radius: 50%; background: var(--mint); color: var(--ink); display: grid; place-items: center; font-size: 11px; font-weight: 800; flex: none; }
+
+  /* contents */
+  .toc { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 56px; }
+  .toc a { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; border-bottom: 1px solid #5a5a5a; padding: 18px 6px 14px; text-decoration: none; }
+  .toc a:hover .k { color: var(--mint); }
+  .toc .k { font-family: var(--f-en); font-size: clamp(22px, 2.4vw, 30px); }
+  .toc .k em { font-style: normal; color: var(--mint); font-size: .6em; margin-right: 12px; vertical-align: middle; }
+  .toc .v { font-size: 15px; color: var(--sub); text-align: right; }
+
+  /* profile */
+  .prof { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: end; }
+  .prof .ph { width: 200px; aspect-ratio: 200/255; border: 1px solid #555; overflow: hidden; max-width: 100%; }
+  .prof .ph img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+  .prof .hello { font-size: clamp(22px, 2.4vw, 29px); font-weight: 300; line-height: 1.5; letter-spacing: -.5px; }
+  .prof .hello b { font-weight: 800; }
+  .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px 28px; margin-top: 22px; font-size: 14.5px; color: var(--sub); }
+  .facts div b { display: block; color: var(--tx); font-weight: 700; font-size: 15px; }
+
+  /* promises */
+  .pc { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); padding: 26px 26px 22px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .pc .no { font-family: var(--f-en); font-size: 14px; letter-spacing: 2.5px; color: var(--mint); font-weight: 600; }
+  .pc .tt { font-size: 24px; font-weight: 800; letter-spacing: -.5px; }
+  .pc .bd { font-size: 16px; line-height: 1.8; color: #d6d6d6; }
+  .pc .ev { margin-top: auto; border-top: 1px dashed #444; padding-top: 14px; }
+  .pc .ev .h { font-family: var(--f-en); font-size: 12px; letter-spacing: 2.5px; color: var(--mute); margin-bottom: 8px; }
+  .pc .ev li { font-size: 14.5px; color: #e6e6e6; line-height: 1.7; }
+  .flowchip { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .flowchip span { border: 1px solid var(--mint-d); color: var(--mint); border-radius: 30px; padding: 7px 20px; font-size: 16px; font-weight: 700; }
+  .flowchip i { color: var(--mint); font-style: normal; font-size: 18px; }
+
+  /* timeline */
+  .tl { position: relative; display: flex; flex-direction: column; gap: 16px; padding-left: 26px; }
+  .tl::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: #3a3a3a; }
+  .tl .it { position: relative; }
+  .tl .it::before { content: ""; position: absolute; left: -26px; top: 5px; width: 14px; height: 14px; border-radius: 50%; background: var(--bg); border: 2px solid var(--mint); }
+  .tl .it.on::before { background: var(--mint); }
+  .tl .d { font-family: var(--f-en); font-size: 14px; color: var(--mint); font-weight: 600; }
+  .tl .t { font-size: 16px; font-weight: 700; margin-top: 2px; }
+  .tl .p { font-size: 13.5px; color: #bdbdbd; margin-top: 2px; line-height: 1.55; }
+
+  /* converge */
+  .conv { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 280px minmax(0, 1fr); grid-template-rows: auto auto; gap: 22px 36px; align-items: stretch; }
+  .conv .cd { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 20px 22px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .conv .cd .k { font-family: var(--f-en); font-size: 12.5px; letter-spacing: 2.5px; color: var(--mint); font-weight: 600; }
+  .conv .cd .t { font-size: 21px; font-weight: 800; }
+  .conv .cd li { font-size: 14.5px; color: #d6d6d6; line-height: 1.7; }
+  .conv .cd .to { margin-top: auto; padding-top: 8px; font-size: 14.5px; color: var(--mint); font-weight: 600; }
+  .conv .core { grid-column: 2; grid-row: 1 / span 2; align-self: center; justify-self: center; width: 280px; aspect-ratio: 1; max-width: 100%; border-radius: 50%; background: var(--mint-glow); box-shadow: 0 0 0 14px rgba(159,227,161,.07), 0 0 0 30px rgba(159,227,161,.04); border: 2px solid var(--mint); display: grid; place-items: center; text-align: center; padding: 36px; }
+  .conv .core div { font-size: 20px; font-weight: 800; line-height: 1.5; letter-spacing: -.5px; }
+  .conv .c1 { grid-column: 1; grid-row: 1; } .conv .c2 { grid-column: 3; grid-row: 1; } .conv .c3 { grid-column: 1; grid-row: 2; } .conv .c4 { grid-column: 3; grid-row: 2; }
+
+  /* why pm */
+  .why p { font-size: clamp(16px, 1.45vw, 18px); line-height: 1.9; color: #dcdcdc; max-width: 64ch; }
+  .why p + p { margin-top: 18px; }
+  .why p b { color: #fff; }
+  .cycle { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; counter-reset: c; }
+  .cycle > div { position: relative; background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 18px 18px 16px; min-width: 0; }
+  .cycle b { display: block; color: var(--mint); font-size: 17px; margin-bottom: 6px; }
+  .cycle b::before { counter-increment: c; content: counter(c, decimal-leading-zero) "  "; font-family: var(--f-en); color: var(--mute); font-weight: 500; }
+  .cycle p { font-size: 14px; color: #d5d5d5; line-height: 1.7; }
+  .cycle .ev { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #3d3d3d; font-size: 13px; color: var(--sub); }
+  .fm { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .fm .panel li { font-size: 15px; color: #e2e2e2; line-height: 1.75; }
+  .fm .panel li b { color: var(--mint); }
+
+  /* skill matrix */
+  .tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { padding: 11px 14px; border-bottom: 1px solid #262626; text-align: left; vertical-align: top; }
+  th { font-weight: 500; color: var(--sub); font-size: 12.5px; letter-spacing: .5px; font-family: var(--f-en); background: #0e0e0e; white-space: nowrap; }
+  tr:last-child td { border-bottom: 0; }
+  td.c { text-align: center; }
+  .dotm { display: inline-block; width: 11px; height: 11px; border-radius: 50%; background: var(--mint); }
+  .doto { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid var(--mint-d); }
+  table.mt { font-family: var(--f-en); font-size: 15.5px; }
+  table.mt th, table.mt td { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  table.mt th:first-child, table.mt td:first-child { text-align: left; }
+  table.mt td.hi { color: var(--mint); font-weight: 700; }
+  .ielts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+  .ielts div { background: var(--panel-2); border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; }
+  .ielts .k { font-family: var(--f-en); font-size: 12px; color: var(--sub); letter-spacing: 1px; }
+  .ielts .v { font-family: var(--f-en); font-size: 22px; font-weight: 600; }
+  .ielts .tr { height: 6px; background: var(--track); border-radius: 3px; margin-top: 6px; overflow: hidden; }
+  .ielts .fl { height: 100%; background: var(--mint); }
+
+  /* projects divider */
+  .proj-title { font-family: var(--f-en); font-weight: 700; font-size: clamp(64px, 10vw, 130px); color: var(--mint); line-height: 1; letter-spacing: 1px; }
+  .plist { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 40px; }
+  .plist a { display: grid; grid-template-columns: 44px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; text-decoration: none; border-bottom: 1px solid #2f2f2f; padding: 12px 2px; font-size: 17px; }
+  .plist a:hover { color: var(--mint); }
+  .plist .n { font-family: var(--f-en); color: var(--mint); }
+  .plist .tg { font-family: var(--f-en); font-size: 12px; color: var(--mute); letter-spacing: 1px; }
+
+  /* project frame */
+  .phead { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; align-items: end; }
+  .pno { font-family: var(--f-en); font-size: 44px; color: var(--mint); line-height: 1; }
+  .ptitle { font-size: clamp(30px, 3.8vw, 46px); font-weight: 800; letter-spacing: -1px; margin-top: 12px; line-height: 1.2; text-wrap: balance; }
+  .pmeta { font-size: 15px; color: var(--sub); margin-top: 10px; }
+  .ptags { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+  .ov { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 0; border-top: 2px solid var(--mint-d); border-bottom: 1px solid var(--line); }
+  .ov > div { padding: 18px 20px 18px 0; min-width: 0; }
+  .ov > div + div { padding-left: 20px; border-left: 1px solid var(--line); }
+  .ov h6 { font-family: var(--f-en); font-size: 13px; letter-spacing: 2px; color: var(--mint); text-transform: uppercase; margin-bottom: 8px; font-weight: 600; }
+  .ov p, .ov li { font-size: 14.5px; color: #d8d8d8; line-height: 1.75; }
+  .ov li b { color: var(--mint); }
+
+  /* PAR stack */
+  .par { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); }
+  .par > div { padding: 18px 18px 20px; min-width: 0; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; }
+  .par > div:first-child { border-left: 0; }
+  .par .k { display: flex; align-items: center; gap: 8px; font-family: var(--f-en); font-size: 12.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mute); }
+  .par .k b { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 6px; border-radius: 6px; background: var(--track); color: var(--mint); font-size: 13px; letter-spacing: 0; }
+  .par .imp { background: var(--mint-bg); }
+  .par .imp .k b { background: var(--mint); color: var(--ink); }
+  .par p, .par li { font-size: 14px; color: #dedede; line-height: 1.7; }
+  .par li b, .par p b { color: var(--mint); font-weight: 700; }
+  .par .chips span { font-size: 12px; padding: 3px 10px; }
+
+  /* shots */
+  .shot { border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: #111; position: relative; min-width: 0; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; }
+  .shot .lb { position: absolute; left: 10px; bottom: 10px; background: rgba(0,0,0,.75); color: #fff; font-size: 12.5px; padding: 4px 10px; border-radius: 4px; }
+  .shot.ratio { aspect-ratio: 16/9; }
+
+  /* scope */
+  .scope { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .scope > div { border-radius: 8px; padding: 14px 16px; font-size: 14.5px; line-height: 1.7; min-width: 0; }
+  .scope .in { background: var(--mint-bg); border: 1px solid var(--mint-d); }
+  .scope .out { background: #1d1d1d; border: 1px dashed #555; color: #bdbdbd; }
+  .scope b { display: block; font-size: 13px; margin-bottom: 6px; font-family: var(--f-en); letter-spacing: .5px; }
+  .scope .in b { color: var(--mint); }
+
+  /* flow */
+  .flow { display: flex; align-items: stretch; gap: 8px; flex-wrap: wrap; }
+  .flow .st { flex: 1 1 140px; border: 1px solid #3a3a3a; border-radius: 8px; padding: 12px 14px; background: var(--panel-2); min-width: 0; }
+  .flow .st b { display: block; color: var(--mint); font-size: 15px; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+  .flow .st span { font-size: 13.5px; line-height: 1.65; color: #d5d5d5; display: block; }
+  .flow .st.me { border-color: var(--mint-d); background: var(--mint-bg); }
+  .flow .ar { display: grid; place-items: center; color: var(--mint); font-size: 20px; flex: 0 0 auto; }
+
+  /* OHT levels */
+  .lv { display: flex; align-items: center; gap: 14px; padding: 10px 16px; border-radius: 8px; font-size: 15px; }
+  .lv + .lv { margin-top: 8px; }
+  .lv b { width: 48px; font-size: 16px; }
+  .lv .dt { width: 13px; height: 13px; border-radius: 50%; flex: none; }
+  .lv.g { background: var(--good-bg); } .lv.g .dt { background: var(--good); }
+  .lv.y { background: var(--warn-bg); } .lv.y .dt { background: var(--warn); }
+  .lv.r { background: var(--bad-bg); } .lv.r .dt { background: var(--bad); }
+
+  /* news */
+  .cal { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+  .cal div { border-radius: 6px; background: var(--mint-bg); border: 1px solid var(--mint-d); padding: 8px 4px; text-align: center; font-family: var(--f-en); min-width: 0; }
+  .cal .d { font-size: 15px; font-weight: 600; color: var(--tx); }
+  .cal .wd { font-size: 11px; color: var(--sub); display: block; }
+  .cal .hol { border-color: var(--warn); background: var(--warn-bg); }
+  .tabs { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tabs button { font: inherit; font-size: 14px; cursor: pointer; border-radius: 30px; padding: 7px 16px; border: 1px solid var(--line-2); background: transparent; color: var(--tx-2); display: inline-flex; gap: 8px; align-items: center; }
+  .tabs button[aria-selected="true"] { background: var(--mint); color: var(--ink); border-color: var(--mint); font-weight: 700; }
+  .tabs button .s2 { font-family: var(--f-en); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; opacity: .8; }
+  .tabp { border: 1px solid var(--line); border-radius: 10px; background: var(--panel-2); padding: 18px 20px; }
+  .tabp h5 { font-size: 17px; margin-bottom: 8px; }
+  .tabp p, .tabp li { font-size: 14.5px; color: #d6d6d6; line-height: 1.75; }
+  .mock { border: 1px dashed var(--line-2); border-radius: 8px; padding: 12px 14px; margin-top: 12px; font-size: 13.5px; color: var(--sub); }
+  .mock .row { display: flex; gap: 10px; align-items: baseline; padding: 4px 0; border-bottom: 1px dotted #333; }
+  .mock .row:last-child { border-bottom: 0; }
+  .mock .row .d { font-family: var(--f-en); color: var(--mint); min-width: 56px; }
+
+  /* K-Path stepper */
+  .stepper { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); position: relative; }
+  .stepper::before { content: ""; position: absolute; left: 10%; right: 10%; top: 17px; height: 2px; background: var(--mint-d); }
+  .stepper div { position: relative; text-align: center; font-size: 14px; color: var(--tx-2); padding: 0 4px; }
+  .stepper div::before { content: attr(data-n); display: grid; place-items: center; width: 36px; height: 36px; margin: 0 auto 10px; border-radius: 50%; background: var(--bg); border: 2px solid var(--mint); color: var(--mint); font-family: var(--f-en); font-weight: 600; position: relative; }
+  .stepper div:last-child::before { background: var(--mint); color: var(--ink); }
+  .stepper small { display: block; color: var(--mute); font-size: 12px; margin-top: 2px; }
+  .prd { display: grid; grid-template-columns: 150px minmax(0, 1fr); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .prd > div { padding: 12px 16px; border-bottom: 1px solid #262626; font-size: 14.5px; line-height: 1.7; min-width: 0; }
+  .prd > div:nth-last-child(-n+2) { border-bottom: 0; }
+  .prd .k { background: #0e0e0e; color: var(--mint); font-family: var(--f-en); font-size: 13px; letter-spacing: 1px; }
+
+  /* 24h band */
+  .band { position: relative; height: 34px; background: var(--bad-bg); border: 1px solid #3a2a28; border-radius: 6px; overflow: hidden; }
+  .band span { position: absolute; top: 0; bottom: 0; background: var(--good); opacity: .85; display: grid; place-items: center; color: var(--ink); font-size: 12px; font-weight: 700; font-family: var(--f-en); }
+  .ticks { display: flex; justify-content: space-between; font-family: var(--f-en); font-size: 11.5px; color: var(--mute); margin-top: 4px; }
+
+  /* svg chart text */
+  svg text { font-family: var(--f-en); }
+  .ax { stroke: #3a3a3a; }
+  .gl { stroke: #262626; }
+
+  /* experience */
+  .exp { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 32px; }
+  .exp .e { border-top: 2px solid var(--mint-d); padding-top: 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .exp .d { font-family: var(--f-en); color: var(--mint); font-size: 14px; }
+  .exp .t { font-size: 19px; font-weight: 700; line-height: 1.4; }
+  .exp .p { font-size: 14.5px; color: #d2d2d2; line-height: 1.75; }
+  .exp .r { font-size: 13.5px; color: var(--sub); line-height: 1.65; }
+  .exp .r b { color: var(--mint); font-weight: 700; }
+  .exp .chips { margin-top: auto; padding-top: 6px; }
+
+  /* global */
+  .cities { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cities span { font-family: var(--f-en); font-size: 14px; padding: 6px 14px; border-radius: 6px; background: var(--panel-2); border: 1px solid var(--line); }
+  .cities span b { color: var(--mint); margin-right: 6px; font-weight: 600; }
+  .disrupt { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .disrupt > div { padding: 14px 16px; border-left: 1px solid var(--line); min-width: 0; background: var(--panel); }
+  .disrupt > div:first-child { border-left: 0; }
+  .disrupt .d { font-family: var(--f-en); color: var(--mint); font-size: 13px; }
+  .disrupt .t { font-size: 15px; font-weight: 700; margin-top: 4px; }
+  .disrupt .p { font-size: 13.5px; color: var(--sub); margin-top: 4px; line-height: 1.6; }
+  .disrupt .x { background: var(--bad-bg); }
+  .disrupt .x .d { color: var(--bad-tx); }
+
+  .foot-thanks { text-align: center; align-items: center; }
+
+  /* responsive */
+  @media (max-width: 1100px) {
+    .par { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .par > div { border-left: 0; border-top: 1px solid var(--line); }
+    .par > div:nth-child(2n) { border-left: 1px solid var(--line); }
+    .par > div:nth-child(-n+2) { border-top: 0; }
+    .par .imp { grid-column: 1 / -1; border-left: 0 !important; }
+    .exp { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cycle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .conv { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .conv .core { grid-column: 1 / -1; grid-row: 1; width: 220px; padding: 24px; }
+    .conv .core div { font-size: 17px; }
+    .conv .c1 { grid-column: 1; grid-row: 2; } .conv .c2 { grid-column: 2; grid-row: 2; } .conv .c3 { grid-column: 1; grid-row: 3; } .conv .c4 { grid-column: 2; grid-row: 3; }
+  }
+  @media (max-width: 760px) {
+    .g2, .g3, .fm, .toc, .plist, .exp, .scope, .facts { grid-template-columns: minmax(0, 1fr); }
+    .prof { grid-template-columns: minmax(0, 1fr); }
+    .prof .ph { width: 150px; }
+    .ov { grid-template-columns: minmax(0, 1fr); }
+    .ov > div + div { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+    .par { grid-template-columns: minmax(0, 1fr); }
+    .par > div, .par > div:nth-child(2n) { border-left: 0; border-top: 1px solid var(--line); }
+    .par > div:first-child { border-top: 0; }
+    .par > div:nth-child(2) { border-top: 1px solid var(--line); }
+    .conv { grid-template-columns: minmax(0, 1fr); }
+    .conv .c1, .conv .c2, .conv .c3, .conv .c4 { grid-column: 1; grid-row: auto; }
+    .phead { grid-template-columns: minmax(0, 1fr); }
+    .ptags { justify-content: flex-start; }
+    .cal { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .stepper { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .stepper::before { display: none; }
+    .stepper div { display: flex; gap: 12px; align-items: center; text-align: left; }
+    .stepper div::before { margin: 0; flex: none; }
+    .prd { grid-template-columns: minmax(0, 1fr); }
+    .prd .k { border-bottom: 0; padding-bottom: 2px; }
+    .disrupt { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .disrupt > div:nth-child(3) { border-left: 0; }
+    .disrupt > div:nth-child(n+3) { border-top: 1px solid var(--line); }
+    .ielts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .bar { grid-template-columns: minmax(96px, 130px) minmax(0, 1fr) 48px; font-size: 13px; }
+    .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cycle { grid-template-columns: minmax(0, 1fr); }
+  }
+  @media print {
+    .nav { display: none; }
+    .s { break-after: page; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="섹션 이동">
+  <ul>
+    <li><a href="#contents">Contents</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#record">Record</a></li>
+    <li><a href="#why">Why PM</a></li>
+    <li><a href="#skills">Skill Set</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#global">Global</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ============ 01 COVER ============ -->
+<section class="s grain cover" id="cover">
+  <div class="w">
+    <div class="cover-k">MASTER PORTFOLIO · 2026</div>
+    <div class="cover-title">PORTFOLIO</div>
+    <div class="cover-line"><i></i><span>진영은 · Data-driven PM</span><i></i></div>
+    <p class="cover-tag">기록하고, 제3자의 눈으로 분석하고, 사람에게 쓸모 있는 답을 끝까지 만들어 내는 PM</p>
+    <ul class="contact">
+      <li><span class="ic">G</span><a href="https://github.com/YoungEunJin" target="_blank" rel="noopener">github.com/YoungEunJin</a></li>
+      <li><span class="ic">N</span><a href="https://youngeunjin.github.io/news1/" target="_blank" rel="noopener">youngeunjin.github.io/news1</a></li>
+      <li><span class="ic">@</span><span>ryqkr@naver.com</span></li>
+      <li><span class="ic">☎</span><span>010-5693-3560</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ 02 CONTENTS ============ -->
+<section class="s" id="contents">
+  <div class="w">
+    <div>
+      <div class="h-big">CONTENTS</div>
+      <p class="lead">Data-driven PM · AI Native · Global Operations. 프로젝트는 모두 <b class="mint">Problem → Action → Result → Stack → Implication</b> 순서로 정리했고, 팀 작업은 본인 담당 범위를 따로 표기했습니다.</p>
+    </div>
+    <div class="toc">
+      <a href="#about"><span class="k"><em>01</em>About Me</span><span class="v">세 가지 약속 · 기록 · 모이는 점</span></a>
+      <a href="#why"><span class="k"><em>02</em>Why PM</span><span class="v">일하는 방식 · Founder Mentality</span></a>
+      <a href="#skills"><span class="k"><em>03</em>Skill Set</span><span class="v">역량 × 프로젝트 증거 매트릭스</span></a>
+      <a href="#projects"><span class="k"><em>04</em>Projects</span><span class="v">딥다이브 8건</span></a>
+      <a href="#experience"><span class="k"><em>05</em>Experience</span><span class="v">대내외 활동 · 리더십 · 교육</span></a>
+      <a href="#global"><span class="k"><em>06</em>Global</span><span class="v">Kent State · 미국 9개 도시 · 현장</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 ABOUT ============ -->
+<section class="s" id="about">
+  <div class="w">
+    <div class="prof">
+      <div class="ph"><img src="img/photo.jpg" alt="진영은 증명사진"></div>
+      <div>
+        <div class="lbl">About Me</div>
+        <p class="hello" style="margin-top:10px">안녕하세요, 문제를 <b>데이터로 정의</b>하고<br>역할 밖에서라도 <b>끝까지 만들어 보는</b> PM 진영은입니다.</p>
+        <div class="facts">
+          <div><b>고려대학교 세종캠퍼스</b>글로벌비즈니스대학 융합경영학부 디지털경영전공 · 2027.02 졸업예정</div>
+          <div><b>Kent State University</b>교환학생 2025.12.28 – 2026.05.09 · CIS 수강 · 교내 경쟁률 11:1 선발</div>
+          <div><b>IELTS Academic 6.0</b>L 6.5 · R 6.0 · W 5.5 · S 5.0 · CEFR B2 (2025.08.26)</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="lbl">Three Promises</div>
+      <h2 class="hl">스무 살 이후, 저는 저와 <span class="mint">세 가지 약속</span>을 했습니다.</h2>
+      <p class="lead">기억은 증발합니다. 그래서 남기고, 떨어져서 다시 보고, 그 안에서 제가 쓸모 있는 자리를 찾습니다.</p>
+    </div>
+    <div class="g3">
+      <div class="pc">
+        <div class="no">01 · RECORD</div>
+        <div class="tt">모든 것을 기록하고, 꼭 정리한다</div>
+        <p class="bd">입학 첫 학기 학사경고를 받았을 때 생활과 학습을 기록하며 패턴을 다시 세웠습니다. 그 습관이 지금의 아카이브가 됐습니다.</p>
+        <div class="ev"><div class="h">EVIDENCE</div><ul class="dot"><li>취업 아카이브 파일 929개 · 7개 폴더</li><li>네이버 블로그 일상 · 개발 기록 2채널</li><li>미국 9개 도시 탐방 아카이브</li></ul></div>
+      </div>
+      <div class="pc">
+        <div class="no">02 · ANALYZE</div>
+        <div class="tt">제3자의 시각으로 다시 본다</div>
+        <p class="bd">복기에서 멈추지 않고 한계를 다음 질문으로 넘깁니다. 결과가 좋을 때도 무엇이 틀렸는지를 함께 기록합니다.</p>
+        <div class="ev"><div class="h">EVIDENCE</div><ul class="dot"><li>해커톤 한계 → S-CURT 연구 질문으로 전환</li><li>Recall@5 0.0021을 평가 설계 한계로 명시</li><li>K-Path 회고: "실행 단계까지 못 간 제안"을 기록</li></ul></div>
+      </div>
+      <div class="pc">
+        <div class="no">03 · FIND MY USE</div>
+        <div class="tt">나의 쓸모를 찾아간다</div>
+        <p class="bd">여행도, 교환학생도 더 큰 세상에서 저를 보기 위한 선택이었습니다. 직접 모은 돈으로 4개국을 다녔고, 그 경험이 여행 제품을 보는 눈이 됐습니다.</p>
+        <div class="ev"><div class="h">EVIDENCE</div><ul class="dot"><li>해외 4개국 5개 도시 · 미국 9개 도시</li><li>다국적 동료 110여 명과 피크타임 운영</li><li>창업 · 연구 · 현장 · 교육까지 직접 경험</li></ul></div>
+      </div>
+    </div>
+    <div class="flowchip"><span>기록</span><i>→</i><span>분석</span><i>→</i><span>쓸모</span><p class="note" style="margin-left:6px">이 순서가 그대로 제가 일하는 방식입니다.</p></div>
+  </div>
+</section>
+
+<!-- ============ 04 RECORD ============ -->
+<section class="s bk" id="record">
+  <div class="w">
+    <div>
+      <div class="lbl">About Me · Record</div>
+      <h2 class="hl">기록은 저의 <span class="mint">재료</span>가 됩니다</h2>
+      <p class="lead">이 포트폴리오는 취업 아카이브 폴더 전체를 다시 읽고, 원본 문서로 확인된 숫자만 골라 만들었습니다.</p>
+    </div>
+    <div class="g4">
+      <div class="kc hi"><div class="v">929</div><div class="l">아카이브 전체 파일</div></div>
+      <div class="kc"><div class="v">7</div><div class="l">상위 폴더 (요약 · 이력서 · 활동 · 해외 · 지원서 · 자격증 · 포트폴리오)</div></div>
+      <div class="kc"><div class="v">26</div><div class="l">작성해 둔 지원서 원본</div></div>
+      <div class="kc"><div class="v">10<small>일 연속</small></div><div class="l">아침 7시 브리핑 발행 (2026.10.02 – 10.11)</div></div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>취업 아카이브 · 폴더별 파일 수</h6>
+        <div class="bars">
+          <div class="bar top"><span class="nm">포트폴리오</span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="vv">393</span></div>
+          <div class="bar"><span class="nm">02 대내외 활동</span><span class="tr"><span class="fl" style="width:65.4%;display:block"></span></span><span class="vv">257</span></div>
+          <div class="bar"><span class="nm">05 자격증</span><span class="tr"><span class="fl" style="width:37.7%;display:block"></span></span><span class="vv">148</span></div>
+          <div class="bar"><span class="nm">01 이력서 · 자소서</span><span class="tr"><span class="fl" style="width:22.4%;display:block"></span></span><span class="vv">88</span></div>
+          <div class="bar"><span class="nm">04 지원서</span><span class="tr"><span class="fl" style="width:6.6%;display:block"></span></span><span class="vv">26</span></div>
+          <div class="bar"><span class="nm">03 해외 경험</span><span class="tr"><span class="fl" style="width:4.1%;display:block"></span></span><span class="vv">16</span></div>
+          <div class="bar"><span class="nm">00 요약</span><span class="tr"><span class="fl" style="width:1%;display:block"></span></span><span class="vv">1</span></div>
+        </div>
+        <p class="note" style="margin-top:14px">2026.10.12 기준 파일 수. 막대 길이는 최댓값(393) 대비 비율입니다.</p>
+      </div>
+      <div class="panel">
+        <h6>기록이 다음 결정으로 이어진 흐름</h6>
+        <div class="tl">
+          <div class="it"><div class="d">2023.12</div><div class="t">MITP 마케팅 학회</div><div class="p">CES 2023 트렌드 · 돌봄경제 ESG · 상세페이지 리디자인</div></div>
+          <div class="it"><div class="d">2024.09 · 12</div><div class="t">프레젠테이션 경진대회 · RIS 창업캠프 최우수상</div><div class="p">설득 구조와 규제 검토를 서비스 설계에 반영</div></div>
+          <div class="it"><div class="d">2025.02</div><div class="t">제주 런케이션 AI 해커톤 본선</div><div class="p">'비슷한 곳 ≠ 만족할 곳'이라는 한계 발견</div></div>
+          <div class="it"><div class="d">2025.07</div><div class="t">S-CURT 인문사회계열 최우수</div><div class="p">만족도 예측으로 확장, NDCG 0.9555</div></div>
+          <div class="it"><div class="d">2025.10</div><div class="t">반도체 물류 OHT</div><div class="p">감에 의존하던 대응을 속도 3단계 · 혼잡비율 기준으로</div></div>
+          <div class="it"><div class="d">2026.01</div><div class="t">K-Path 제안서 제출</div><div class="p">흩어진 학사 · 행정 데이터를 하나의 플랫폼으로</div></div>
+          <div class="it"><div class="d">2026.05</div><div class="t">Kent State 교환학기 종료</div><div class="p">미국 9개 도시 탐방 아카이브</div></div>
+          <div class="it on"><div class="d">2026.10 –</div><div class="t">아침 7시 브리핑 운영 중</div><div class="p">Claude 기반 발행 워크플로, 매일 07:00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 CONVERGE ============ -->
+<section class="s" id="converge">
+  <div class="w">
+    <div>
+      <div class="lbl">About Me · One Point</div>
+      <h2 class="hl">하고 싶은 것을 다 해본 이력, 제3자의 눈으로 보면 <span class="mint">한 점</span>으로 모입니다</h2>
+    </div>
+    <div class="conv">
+      <div class="cd c1"><div class="k">TRAVEL · 여행</div><div class="t">더 큰 세상에서 나를 본다</div><ul class="dot"><li>세부 · 타이페이 · 보홀 · 다낭 · 후쿠오카</li><li>Kent State 교환학생, 미국 9개 도시</li><li>다낭 귀국편 2회 변경 · 결항, 20시간 대기</li></ul><div class="to">→ 여행자의 문제를 푸는 S-CURT · 제주 해커톤</div></div>
+      <div class="cd c2"><div class="k">RESEARCH · 연구</div><div class="t">객관적으로 분석해 답을 낸다</div><ul class="dot"><li>S-CURT 인문사회계열 최우수 · NDCG 0.9555</li><li>OHT 속도 3단계 · 혼잡비율 정책</li><li>K-Path 부서별 시스템 분석</li></ul><div class="to">→ 가설을 지표로 검증하는 방식</div></div>
+      <div class="core"><div>사람의 경험을<br>데이터로 읽고,<br><span class="mint">끝까지 만들어</span><br>문제를 푸는 PM</div></div>
+      <div class="cd c3"><div class="k">PEOPLE · 사람</div><div class="t">사교적이고, 현장에 강하다</div><ul class="dot"><li>Rosie's Diner 다국적 동료 110여 명</li><li>폴라리스+ 25기 세종 기수장</li><li>T-SUM · 튜터링 · KUSSO 교육 봉사</li></ul><div class="to">→ 사용자 입장에서 문제를 보는 습관</div></div>
+      <div class="cd c4"><div class="k">VENTURE · 만들기</div><div class="t">아이디어를 직접 만들어 본다</div><ul class="dot"><li>RIS 모빌리티 ICT 창업캠프 최우수상</li><li>아침 7시 브리핑 1인 기획 · 운영</li><li>인터내셔널데이 부스 손익 설계</li></ul><div class="to">→ 문제를 BM과 설득 구조로 만드는 힘</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 06 WHY PM ============ -->
+<section class="s bk" id="why">
+  <div class="w">
+    <div class="g2" style="align-items:start">
+      <div class="why">
+        <div class="h-big" style="margin-bottom:22px">Why PM</div>
+        <p>CatBoost · LightGCN · MF-SGD 비교로 여행 만족도 예측 <b>NDCG 0.9555</b>를 낸 학부연구, Django 웹 데모로 본선에 오른 AI 해커톤, 반도체 OHT 정체의 <b>개입 기준</b>을 설계한 물류 프로젝트, 그리고 매일 아침 직접 발행하는 <b>AI 뉴스 브리핑</b>.</p>
+        <p>네 가지 일에서 같은 일을 했습니다. 기술이 어떻게 작동하는지 이해하고, 그것이 어떤 의사결정을 바꾸는지 숫자로 정리했습니다. 모델은 '1위'로 고르지 않고 트레이드오프로 설명했고, 기능은 사용자 불만에 가장 가까운 것부터 v1에 넣었습니다.</p>
+        <p>2024년 다낭 공항에서 20시간을 기다리며 배운 것이 하나 있습니다. <b>서비스의 품질은 일이 틀어진 순간에 결정됩니다.</b> 그 순간에 사용자가 다음 행동을 고를 수 있게 만드는 것이 제가 PM이 되려는 이유입니다.</p>
+      </div>
+      <div class="fm">
+        <div class="panel" style="grid-column:1/-1">
+          <h6>Founder Mentality · 증거</h6>
+          <ul class="dot">
+            <li><b>스스로 문제 정의</b> · 해커톤 직후 지도교수에게 후속 연구를 먼저 제안</li>
+            <li><b>범위 자르기</b> · 모델 고도화를 고집하던 개발팀을 '비싼 물가' 데이터로 설득, 가격 필터를 v1에 우선 탑재</li>
+            <li><b>끝까지 실행</b> · 3년 멈춘 Unity 미디어월을 넘겨받아 실제 전시까지</li>
+            <li><b>매일 출시</b> · 뉴스 브리핑 10일 연속, 주말 · 공휴일 포함 발행</li>
+          </ul>
+        </div>
+        <div class="panel" style="grid-column:1/-1">
+          <h6>AI Native · 증거</h6>
+          <ul class="dot">
+            <li><b>LLM 워크플로</b> · Claude 초안 → 사람 검수 → 07:00 발행 파이프라인</li>
+            <li><b>모델 비교</b> · CatBoost · LightGCN · MF-SGD, 20회 배깅, 지표 5종</li>
+            <li><b>CNN 활용</b> · ResNet-18 + GAP 특징 벡터 · 코사인 유사도 Top-3</li>
+            <li><b>빠른 프로토타입</b> · Django · SQLite 데모, 정적 웹 배포, Figma 와이어프레임</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="lbl" style="margin-bottom:14px">How I Work · 한 바퀴 도는 사이클</div>
+      <div class="cycle">
+        <div><b>문제 발견</b><p>직접 겪거나 데이터에서 찾은 불편을 누가 · 언제 · 왜로 정의합니다.</p><div class="ev">공항 20시간 · 경비 만족도 3.16점 · 흩어진 학사 포털</div></div>
+        <div><b>가설 · 지표</b><p>"A를 바꾸면 B가 좋아진다"로 쓰고, 측정할 지표를 먼저 정합니다.</p><div class="ev">추천 = 순위 문제 → NDCG 주 지표</div></div>
+        <div><b>검증 · 합의</b><p>데이터와 실험으로 확인하고, 근거를 들고 팀과 우선순위를 맞춥니다.</p><div class="ev">모델 3종 × 20회 배깅 · 필터 우선 탑재</div></div>
+        <div><b>학습 · 다음 질문</b><p>결과보다 한계를 먼저 읽고, 다음 문제로 넘깁니다.</p><div class="ev">'비슷한 곳 ≠ 만족할 곳' → S-CURT</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 07 SKILL SET ============ -->
+<section class="s" id="skills">
+  <div class="w">
+    <div>
+      <div class="h-big">Skill Set</div>
+      <p class="lead">모델 실험 설계부터 서비스 범위 결정, 운영 지표 설계, 매일 돌아가는 AI 워크플로까지. 숙련도 점수 대신 <b class="mint">어느 프로젝트에서 실제로 썼는지</b>로 보여드립니다.</p>
+    </div>
+    <div class="g4">
+      <div class="kc hi"><div class="v">0.9555</div><div class="l">CatBoost NDCG · 20회 배깅 평균</div></div>
+      <div class="kc"><div class="v">28K</div><div class="l">AI Hub 여행 로그 약 2만 8천 세션</div></div>
+      <div class="kc"><div class="v">92<small>건</small></div><div class="l">AI 브리핑으로 정리한 뉴스 (10회차)</div></div>
+      <div class="kc"><div class="v">3<small>tiers</small></div><div class="l">OHT 속도 기준 원활 · 서행 · 정체</div></div>
+    </div>
+    <div class="tbl">
+      <table>
+        <thead><tr><th>역량</th><th>도구 · 방법</th><th>S-CURT</th><th>제주</th><th>Briefing</th><th>OHT</th><th>K-Path</th><th>PICKUPCHU</th><th>Booth</th><th>Unity</th></tr></thead>
+        <tbody>
+          <tr><td><b>ML 실험 · 평가</b></td><td>Python · CatBoost · LightGCN · MF-SGD · NDCG/MAE/RMSE/P@K/R@K</td><td class="c"><span class="dotm" title="주도"></span></td><td class="c"><span class="doto" title="참여"></span></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td><b>AI 활용 · 프롬프트</b></td><td>Claude 워크플로 설계 · 검수 규칙 · ResNet-18 활용 기획</td><td></td><td class="c"><span class="doto"></span></td><td class="c"><span class="dotm"></span></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td><b>문제 정의 · 범위</b></td><td>페르소나 · 고객 여정 지도 · v1 / Next 분리</td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="doto"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td></td></tr>
+          <tr><td><b>지표 · 정책 설계</b></td><td>혼잡비율 · 임계값 · KPI 대시보드 · 처리 단계 공시</td><td class="c"><span class="dotm"></span></td><td></td><td></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td></td><td class="c"><span class="dotm"></span></td><td></td></tr>
+          <tr><td><b>프로토타입 · 개발</b></td><td>Django · SQLite · 정적 HTML · GitHub Pages · Unity · Figma</td><td></td><td class="c"><span class="doto"></span></td><td class="c"><span class="dotm"></span></td><td></td><td></td><td></td><td></td><td class="c"><span class="dotm"></span></td></tr>
+          <tr><td><b>데이터 수집 · 정제</b></td><td>크롤링 · 라벨링 · 네이버 뉴스 API · Excel</td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td></td><td></td><td></td><td></td><td></td></tr>
+          <tr><td><b>비즈니스 · 규제</b></td><td>시장 분석 · SWOT · 손익 구조 · 여객자동차운수사업법 검토</td><td></td><td class="c"><span class="doto"></span></td><td></td><td></td><td class="c"><span class="doto"></span></td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td></td></tr>
+          <tr><td><b>설득 · 발표</b></td><td>피치덱 · 최종 발표 · 성과공유회</td><td class="c"><span class="dotm"></span></td><td class="c"><span class="dotm"></span></td><td></td><td></td><td class="c"><span class="doto"></span></td><td class="c"><span class="dotm"></span></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note"><span class="dotm" style="vertical-align:-1px"></span> 본인 주도 &nbsp; <span class="doto" style="vertical-align:-1px"></span> 팀원과 분담 · 참여</p>
+    <div class="g2">
+      <div class="panel">
+        <h6>Certifications & Language</h6>
+        <ul class="dot" style="font-size:15px;color:#e2e2e2">
+          <li>IELTS Academic <b class="mint">Overall 6.0</b> · CEFR B2 · 2025.08.26</li>
+          <li>Unity Certified User · 2024.11</li>
+          <li>컴퓨터활용능력 2급 · 2024.02</li>
+        </ul>
+        <div class="ielts" style="margin-top:16px">
+          <div><div class="k">LISTENING</div><div class="v">6.5</div><div class="tr"><div class="fl" style="width:72.2%"></div></div></div>
+          <div><div class="k">READING</div><div class="v">6.0</div><div class="tr"><div class="fl" style="width:66.7%"></div></div></div>
+          <div><div class="k">WRITING</div><div class="v">5.5</div><div class="tr"><div class="fl" style="width:61.1%"></div></div></div>
+          <div><div class="k">SPEAKING</div><div class="v">5.0</div><div class="tr"><div class="fl" style="width:55.6%"></div></div></div>
+        </div>
+        <p class="note" style="margin-top:10px">막대는 9.0 만점 기준.</p>
+      </div>
+      <div class="panel">
+        <h6>Stack</h6>
+        <div class="chips m">
+          <span>Python</span><span>CatBoost</span><span>LightGCN</span><span>MF-SGD</span><span>PyTorch · ResNet-18</span><span>Feature Importance</span><span>Django</span><span>SQLite</span><span>Kakao Map API</span><span>Naver Search API</span><span>Google Colab</span><span>Claude</span><span>GitHub Pages</span><span>HTML · CSS</span><span>Unity</span><span>Figma</span><span>Miro</span><span>MiriCanvas</span><span>Excel</span><span>Pitch Deck</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 08 PROJECTS DIVIDER ============ -->
+<section class="s grain" id="projects">
+  <div class="w">
+    <div class="proj-title">PROJECTS</div>
+    <div class="g4">
+      <div class="kc hi"><div class="v">0.9555</div><div class="l">S-CURT · CatBoost NDCG</div></div>
+      <div class="kc"><div class="v">본선</div><div class="l">제주 런케이션 AI 해커톤</div></div>
+      <div class="kc"><div class="v">07:00</div><div class="l">아침 7시 브리핑 매일 발행</div></div>
+      <div class="kc"><div class="v">최우수</div><div class="l">S-CURT 인문사회계열 · RIS 창업캠프</div></div>
+    </div>
+    <div class="plist">
+      <a href="#p1"><span class="n">01</span><span>S-CURT 여행 만족도 예측 연구</span><span class="tg">ML · RESEARCH</span></a>
+      <a href="#p2"><span class="n">02</span><span>제주 런케이션 AI 해커톤 '여기옵서'</span><span class="tg">CNN · PROTOTYPE</span></a>
+      <a href="#p3"><span class="n">03</span><span>아침 7시 브리핑</span><span class="tg">AI NATIVE · LIVE</span></a>
+      <a href="#p4"><span class="n">04</span><span>반도체 물류 OHT 혼잡 기준 설계</span><span class="tg">METRICS · POLICY</span></a>
+      <a href="#p5"><span class="n">05</span><span>K-Path 캠퍼스 통합 플랫폼</span><span class="tg">PRD · SYSTEM</span></a>
+      <a href="#p6"><span class="n">06</span><span>PICKUPCHU 실시간 경로 매칭 카풀</span><span class="tg">VENTURE · REGULATION</span></a>
+      <a href="#p7"><span class="n">07</span><span>인터내셔널데이 베트남 부스 '봉진스'</span><span class="tg">UNIT ECONOMICS</span></a>
+      <a href="#p8"><span class="n">08</span><span>고려대 미디어월 복구 (Unity)</span><span class="tg">DEBUGGING</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P1 S-CURT ============ -->
+<section class="s" id="p1">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">01</div>
+        <h2 class="ptitle">S-CURT 여행 만족도 예측 모델 비교</h2>
+        <div class="pmeta">2025.04.14 – 2025.07.07 · 학부연구 · 2인 공동연구 · 지도교수 면담 10회</div>
+      </div>
+      <div class="ptags"><span class="tag live">인문사회계열 최우수</span><span class="tag">ML Research</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>리뷰 기반 추천은 작성자의 선택적 참여로 극단 경험이 과대 표현됩니다. 실제 방문과 만족도가 함께 남는 AI Hub 국내 여행 로그(수도권, 약 2만 8천 세션)로 '방문지 만족도 예측' 문제를 다시 정의했습니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>연구 직접 제안</li><li>모델 비교 실험 설계</li><li>평가 지표 선정 · 분석</li><li>최종 보고서 작성</li></ul></div>
+      <div><h6>Results</h6><ul class="dot"><li><b>NDCG 0.9555</b> 정확도 1위</li><li><b>Std 0.0052</b> 안정성 1위</li><li>인문사회계열 최우수</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>제주 해커톤의 이미지 추천은 '비슷한 곳'은 찾지만 '만족할 곳'은 예측하지 못했습니다. 추천은 맞히기가 아니라 <b>순서 매기기</b> 문제이고, 정확도 하나로 고르면 안정성을 놓칩니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>해커톤 직후 지도교수에게 연구 제안</li><li>Tree · Graph · MF 3계열을 같은 조건에서 <b>20회 배깅</b></li><li>NDCG 주 지표, MAE · RMSE · P@K · R@K · Std 보완</li><li>시간 · 경로 특성 제외로 비교 조건 통제</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>CatBoost NDCG <b>0.9555</b> · MAE 0.6890 · RMSE 0.8628</li><li>LightGCN 예측 Std <b>0.0052</b>로 가장 일관적</li><li>MF-SGD는 P@K 0.40으로 배제</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Python</span><span>CatBoost</span><span>LightGCN</span><span>MF-SGD</span><span>Bagging ×20</span><span>Colab</span><span>AI Hub</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>개인화 온보딩의 첫 질문은 성별이 아니라 <b>여행 목적 · 스타일</b>입니다. 결론을 '1위 모델'이 아닌 <b>선택 기준</b>으로 제시해, 정확도와 일관성 중 무엇이 필요한 제품인지에 따라 고르게 했습니다.</p></div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>Model Comparison · 20회 배깅 평균</h6>
+        <div class="tbl" style="border:0;background:transparent">
+          <table class="mt">
+            <thead><tr><th>Model</th><th>NDCG</th><th>MAE</th><th>RMSE</th><th>P@K</th><th>R@K</th><th>Std</th></tr></thead>
+            <tbody>
+              <tr><td>CatBoost</td><td class="hi">0.9555</td><td class="hi">0.6890</td><td class="hi">0.8628</td><td>1.0000</td><td>0.0021</td><td>0.0784</td></tr>
+              <tr><td>LightGCN</td><td>0.9528</td><td>0.7002</td><td>0.8693</td><td>1.0000</td><td>0.0021</td><td class="hi">0.0052</td></tr>
+              <tr><td>MF-SGD</td><td>0.9409</td><td>0.7003</td><td>0.8695</td><td>0.4000</td><td>0.0008</td><td>0.0189</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="margin-top:18px">
+          <div class="lbl" style="font-size:12px;margin-bottom:10px">예측 표준편차 · 낮을수록 일관적</div>
+          <div class="bars">
+            <div class="bar"><span class="nm">CatBoost</span><span class="tr"><span class="fl" style="width:98%;display:block"></span></span><span class="vv">0.0784</span></div>
+            <div class="bar top"><span class="nm">LightGCN</span><span class="tr"><span class="fl" style="width:6.5%;display:block"></span></span><span class="vv">0.0052</span></div>
+            <div class="bar"><span class="nm">MF-SGD</span><span class="tr"><span class="fl" style="width:23.6%;display:block"></span></span><span class="vv">0.0189</span></div>
+          </div>
+          <p class="note" style="margin-top:8px">막대는 0 – 0.08 축 기준.</p>
+        </div>
+      </div>
+      <div class="panel">
+        <h6>CatBoost Feature Importance · Top 14</h6>
+        <div class="bars">
+          <div class="bar top"><span class="nm">여행 목적<small>MISSION_INT</small></span><span class="tr"><span class="fl" style="width:100%;display:block"></span></span><span class="vv">11.93</span></div>
+          <div class="bar top"><span class="nm">여행 스타일<small>STYL_8</small></span><span class="tr"><span class="fl" style="width:80.2%;display:block"></span></span><span class="vv">9.57</span></div>
+          <div class="bar top"><span class="nm">여행 동기<small>MOTIVE_1</small></span><span class="tr"><span class="fl" style="width:77.6%;display:block"></span></span><span class="vv">9.26</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_1</small></span><span class="tr"><span class="fl" style="width:72.3%;display:block"></span></span><span class="vv">8.63</span></div>
+          <div class="bar"><span class="nm">방문지명<small>VISIT_AREA_NM</small></span><span class="tr"><span class="fl" style="width:70.5%;display:block"></span></span><span class="vv">8.41</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_4</small></span><span class="tr"><span class="fl" style="width:69%;display:block"></span></span><span class="vv">8.23</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_7</small></span><span class="tr"><span class="fl" style="width:58.8%;display:block"></span></span><span class="vv">7.01</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_6</small></span><span class="tr"><span class="fl" style="width:52.8%;display:block"></span></span><span class="vv">6.30</span></div>
+          <div class="bar"><span class="nm">연령대<small>AGE_GRP</small></span><span class="tr"><span class="fl" style="width:52.2%;display:block"></span></span><span class="vv">6.23</span></div>
+          <div class="bar"><span class="nm">동반자 수<small>COMPANIONS</small></span><span class="tr"><span class="fl" style="width:50.3%;display:block"></span></span><span class="vv">6.00</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_2</small></span><span class="tr"><span class="fl" style="width:49.5%;display:block"></span></span><span class="vv">5.90</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_3</small></span><span class="tr"><span class="fl" style="width:49.1%;display:block"></span></span><span class="vv">5.86</span></div>
+          <div class="bar"><span class="nm">여행 스타일<small>STYL_5</small></span><span class="tr"><span class="fl" style="width:48.5%;display:block"></span></span><span class="vv">5.79</span></div>
+          <div class="bar low"><span class="nm">성별<small>GENDER</small></span><span class="tr"><span class="fl" style="width:7.3%;display:block"></span></span><span class="vv">0.87</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>Case · 테스트 여행객 a006014</h6>
+        <div class="tbl" style="border:0;background:transparent">
+          <table class="mt">
+            <thead><tr><th>방문지</th><th>실제</th><th>CatBoost</th><th>MF-SGD</th><th>LightGCN</th></tr></thead>
+            <tbody>
+              <tr><td>화담숲</td><td class="hi">5.0</td><td>4.3411</td><td>4.2486</td><td>4.2608</td></tr>
+              <tr><td>토담</td><td style="color:var(--bad-tx)">3.0</td><td>4.1764</td><td>4.3064</td><td>4.2485</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="margin-top:10px">세 모델 모두 5.0점은 낮게, 3.0점은 높게 예측했습니다. 예측이 4.2 – 4.3점대에 몰리는 보수적 경향을 한계로 명시했습니다.</p>
+      </div>
+      <div class="panel">
+        <h6>Limitation · 한계도 결과로 남긴다</h6>
+        <ul class="dot" style="font-size:14.5px;color:#e2e2e2;line-height:1.8">
+          <li>P@5 1.0과 R@5 0.0021이 함께 나온 것은 모델보다 <b class="mint">평가 설계(관련 항목 정의 · K 설정)</b>의 한계로 해석했습니다.</li>
+          <li>그래서 모델 선택은 Recall이 아니라 NDCG · MAE · RMSE와 예측 안정성으로 판단했습니다.</li>
+          <li>성별 중요도 0.87은 "성별이 무의미하다"가 아니라, 성별 효과를 여행 스타일 변수가 상당 부분 흡수한 것으로 봤습니다.</li>
+          <li>실제 서비스 전환율은 이 연구가 측정하지 않았습니다.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P2 JEJU ============ -->
+<section class="s bk" id="p2">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">02</div>
+        <h2 class="ptitle">제주 런케이션 AI 해커톤 '여기옵서'</h2>
+        <div class="pmeta">2025.01 – 2025.02 · 팀 SECY CODER · 5인 (제주대 AI 전공 4 + 본인)</div>
+      </div>
+      <div class="ptags"><span class="tag live">본선 진출</span><span class="tag">Django 웹 데모</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>사진 한 장을 올리면 분위기가 비슷한 제주 관광지 Top-3를 추천하고, '저렴이' 가격 필터로 예산에 맞는 장소를 함께 보여주는 외국인 여행자용 웹 서비스입니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>문제 정의 · 서비스 기획</li><li>이미지 크롤링 · 라벨링 · 전처리</li><li>피치덱 · 최종 발표</li></ul></div>
+      <div><h6>Team</h6><ul class="dot"><li>ResNet-18 모델 학습</li><li>Django · SQLite · 카카오맵 구현</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>제주 여행객 불만 1위는 <b>비싼 물가 53.4%</b>. 2023년 외국인 관광객 약 <b>150만 명</b> 중 <b>70%</b>가 아시아 출신입니다. 첫 방문 외국인은 정보가 많아도 분위기와 예산을 동시에 맞추는 장소를 찾기 어렵습니다 → <b>탐색 비용</b> 문제로 정의.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>페르소나 Nadine과 고객 여정 지도 설계</li><li>관광지 이미지 직접 수집 · 라벨링, 특징 없는 사진 · 어두운 사진 제외</li><li>모델 고도화를 고집하던 개발팀을 <b>물가 불만 데이터로 설득</b>해 가격 필터를 v1에 우선 탑재</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li><b>본선 진출</b> · Django 웹 데모 완성</li><li>사진 Top-3 + 가격 필터 + 지도</li><li>AI 전공 4명의 모델을 시장 → 고객 여정 → 서비스 → 기대효과 피치덱으로 번역해 직접 발표</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>PyTorch</span><span>ResNet-18 · GAP</span><span>Cosine Similarity</span><span>Django</span><span>SQLite</span><span>Kakao Map API</span><span>Git</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>불만 1위와 직접 닿고 기간 안에 끝낼 수 있는 기능부터 v1에 넣었습니다. 데모 뒤 '비슷한 곳 ≠ 만족할 곳'이라는 한계가 보였고, 이것이 <b>S-CURT 연구 질문</b>이 됐습니다.</p></div>
+    </div>
+    <div class="g2">
+      <div class="shot ratio"><img src="img/jeju_home.jpg" alt="여기옵서 웹 데모 메인 화면: Where Do You Want To Go" style="object-position:center 55%"><span class="lb">메인 · 사진 업로드</span></div>
+      <div class="shot ratio"><img src="img/jeju_labeling.jpg" alt="관광지 이미지 수집 · 라벨링 · 전처리 슬라이드" style="object-position:left center"><span class="lb">본인 담당 · 데이터 수집 · 라벨링</span></div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>제주 여행객 불만 사항 · 프로젝트 보고서 시장조사</h6>
+        <div class="bars">
+          <div class="bar top"><span class="nm">비싼 물가</span><span class="tr"><span class="fl" style="width:89%;display:block"></span></span><span class="vv">53.4%</span></div>
+          <div class="bar"><span class="nm">대중교통 불편</span><span class="tr"><span class="fl" style="width:20.2%;display:block"></span></span><span class="vv">12.1%</span></div>
+          <div class="bar"><span class="nm">한정된 쇼핑 품목</span><span class="tr"><span class="fl" style="width:18.5%;display:block"></span></span><span class="vv">11.1%</span></div>
+          <div class="bar"><span class="nm">관광종사원 불친절</span><span class="tr"><span class="fl" style="width:9.7%;display:block"></span></span><span class="vv">5.8%</span></div>
+          <div class="bar"><span class="nm">부정확한 관광 정보</span><span class="tr"><span class="fl" style="width:9.5%;display:block"></span></span><span class="vv">5.7%</span></div>
+        </div>
+        <p class="note" style="margin-top:12px">막대는 0 – 60% 축 기준. 여행 경비 만족도 3.16점으로 평가 항목 중 최저.</p>
+      </div>
+      <div class="panel">
+        <h6>How it works · Scope Decision</h6>
+        <div class="flow">
+          <div class="st"><b>사진 업로드</b><span>원하는 분위기의 사진 한 장</span></div><div class="ar">›</div>
+          <div class="st"><b>CNN 특징 추출</b><span>ResNet-18 + GAP → 코사인 유사도 Top-3</span></div><div class="ar">›</div>
+          <div class="st me"><b>'저렴이' 필터</b><span>인증 여부 · 평점 · 가격대 DB 필드</span></div>
+        </div>
+        <div class="scope" style="margin-top:14px">
+          <div class="in"><b>IN · v1</b>사진 기반 Top-3 추천<br>'저렴이' 가격 필터<br>카카오맵 위치 표시</div>
+          <div class="out"><b>NEXT</b>실시간 대체 옵션<br>여행 기록 · 리뷰 재추천<br>다국어 · 교통 · 날씨 연동</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P3 NEWS BRIEFING ============ -->
+<section class="s" id="p3">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">03</div>
+        <h2 class="ptitle">아침 7시 브리핑 · AI 데일리 뉴스</h2>
+        <div class="pmeta">2026.10.02 – 진행 중 · 1인 사이드 프로젝트 · <a href="https://youngeunjin.github.io/news1/" target="_blank" rel="noopener" class="mint">youngeunjin.github.io/news1</a></div>
+      </div>
+      <div class="ptags"><span class="tag live">Live · 매일 07:00</span><span class="tag">AI Native</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>"커피 식기 전에 끝나는 뉴스." 국내 · 해외 주요 뉴스를 요약하고 경제 개념을 하루에 하나씩 쌓는 일간 브리핑입니다. 관심 분야 밖의 뉴스까지 매일 읽으며 도메인 지식을 넓히기 위해 직접 기획하고 운영합니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>서비스 기획 · 정보 구조 설계</li><li>Claude 발행 워크플로 설계</li><li>매일 검수 · 발행 운영</li></ul></div>
+      <div><h6>Results</h6><ul class="dot"><li><b>10일</b> 연속 발행</li><li>뉴스 <b>92건</b> · 경제 개념 <b>10개</b></li><li>주말 · 공휴일 포함 결호 0</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>관심 있는 분야의 뉴스만 읽게 되고, 경제 기사는 개념을 몰라 흘려 읽게 됩니다. 매일 아침 짧은 시간에 넓게 보고, 필요한 것만 깊게 읽는 구조가 필요했습니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li><b>Claude 초안 → 사람 검수 → 07:00 발행</b> 워크플로 설계</li><li>'오늘 꼭 기억할 5줄' → 전체 브리핑 펼침 구조</li><li>모든 기사에 출처 · 날짜, 미확인 내용은 따로 표기</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>10회차 · 뉴스 92건 · 회차당 평균 9.2건</li><li>경제 개념 10개 + O/X 확인</li><li>이어지는 이슈에 '새 전개' 연결</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Claude</span><span>Prompt Design</span><span>HTML · CSS</span><span>GitHub Pages</span><span>Human-in-the-loop</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>LLM을 '쓰는 사람'이 아니라 <b>LLM이 들어간 제품을 매일 출시하는 사람</b>의 경험입니다. 자동화 범위와 사람이 검수할 범위를 나누고, 신뢰 기준(출처 · 미확인 표기)을 제품 규칙으로 만들었습니다.</p></div>
+    </div>
+    <div class="g4">
+      <div class="kc hi"><div class="v">10<small>회</small></div><div class="l">연속 발행 (10.02 – 10.11)</div></div>
+      <div class="kc"><div class="v">92<small>건</small></div><div class="l">요약한 뉴스</div></div>
+      <div class="kc"><div class="v">10<small>개</small></div><div class="l">경제 개념 (기준금리 · 환율 · 무역수지 등)</div></div>
+      <div class="kc"><div class="v">07:00</div><div class="l">고정 발행 시각 · KST</div></div>
+    </div>
+    <div class="panel">
+      <h6>발행 기록 · 2026년 10월</h6>
+      <div class="cal">
+        <div><span class="wd">FRI</span><span class="d">02</span></div>
+        <div class="hol"><span class="wd">SAT · 개천절</span><span class="d">03</span></div>
+        <div><span class="wd">SUN</span><span class="d">04</span></div>
+        <div><span class="wd">MON</span><span class="d">05</span></div>
+        <div><span class="wd">TUE</span><span class="d">06</span></div>
+        <div><span class="wd">WED</span><span class="d">07</span></div>
+        <div><span class="wd">THU</span><span class="d">08</span></div>
+        <div class="hol"><span class="wd">FRI · 한글날</span><span class="d">09</span></div>
+        <div><span class="wd">SAT</span><span class="d">10</span></div>
+        <div><span class="wd">SUN</span><span class="d">11</span></div>
+      </div>
+      <p class="note" style="margin-top:10px">모든 칸이 발행일입니다. 노란 칸은 공휴일 발행.</p>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>Workflow · Human-in-the-loop</h6>
+        <div class="flow">
+          <div class="st"><b>수집</b><span>국내 · 해외 주요 보도</span></div><div class="ar">›</div>
+          <div class="st"><b>Claude 초안</b><span>5줄 요약 · 왜 중요? · 경제 개념</span></div><div class="ar">›</div>
+          <div class="st me"><b>사람 검수</b><span>출처 · 날짜 확인, 미확인 표기</span></div><div class="ar">›</div>
+          <div class="st"><b>07:00 발행</b><span>GitHub Pages 정적 배포</span></div>
+        </div>
+        <div class="shot" style="margin-top:16px"><img src="img/news_home.png" alt="아침 7시 브리핑 메인 화면: 10일째, 92개 뉴스, 10개 경제 개념"></div>
+      </div>
+      <div class="panel">
+        <h6>탐색 구조 · Future Roadmap</h6>
+        <div class="tabs" role="tablist" aria-label="브리핑 탐색 구조">
+          <button role="tab" id="tab-date" aria-selected="true" aria-controls="tp-date">날짜별 <span class="s2">Live</span></button>
+          <button role="tab" id="tab-topic" aria-selected="false" aria-controls="tp-topic">주제별 <span class="s2">Planned</span></button>
+          <button role="tab" id="tab-thread" aria-selected="false" aria-controls="tp-thread">이슈 타래 <span class="s2">Planned</span></button>
+          <button role="tab" id="tab-concept" aria-selected="false" aria-controls="tp-concept">경제 개념 <span class="s2">Live</span></button>
+        </div>
+        <div class="tabp" role="tabpanel" id="tp-date" aria-labelledby="tab-date" style="margin-top:12px">
+          <h5><span class="tag live">Live</span> 날짜별 브리핑</h5>
+          <p>회차마다 '최신' 요약 → 오늘 꼭 기억할 5줄 → 국내 · 해외 주요 뉴스 → 내 관심 분야(AI · 뷰티 · 여행 · 사업기획) → 오늘의 경제 개념 순서로 읽습니다.</p>
+        </div>
+        <div class="tabp" role="tabpanel" id="tp-topic" aria-labelledby="tab-topic" style="margin-top:12px" hidden>
+          <h5><span class="tag plan">Planned</span> 태그 분류 엔진</h5>
+          <p>기사마다 주제 태그를 붙여 날짜와 무관하게 분야별로 모아 보는 화면입니다. 발행 단계에서 Claude가 태그 후보를 제안하고, 검수 단계에서 확정하는 방식으로 설계합니다.</p>
+          <div class="mock"><div class="row"><span class="d">#AI</span><span>모델 출시 · 규제 · 투자</span></div><div class="row"><span class="d">#여행</span><span>항공 · OTA · 환율 영향</span></div><div class="row"><span class="d">#경제</span><span>금리 · 물가 · 무역</span></div></div>
+        </div>
+        <div class="tabp" role="tabpanel" id="tp-thread" aria-labelledby="tab-thread" style="margin-top:12px" hidden>
+          <h5><span class="tag plan">Planned</span> 키워드 타임라인 트래커</h5>
+          <p>지금은 후속 보도에 '새 전개' 표시만 붙습니다. 다음 단계는 같은 이슈를 하나의 타래로 묶어, 처음 보도부터 오늘까지의 흐름을 타임라인으로 보여주는 것입니다.</p>
+          <div class="mock"><div class="row"><span class="d">D1</span><span>첫 보도</span></div><div class="row"><span class="d">D3</span><span>새 전개 · 후속 발표</span></div><div class="row"><span class="d">D7</span><span>새 전개 · 시장 반응</span></div></div>
+        </div>
+        <div class="tabp" role="tabpanel" id="tp-concept" aria-labelledby="tab-concept" style="margin-top:12px" hidden>
+          <h5><span class="tag live">Live</span> 경제 개념 모음</h5>
+          <p>쉬운 뜻 → 일상 예시 → 숫자 예시 → 오늘 뉴스와의 연결 → 한 문장 정리, 그리고 O/X 확인.</p>
+          <div class="chips" style="margin-top:10px"><span>수요와 공급</span><span>기준금리</span><span>인플레이션</span><span>환율</span><span>국채 금리</span><span>자사주 매입</span><span>컨센서스 · 어닝 서프라이즈</span><span>선반영 · 셀온</span><span>소비자심리지수</span><span>무역수지</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 OHT ============ -->
+<section class="s bk" id="p4">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">04</div>
+        <h2 class="ptitle">반도체 물류 OHT 혼잡 기준 설계</h2>
+        <div class="pmeta">2025.09 – 2025.10 · '인공지능과 경영' 3조 팀 프로젝트 · 실제 팹 데이터 없는 시뮬레이션 가정</div>
+      </div>
+      <div class="ptags"><span class="tag sim">Simulation</span><span class="tag">Metrics · Policy</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>모든 Bay가 합류하는 Center Loop의 상습 정체에 대해, 관리자가 <b class="mint">언제 개입해야 하는지</b> 객관적 기준이 없어 대응이 경험에 의존하던 문제를 다뤘습니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>혼잡 지표 설계</li><li>시각화 · 분석 프레임 제안</li><li>시뮬레이션 가정 정리</li></ul></div>
+      <div><h6>Results</h6><ul class="dot"><li>속도 3단계 개입 기준</li><li>혼잡비율 · 알림 임계값</li><li>3계층 대시보드 설계</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>OHT 증설은 비용 · 공간 문제로 오히려 정체를 키웁니다. 긴급 Lot 우선순위도 지켜지지 않았고, 개입 시점은 감에 의존했습니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>도로 혼잡도 체계를 OHT에 이식 (직선 최대 18 km/h 기준)</li><li>대기시간 · 처리량 · 점유율 · 혼잡비율 복합 정책표</li><li>팹 평면도 히트맵 · <b>진단 → 예측 → 처방</b> 프레임 제안</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>14.4 / 7.2 km/h 속도 기준</li><li>알림: <b>혼잡비율 &gt; 1.2</b> 또는 <b>On-time &lt; 85%</b></li><li>임원 · 분석가 · 현장 담당자별 화면 설계, 교수 피드백 반영</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Simulation</span><span>Heatmap</span><span>Box Plot</span><span>Sankey</span><span>Executive Dashboard</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>지표는 사용자가 <b>개입 시점을 판단할 수 있을 때</b> 의미가 있습니다. 지표 정의 → 임계값 → 사용자별 화면 → 알림 → 처방까지 정책으로 완결했습니다.</p></div>
+    </div>
+    <div class="g3">
+      <div class="panel">
+        <h6>OHT 속도 3단계 기준</h6>
+        <div class="lv g"><span class="dt"></span><b>원활</b><span>14.4 km/h 이상</span></div>
+        <div class="lv y"><span class="dt"></span><b>서행</b><span>7.2 – 14.4 km/h</span></div>
+        <div class="lv r"><span class="dt"></span><b>정체</b><span>7.2 km/h 미만</span></div>
+        <div style="margin-top:16px;font-size:14.5px;color:var(--tx-2);line-height:1.7"><b class="mint">Congestion Ratio</b><br>= 실제 이동시간 ÷ 기대 이동시간<br><span class="note">1보다 클수록 지연. 속도와 함께 보며 개입 시점을 판단합니다.</span></div>
+      </div>
+      <div class="panel">
+        <h6>복합 정책 지표 · 주의 / 위험</h6>
+        <div class="tbl" style="border:0;background:transparent">
+          <table>
+            <thead><tr><th>지표</th><th>주의</th><th>위험</th></tr></thead>
+            <tbody>
+              <tr><td>대기시간</td><td>2분</td><td>5분</td></tr>
+              <tr><td>FOUP 처리량</td><td>90%</td><td>70%</td></tr>
+              <tr><td>점유율</td><td>80%</td><td>95%</td></tr>
+              <tr><td>혼잡비율</td><td>1.0</td><td>1.5</td></tr>
+              <tr><td>긴급 Lot 대기</td><td colspan="2">1분 초과 시 경고</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="panel">
+        <h6>분석 구조</h6>
+        <div class="flow" style="flex-direction:column">
+          <div class="st"><b>진단</b><span>Center Loop 혼잡 원인 · Bay별 대기시간 · 평면도 히트맵</span></div>
+          <div class="st"><b>예측</b><span>시간대별 물류량 기반 혼잡 확률 · 납기 준수 가능성</span></div>
+          <div class="st me"><b>처방</b><span>경로 재배정 · Lot 분배 정책 · 우회 로직(구간 대수 임계 초과 시 인접 Bay 분산)</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="panel">
+      <h6>Executive Summary · 시뮬레이션 데모 데이터</h6>
+      <div class="g4">
+        <div class="kc"><div class="v">91.2<small>%</small></div><div class="l">On-time Rate · 목표 95.0%</div></div>
+        <div class="kc"><div class="v">1.08</div><div class="l">Congestion Ratio · 목표 1.2 이하</div></div>
+        <div class="kc"><div class="v">3,420</div><div class="l">Throughput (jobs/day) · 목표 3,400</div></div>
+        <div class="kc"><div class="v">5 → 3</div><div class="l">일일 알림 건수 (−40%)</div></div>
+      </div>
+      <p class="note" style="margin-top:12px">대시보드 PDF의 수치이며, 실제 운영 성과가 아닌 시뮬레이션 데모 값입니다. 피크(10:00 · 16:00) 사전 배차, CenterC · Bay6 경로 조정, 비긴급 이동 분산 등 권고 4건을 함께 도출했습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P5 K-PATH ============ -->
+<section class="s" id="p5">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">05</div>
+        <h2 class="ptitle">K-Path 캠퍼스 통합 관리 플랫폼</h2>
+        <div class="pmeta">2025.09 – 2026.01 · KUS 대학혁신사업단 학생서포터즈 4기 · 팀 길잡이 (기획 1 + 디자인 1)</div>
+      </div>
+      <div class="ptags"><span class="tag">PRD · 제안서 제출 2026.01.14</span><span class="tag">System Design</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>교무학사팀 · 세종교육혁신원 · 대학일자리플러스센터 · 시설팀이 각자 독립 시스템으로 운영되면서 생긴 정보 파편화를, 학생용 단일 뷰와 본부용 모니터링 대시보드로 묶는 전사 통합 플랫폼입니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>End-to-end 기획 · 분석</li><li>ERP 관점 시스템 설계</li><li>학생 니즈 분석 · 솔루션 설계</li></ul></div>
+      <div><h6>Partner</h6><ul class="dot"><li>디자인팀: UI · 시각화 리포트 · 발표</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><ul class="dot"><li>학생: 지능형홈 · KUSEUM · 일자리센터를 따로 확인, 중복 로그인</li><li>건의 처리 과정이 보이지 않아 행정 신뢰도 하락</li><li>본부: 부서별 운영을 실시간으로 볼 대시보드 부재</li></ul></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>교내 조직도로 부서 · 시스템 맵핑</li><li>3대 기능 정의: <b>Single View</b> · <b>Student Voice</b> · <b>품질 모니터링</b></li><li>필요 요소 정의: 부서 업무 연동 API, 피드백 모니터링, 대시보드 UI</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>프로그램 제안서 제출 · 성과공유회 발표</li><li>홍보물 · 발표 자료 제작</li><li>회고: 일부 제안은 실행까지 못 감 → 예산 · 행정 제약을 기획 단계에 넣어야 함</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>PRD</span><span>As-is / To-be</span><span>ERP 관점</span><span>KPI Dashboard</span><span>QR 접수</span><span>Miro</span><span>MiriCanvas</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>사용자 화면(학생)과 운영자 화면(본부)을 <b>같은 데이터의 두 얼굴</b>로 설계했습니다. 처리 상태 공개가 곧 부서 KPI가 되도록 만든 것이 핵심입니다.</p></div>
+    </div>
+    <div class="panel">
+      <h6>Student Voice · 처리 단계 실시간 공시</h6>
+      <div class="stepper">
+        <div data-n="1">접수<small>QR 스캔 · 위치 자동 입력</small></div>
+        <div data-n="2">분석<small>유형 · 긴급도 분류</small></div>
+        <div data-n="3">부서 이관<small>담당 부서 배정</small></div>
+        <div data-n="4">조치 중<small>진행 상황 공개</small></div>
+        <div data-n="5">완료<small>결과 공시 · 만족도</small></div>
+      </div>
+    </div>
+    <div class="prd">
+      <div class="k">TARGET</div><div>세종캠퍼스 재학생 전체 · 전 행정 부서 담당자 · 대학 본부</div>
+      <div class="k">FEATURE 1</div><div><b>Single View</b> · 로그인 한 번으로 성적(교무), 역량 성취도(KUSEUM), 취업 상담 이력을 한 페이지에서 조회. 학사 일정 · 장학 · 도서 대출을 개인 대시보드로.</div>
+      <div class="k">FEATURE 2</div><div><b>Student Voice</b> · 캠퍼스 곳곳의 QR로 시설 · 행정 건의 접수, 5단계 처리 상태를 실시간 공개.</div>
+      <div class="k">FEATURE 3</div><div><b>행정 품질 모니터링</b> · 부서별 민원 처리 속도 · 프로그램 참여율 · 학생 만족도를 대시보드로 수치화, 차년도 사업 계획에 반영하는 환류.</div>
+      <div class="k">KPI</div><div>민원 처리 리드타임 · 단계별 체류 시간 · 프로그램 참여율 · 학생 만족도 · 유형별 · 장소별 접수 핫스팟</div>
+      <div class="k">DEPENDENCY</div><div>부서별 실시간 행정 업무 현황 연동 API · 통합 인증 · 대시보드 UI 디자인</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P6 PICKUPCHU ============ -->
+<section class="s bk" id="p6">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">06</div>
+        <h2 class="ptitle">PICKUPCHU 실시간 경로 매칭 카풀</h2>
+        <div class="pmeta">2024.12 · RIS 2024 모빌리티 ICT 창업캠프 · 3인 팀 (ICT가세상을바꾸조)</div>
+      </div>
+      <div class="ptags"><span class="tag live">최우수상</span><span class="tag">Regulation Review</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>교통비 상승, 비효율적인 이동 경로, 대중교통 혼잡, 운전면허가 없는 대학생의 이동 제약을 하나의 문제로 묶어 실시간 경로 매칭 카풀을 제안했습니다.</p></div>
+      <div><h6>My Role</h6><ul class="dot"><li>아이디어 제언</li><li>서비스 기획 · 규제 검토</li><li>최종 발표</li></ul></div>
+      <div><h6>Results</h6><ul class="dot"><li><b>최우수상</b></li><li>지도 앱 기반 매칭 시뮬레이션</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>카풀은 수요가 분명하지만 <b>여객자동차 운수사업법 제81조</b>(자가용 유상운송 금지)와 택시업계 반발에 막혀 왔습니다. 규제를 모르고 설계하면 서비스 자체가 성립하지 않습니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>제81조 출퇴근 예외 조항(평일 07–09시 · 18–20시)을 서비스 운영 시간대 설계에 반영</li><li>차량 공유 보급률 · 소비자 인식 · 택시업계 반발까지 SWOT으로 정리</li><li>예상 질문 답변용 별첨으로 규제 근거 준비</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>RIS 모빌리티 ICT 창업캠프 <b>최우수상</b></li><li>지도 앱 경로 화면으로 매칭 시나리오 시연</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Market Research</span><span>SWOT</span><span>Regulation Review</span><span>Scenario Simulation</span><span>Pitch Deck</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>규제는 피해야 할 장애물이 아니라 <b>범위를 정하는 입력값</b>입니다. 법이 허용하는 시간대를 그대로 서비스의 v1 운영 시간으로 바꿨습니다.</p></div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>제81조 출퇴근 예외 · 평일 기준 24시간</h6>
+        <div class="band" aria-label="평일 07시부터 09시, 18시부터 20시만 허용">
+          <span style="left:29.17%;width:8.33%">07–09</span>
+          <span style="left:75%;width:8.33%">18–20</span>
+        </div>
+        <div class="ticks"><span>0</span><span>6</span><span>12</span><span>18</span><span>24</span></div>
+        <p class="note" style="margin-top:12px">초록 구간만 유상 카풀 허용. 토 · 일 · 공휴일은 제외됩니다. 이 두 구간이 PICKUPCHU의 매칭 운영 시간이 됩니다.</p>
+      </div>
+      <div class="panel">
+        <h6>시장 근거 · 발표 자료 인용</h6>
+        <div class="bars">
+          <div class="bar"><span class="nm">차량 공유 보급률 2016</span><span class="tr"><span class="fl" style="width:50%;display:block"></span></span><span class="vv">7.0%</span></div>
+          <div class="bar"><span class="nm">2017</span><span class="tr"><span class="fl" style="width:59.3%;display:block"></span></span><span class="vv">8.3%</span></div>
+          <div class="bar top"><span class="nm">2022</span><span class="tr"><span class="fl" style="width:92.9%;display:block"></span></span><span class="vv">13.0%</span></div>
+        </div>
+        <p class="note" style="margin-top:12px">Statista 인용, 막대는 0 – 14% 축. 카풀 허용 시 '출퇴근 등 특정 시간' 응답 65.6% (외부 설문 인용).</p>
+        <div class="shot" style="margin-top:14px;aspect-ratio:21/9"><img src="img/ris_award.jpg" alt="RIS 2024 모빌리티 ICT 창업캠프 최우수상 시상" style="object-position:right center"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P7 BOOTH ============ -->
+<section class="s" id="p7">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">07</div>
+        <h2 class="ptitle">인터내셔널데이 베트남 부스 '봉진스'</h2>
+        <div class="pmeta">2025 · 세종사회봉사단 · 낮 체험존 + 밤 판매 부스 올데이 운영 기획</div>
+      </div>
+      <div class="ptags"><span class="tag">기획안 기준 예상치</span><span class="tag">Unit Economics</span></div>
+    </div>
+    <div class="ov">
+      <div><h6>Overview</h6><p>낮에는 무료 체험과 포토존으로 사람을 모으고, 밤에는 쌀국수 · 칵테일 판매로 수익을 내는 <b class="mint">체험 → 홍보 → 구매</b> 흐름의 부스를 설계했습니다.</p></div>
+      <div><h6>Scope</h6><ul class="dot"><li>메뉴 · 원가 · 가격 설계</li><li>구매 · 물류 계획</li><li>운영 동선 · 리스크 대응</li></ul></div>
+      <div><h6>Plan</h6><ul class="dot"><li>예상 매출 <b>112만 원</b></li><li>예상 이익률 <b>약 69%</b></li><li>190인분 + 음료 30병</li></ul></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>하루 행사에서 낮 · 밤 성격이 다른 두 부스를 소수 인원(밤 5명)으로 운영해야 했습니다. 재고가 남으면 손실, 모자라면 기회 손실입니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>메뉴별 원가 · 판매가 · 수량 테이블</li><li>시간대별 판매 시뮬레이션으로 완판 시점 예측</li><li>낮 참여자에게 밤부스 <b>500원 할인쿠폰</b> 배포로 전환 설계</li><li>배송 지연 · 결제 병목 등 리스크 6종 대응안</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>총원가 약 34.9만 원 / 총매출 약 112만 원</li><li>포토존 순이익 약 6만 원 (30컷 기준)</li><li>QR 결제 · 직선 동선으로 체증 방지 설계</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Unit Economics</span><span>Demand Simulation</span><span>SNS Campaign</span><span>Ops Flow</span><span>Risk Matrix</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>무료 체험을 <b>유입 퍼널</b>로, 쿠폰을 <b>전환 장치</b>로 설계했습니다. 작은 부스지만 획득 → 전환 → 매출 구조를 숫자로 먼저 맞춰 본 경험입니다.</p></div>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>밤부스 메뉴별 단위경제</h6>
+        <div class="tbl" style="border:0;background:transparent">
+          <table class="mt">
+            <thead><tr><th>메뉴</th><th>수량</th><th>원가</th><th>판매가</th><th>매출</th><th>마진율</th></tr></thead>
+            <tbody>
+              <tr><td>쌀국수</td><td>50</td><td>2,200</td><td>8,000</td><td>400,000</td><td class="hi">72.5%</td></tr>
+              <tr><td>물만두</td><td>50</td><td>1,500</td><td>5,000</td><td>250,000</td><td>70.0%</td></tr>
+              <tr><td>돼지껍데기</td><td>40</td><td>2,000</td><td>6,000</td><td>240,000</td><td>66.7%</td></tr>
+              <tr><td>나쵸</td><td>20</td><td>1,200</td><td>4,000</td><td>80,000</td><td>70.0%</td></tr>
+              <tr><td>소주 칵테일</td><td>30</td><td>2,000</td><td>5,000</td><td>150,000</td><td>60.0%</td></tr>
+              <tr><td><b>합계</b></td><td>190+30</td><td>349,000</td><td>–</td><td><b>1,120,000</b></td><td class="hi">68.8%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="margin-top:8px">단위: 원. 기획안 수치이며 실제 판매 결과가 아닙니다. 마진율은 (판매가 − 원가) ÷ 판매가로 계산했습니다.</p>
+      </div>
+      <div class="panel">
+        <h6>시간대별 누적 판매 시뮬레이션</h6>
+        <svg viewBox="0 0 420 200" role="img" aria-label="18시 0%, 18시30분 10%, 19시30분 55%, 20시30분 92%, 21시 100%" style="width:100%;height:auto">
+          <line class="gl" x1="40" y1="20" x2="400" y2="20"/><line class="gl" x1="40" y1="85" x2="400" y2="85"/>
+          <line class="ax" x1="40" y1="150" x2="400" y2="150"/>
+          <text x="32" y="24" fill="#8a8a8a" font-size="11" text-anchor="end">100%</text>
+          <text x="32" y="89" fill="#8a8a8a" font-size="11" text-anchor="end">50%</text>
+          <text x="32" y="154" fill="#8a8a8a" font-size="11" text-anchor="end">0%</text>
+          <polygon points="40,150 98,137 213,78.5 328,30.4 386,20 386,150" fill="rgba(159,227,161,.12)"/>
+          <polyline points="40,150 98,137 213,78.5 328,30.4 386,20" fill="none" stroke="#9fe3a1" stroke-width="2.5"/>
+          <circle cx="98" cy="137" r="4" fill="#9fe3a1"/><circle cx="213" cy="78.5" r="4" fill="#9fe3a1"/><circle cx="328" cy="30.4" r="4" fill="#9fe3a1"/><circle cx="386" cy="20" r="5.5" fill="#9fe3a1"/>
+          <text x="98" y="128" fill="#f2f2f2" font-size="12" text-anchor="middle">10%</text>
+          <text x="213" y="69" fill="#f2f2f2" font-size="12" text-anchor="middle">55%</text>
+          <text x="318" y="24" fill="#f2f2f2" font-size="12" text-anchor="end">92%</text>
+          <text x="386" y="40" fill="#9fe3a1" font-size="12" text-anchor="end">완판</text>
+          <text x="40" y="172" fill="#8a8a8a" font-size="11" text-anchor="middle">18:00</text>
+          <text x="98" y="172" fill="#8a8a8a" font-size="11" text-anchor="middle">18:30</text>
+          <text x="213" y="172" fill="#8a8a8a" font-size="11" text-anchor="middle">19:30</text>
+          <text x="328" y="172" fill="#8a8a8a" font-size="11" text-anchor="middle">20:30</text>
+          <text x="386" y="172" fill="#8a8a8a" font-size="11" text-anchor="middle">21:00</text>
+          <text x="220" y="194" fill="#8a8a8a" font-size="11" text-anchor="middle">피크 ① 90인분 · 피크 ② 70인분</text>
+        </svg>
+        <div class="flow" style="margin-top:12px">
+          <div class="st"><b>낮 12–17시</b><span>콩 옮기기 · OX 퀴즈 무료, 아오자이 폴라로이드 3,000원</span></div><div class="ar">›</div>
+          <div class="st me"><b>전환</b><span>#봉진스 #VietnamDay2025 인증 · 밤부스 500원 쿠폰</span></div><div class="ar">›</div>
+          <div class="st"><b>밤 18–21:30</b><span>쌀국수 · 칵테일 판매, 버너 3개 회전</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P8 UNITY ============ -->
+<section class="s bk" id="p8">
+  <div class="w">
+    <div class="phead">
+      <div>
+        <div class="pno">08</div>
+        <h2 class="ptitle">고려대학교 미디어월 복구 (Unity)</h2>
+        <div class="pmeta">2025.03 – 2025.12 · 3년간 멈춘 캠퍼스 인터랙티브 미디어월 레거시 프로젝트 인수</div>
+      </div>
+      <div class="ptags"><span class="tag live">실제 전시</span><span class="tag">Legacy Debugging</span></div>
+    </div>
+    <div class="par">
+      <div><div class="k"><b>P</b>Problem</div><p>UI 패널이 <b>오류 메시지 없이</b> 전환되지 않았습니다. 문서도 인수인계도 없는 3년 된 프로젝트였습니다.</p></div>
+      <div><div class="k"><b>A</b>Action</div><ul class="dot"><li>전환 실패 지점을 역추적해 <b>NetworkManager 비활성 초기화</b>로 Prefab 로딩 순서가 꼬인 원인 확인</li><li>활성 상태 강제 전환 · 로딩 순서 재설계</li><li>Canvas Scaler · Anchor 재설계</li></ul></div>
+      <div><div class="k"><b>R</b>Result</div><ul class="dot"><li>Full HD · <b>4K</b> 모두 대응</li><li>캠퍼스 전시 가능한 수준으로 정상화</li></ul></div>
+      <div><div class="k"><b>S</b>Stack</div><div class="chips"><span>Unity</span><span>C#</span><span>NetworkManager</span><span>Canvas Scaler</span><span>Unity Certified User</span></div></div>
+      <div class="imp"><div class="k"><b>→</b>Implication</div><p>개발 이슈를 <b>원인까지 추적</b>할 수 있으면, 엔지니어와 같은 언어로 우선순위를 정할 수 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="s" id="experience">
+  <div class="w">
+    <div>
+      <div class="h-big">Experience</div>
+      <p class="lead">핵심 프로젝트 밖에서도 흩어진 정보를 하나의 체계로 묶고, 사람을 모으고, 가르치며 운영했습니다.</p>
+    </div>
+    <div class="exp">
+      <div class="e">
+        <div class="d">2025.09.22 – 2026.01.23</div>
+        <div class="t">KUS 대학혁신사업단 학생서포터즈 4기 · 기획팀</div>
+        <p class="p">교내 · 교외 · 타 대학 프로그램을 매달 모니터링 · 벤치마킹해 자료집과 뉴스레터(겨울호)를 만들고, 기획 ↔ 디자인팀 12단계 제작 프로세스를 표준화했습니다.</p>
+        <p class="r">개선안 <b>8건</b> 제안 · 성과 자료집 만족도 <b>90% 이상</b></p>
+        <div class="chips"><span>벤치마킹</span><span>DB 구축</span><span>Miro</span><span>MiriCanvas PRO</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2025.03 – 2025.12</div>
+        <div class="t">고려대학교 세종사회봉사단 KUSSO 6기 · 정보부원</div>
+        <p class="p">흩어진 활동 데이터를 엑셀 '최종 기록지' 체계로 통합했습니다. 유학생 대상 「Global KUSSO Day」를 독일 · 중국 교환학생의 아이디어를 반영해 기획했습니다.</p>
+        <p class="r"><b>13건</b> 기획 · <b>107시간</b> · 시간왕 · 우수봉사자 / Global KUSSO Day <b>225명</b> 참여 · 만족도 <b>94.5%</b></p>
+        <div class="chips"><span>데이터 통합</span><span>캠페인</span><span>Excel</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2025</div>
+        <div class="t">KB-YMCA 대학생 금융교육 봉사단 폴라리스+ 25기 · 세종 기수장</div>
+        <p class="p">초등학생 대상 체험형 경제 · 금융 교육을 기획 · 운영했습니다. 아이들 눈높이에 맞춰 생활 속에서 금융 개념을 이해하고 실천하도록 설계했습니다.</p>
+        <div class="chips"><span>리더십</span><span>교육 기획</span><span>금융 리터러시</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2025.09.18 – 2025.11.13</div>
+        <div class="t">T-SUM 데이터 분석 멘토 (Sexy Coder)</div>
+        <p class="p">비전공 멘티 4명에게 Python 기초 → 전처리 → 시각화 → 네이버 뉴스 데이터 미니프로젝트 2회로 이어지는 10주 커리큘럼을 설계하고, 주차별 활동보고서로 운영 과정을 기록했습니다.</p>
+        <div class="chips"><span>커리큘럼 설계</span><span>Python</span><span>Colab</span><span>Zoom</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2024.09.23 – 2024.12.15</div>
+        <div class="t">KUS-Tutoring 'Tearing : DM' · 디지털 마케팅 튜터</div>
+        <p class="p">튜티 3명에게 단원별 마인드맵 자료와 직접 만든 발표 자료(Salesforce 기업 분석)를 제공하고, 비중 40%인 프로젝트 대비로 자료 조사 · PPT · 발표까지 지도했습니다. 우수그룹 자기추천서를 제출했습니다.</p>
+        <div class="chips"><span>교육</span><span>콘텐츠 구조화</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2023.09 – 2024.02</div>
+        <div class="t">MITP(현 MIXX) 마케팅 학회 · Crimson Brain</div>
+        <p class="p">CES 2023 기술 트렌드 조사, 돌봄경제 ESG '케어맘' 발표, 세종애행복팜 상세페이지 9단계 로직 설계와 ABC · 배 · 사과 주스 상세페이지 V2 리디자인을 제안했습니다.</p>
+        <div class="chips"><span>트렌드 리서치</span><span>상세페이지</span><span>ESG</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2024.09</div>
+        <div class="t">교내 프레젠테이션 경진대회 최우수상</div>
+        <p class="p">5분 발표 영상과 10장 슬라이드로 기획부터 전달까지 혼자 완성했습니다. 이후 해커톤 · 창업캠프에서 팀의 발표를 맡는 출발점이 됐습니다.</p>
+        <div class="chips"><span>스토리라인</span><span>발표</span></div>
+      </div>
+      <div class="e">
+        <div class="d">2025.01.13 – 01.17</div>
+        <div class="t">대학생 재능봉사 캠프 30기 · 따숨팀</div>
+        <p class="p">조치원신봉초등학교에서 4인 팀으로 5일간 캠프 프로그램을 운영했습니다.</p>
+        <div class="chips"><span>교육 봉사</span><span>현장 운영</span></div>
+      </div>
+      <div class="e">
+        <div class="d">KOSAC · 2025 상반기</div>
+        <div class="t">영어 에세이 · Sleep Deprivation Among University Students</div>
+        <p class="p">대학생 수면 부족을 개인의 시간 관리 실패가 아닌 경쟁 사회의 구조 문제로 보고, 학교 · 사회 차원의 대응을 제안하는 영어 에세이와 포스터를 작성했습니다.</p>
+        <div class="chips"><span>English Writing</span><span>Poster</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GLOBAL ============ -->
+<section class="s bk" id="global">
+  <div class="w">
+    <div>
+      <div class="h-big">Global</div>
+      <p class="lead">낯선 환경에서 직접 부딪히며 일하고, 여행 한 번을 하나의 운영 프로젝트로 다뤘습니다.</p>
+    </div>
+    <div class="g2">
+      <div class="panel">
+        <h6>Kent State University · 미국 오하이오</h6>
+        <ul class="dot" style="font-size:15px;color:#e2e2e2;line-height:1.8">
+          <li>교환학생 2025.12.28 – 2026.05.09 · 교내 경쟁률 <b class="mint">11:1</b> 선발</li>
+          <li>CIS 수강 · Figma로 <b class="mint">High-Fidelity Wireframe for LCNC Workflow Operations</b> 설계</li>
+          <li>Örebro University(스웨덴) 합격 후, 전공 연계 과목이 부족해 미국 대학으로 방향 전환</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h6>Rosie's Diner · Kent State Culinary Services</h6>
+        <div class="g3" style="gap:12px">
+          <div class="kc"><div class="v">7</div><div class="l">스테이션</div></div>
+          <div class="kc hi"><div class="v">110<small>+</small></div><div class="l">다국적 동료</div></div>
+          <div class="kc"><div class="v">20<small>h/주</small></div><div class="l">국제학생 근로 상한 내 운영</div></div>
+        </div>
+        <p class="note" style="margin-top:12px">2026.01.05 – 2026.05.01 · 대학 공식 온보딩 절차로 채용, 피크타임 오퍼레이션과 학업 병행.</p>
+      </div>
+    </div>
+    <div class="panel">
+      <h6>미국 9개 도시 · 해외 4개국 5개 도시</h6>
+      <div class="cities">
+        <span><b>US</b>LA</span><span><b>US</b>Hawaii</span><span><b>US</b>Cleveland</span><span><b>US</b>Atlanta</span><span><b>US</b>Savannah</span><span><b>US</b>Charleston</span><span><b>US</b>New York</span><span><b>US</b>Miami</span><span><b>US</b>Chicago</span>
+      </div>
+      <div class="cities" style="margin-top:10px">
+        <span><b>PH</b>Cebu</span><span><b>PH</b>Bohol</span><span><b>TW</b>Taipei</span><span><b>VN</b>Da Nang</span><span><b>JP</b>Fukuoka</span>
+      </div>
+    </div>
+    <div>
+      <div class="lbl" style="margin-bottom:12px">Field Case · 다낭 → 인천 귀국편 위기 (2024.10)</div>
+      <div class="disrupt">
+        <div><div class="d">D-0 · 23:40</div><div class="t">출발 예정</div><div class="p">해외 OTA로 예약한 VietJet Air</div></div>
+        <div class="x"><div class="d">변경 ① → ②</div><div class="t">07:10 지연 → 결항 · 01:00 재배정</div><div class="p">표 한 장짜리 이메일, 다음 행동 안내 없음</div></div>
+        <div><div class="d">20h · 현장</div><div class="t">직접 협상</div><div class="p">공항에서 부분 환불 · 교환 합의</div></div>
+        <div class="x"><div class="d">6개월</div><div class="t">이메일 공방 → 한국소비자원</div><div class="p">본사는 현장 합의 부정, 중재 결과 환불 불가</div></div>
+      </div>
+      <div class="g3" style="margin-top:16px">
+        <div class="panel"><h6>Next Best Action 부재</h6><p style="font-size:14.5px;color:var(--tx-2)">변경 사실만 있고 대체편 · 환불 선택지 · 처리 기간이 없는 고지.</p></div>
+        <div class="panel"><h6>알림의 맥락 설계 실패</h6><p style="font-size:14.5px;color:var(--tx-2)">2회 연속 변경과 결항이 사후 표 한 줄로 전달됨.</p></div>
+        <div class="panel"><h6>채널 간 기록 단절</h6><p style="font-size:14.5px;color:var(--tx-2)">현장 합의가 본사에서 부정되고 입증 책임이 고객에게 넘어감.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT / THANKS ============ -->
+<section class="s grain" id="contact">
+  <div class="w foot-thanks">
+    <div class="h-big">Thank you</div>
+    <p class="lead" style="text-align:center">기록하고, 분석하고, 쓸모를 찾는 여정을<br>이제 팀과 사용자의 문제 위에서 이어가겠습니다.</p>
+    <ul class="contact">
+      <li><span class="ic">@</span><span>ryqkr@naver.com</span></li>
+      <li><span class="ic">☎</span><span>010-5693-3560</span></li>
+      <li><span class="ic">G</span><a href="https://github.com/YoungEunJin" target="_blank" rel="noopener">github.com/YoungEunJin</a></li>
+      <li><span class="ic">B</span><a href="https://blog.naver.com/my_daily_life0724" target="_blank" rel="noopener">blog.naver.com/my_daily_life0724</a></li>
+      <li><span class="ic">N</span><a href="https://youngeunjin.github.io/news1/" target="_blank" rel="noopener">youngeunjin.github.io/news1</a></li>
+    </ul>
+  </div>
+</section>
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('[role="tab"]');
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      tabs.forEach(function (o) {
+        var on = o === t;
+        o.setAttribute('aria-selected', on ? 'true' : 'false');
+        document.getElementById(o.getAttribute('aria-controls')).hidden = !on;
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>
