@@ -13,34 +13,30 @@
 <style>
   :root {
     color-scheme: light;
-    --bg: #f5f7fb; --card: #ffffff; --line: #e2e8f0; --tx: #0f172a; --sub: #475569; --mute: #64748b;
-    --accent: #2563eb; --accent-bg: rgba(37,99,235,.08);
+    --bg: #ffffff; --card: #ffffff; --line: #dbe6fb; --tx: #0f172a; --sub: #475569; --mute: #94a3b8;
+    --blue: #2563eb; --blue-d: #1d4ed8; --blue-bg: #eef4ff;
     --gut: max(16px, 5vw);
     --f: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --bg: #0b1120; --card: #131b2e; --line: #243049; --tx: #e2e8f0; --sub: #a5b1c4; --mute: #8190a7;
-      --accent: #7aa2ff; --accent-bg: rgba(122,162,255,.12);
-    }
-  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--tx); font-family: var(--f); line-height: 1.6; word-break: keep-all; overflow-wrap: anywhere; -webkit-font-smoothing: antialiased; }
-  .w { max-width: 960px; margin: 0 auto; padding: clamp(48px, 9vw, 96px) var(--gut) 64px; }
-  header { margin-bottom: 40px; }
-  .eyebrow { font-size: 14px; font-weight: 600; color: var(--accent); letter-spacing: .04em; }
-  h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 800; letter-spacing: -.02em; margin-top: 6px; }
-  .lead { color: var(--sub); margin-top: 10px; font-size: 16px; }
+  .hero { background: var(--blue); color: #fff; }
+  .hero .in { max-width: 960px; margin: 0 auto; padding: clamp(56px, 10vw, 104px) var(--gut) clamp(48px, 8vw, 80px); }
+  .eyebrow { font-size: 14px; font-weight: 600; letter-spacing: .08em; color: rgba(255,255,255,.75); }
+  h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -.02em; margin-top: 6px; }
+  .lead { color: rgba(255,255,255,.85); margin-top: 10px; font-size: 16px; }
+  .w { max-width: 960px; margin: 0 auto; padding: 48px var(--gut) 64px; }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; list-style: none; }
-  .card { display: flex; flex-direction: column; height: 100%; padding: 24px; background: var(--card); border: 1px solid var(--line); border-radius: 18px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; }
-  a.card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  a.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .tag { align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--accent-bg); padding: 3px 10px; border-radius: 99px; }
+  .card { display: flex; flex-direction: column; height: 100%; padding: 24px; background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--blue); border-radius: 16px; text-decoration: none; color: inherit; box-shadow: 0 4px 16px rgba(37,99,235,.06); transition: box-shadow .15s, transform .15s; }
+  a.card:hover { box-shadow: 0 10px 28px rgba(37,99,235,.16); transform: translateY(-2px); }
+  a.card:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+  .tag { align-self: flex-start; font-size: 12px; font-weight: 600; color: var(--blue-d); background: var(--blue-bg); padding: 3px 10px; border-radius: 99px; }
   .card h2 { font-size: 20px; font-weight: 700; margin-top: 14px; }
   .card p { color: var(--sub); font-size: 15px; margin-top: 6px; flex: 1; }
-  .go { margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--accent); }
-  .card.soon { opacity: .6; }
+  .go { margin-top: 18px; font-size: 14px; font-weight: 600; color: var(--blue); }
+  .card.soon { border-top-color: var(--line); box-shadow: none; }
+  .card.soon h2, .card.soon p { color: var(--mute); }
+  .card.soon .tag { color: var(--mute); background: #f1f5f9; }
   .card.soon .go { color: var(--mute); }
   footer { margin-top: 48px; color: var(--mute); font-size: 13px; }
   footer a { color: inherit; }
@@ -48,12 +44,14 @@
 </style>
 </head>
 <body>
-<main class="w">
-  <header>
+<header class="hero">
+  <div class="in">
     <div class="eyebrow">PORTFOLIO</div>
     <h1>진영은 포트폴리오</h1>
     <p class="lead">보고 싶은 포트폴리오를 눌러 주세요.</p>
-  </header>
+  </div>
+</header>
+<main class="w">
 
   <!-- 새 포트폴리오 추가: 폴더(예: newco/index.html)를 만들고 아래 <li> 하나를 복사해 href·내용만 바꾸면 됩니다.
        준비 중인 항목은 <div class="card soon">으로 두면 링크 없이 보입니다. -->
