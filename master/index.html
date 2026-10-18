@@ -66,7 +66,6 @@
   .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
   .c2 { grid-column: span 2; } .c3 { grid-column: span 3; } .c4 { grid-column: span 4; } .c5 { grid-column: span 5; } .c6 { grid-column: span 6; } .c7 { grid-column: span 7; } .c8 { grid-column: span 8; } .c9 { grid-column: span 9; } .c12 { grid-column: span 12; }
   .card { background: var(--panel); border: 1px solid var(--line-2); border-radius: 14px; padding: 18px 20px; min-width: 0; display: flex; flex-direction: column; gap: 9px; }
-  .s.alt .card { background: var(--panel); }
   .card h6 { font-family: var(--f-en); font-size: 15.5px; font-weight: 700; color: var(--tx); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
   .card h6 .k { color: var(--mint); }
   .card p, .card li { font-size: 15px; color: var(--tx-2); line-height: 1.65; }
@@ -158,6 +157,7 @@
   td.c { text-align: center; }
   table.num td, table.num th { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; font-family: var(--f-en); }
   table.num td:first-child, table.num th:first-child { text-align: left; }
+  table.req td:first-child { white-space: nowrap; }
   td.hi { color: var(--mint); font-weight: 700; }
   .dotm { display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--mint); }
   .doto { display: inline-block; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--mint); }
@@ -226,7 +226,7 @@
   .cover { min-height: min(88vh, 820px); display: flex; flex-direction: column; justify-content: center; background: radial-gradient(ellipse at 85% 10%, #e6eefc 0%, #f4f7fd 45%, #ffffff 100%); }
   .cover .w { align-items: center; text-align: center; gap: 18px; }
   .cover-k { font-family: var(--f-en); letter-spacing: 6px; color: var(--sub); font-size: 15px; }
-  .cover-title { font-family: var(--f-en); font-weight: 700; font-size: clamp(64px, 12vw, 150px); letter-spacing: 2px; color: var(--tx); line-height: 1; }
+  .cover-title { font-family: var(--f-en); font-weight: 700; font-size: clamp(44px, 12vw, 150px); letter-spacing: 2px; color: var(--tx); line-height: 1; }
   .cover-title em { font-style: normal; color: var(--mint); }
   .cover-line { display: flex; align-items: center; gap: 28px; color: var(--mint); font-size: clamp(17px, 1.8vw, 22px); width: min(720px, 100%); font-weight: 600; }
   .cover-line i { flex: 1; height: 1.5px; background: var(--mint); }
@@ -301,6 +301,8 @@
     .bar { grid-template-columns: minmax(92px, 120px) minmax(0, 1fr) 62px; font-size: 13.5px; }
     .chrono-wrap { overflow-x: auto; }
     .chrono { min-width: 760px; }
+    .tbl table { min-width: 620px; }
+    td { word-break: keep-all; }
   }
 
   /* print: one section = one 1440x1018 page; --z is set by the fit script */
@@ -1712,7 +1714,7 @@
       <p class="ks">요구사항마다 '왜 필요했나'를 붙여 문제와 기능을 한 줄로 이었습니다.</p>
     </div>
     <div class="card">
-      <div class="tbl"><table>
+      <div class="tbl"><table class="req">
         <thead><tr><th>ID</th><th>요구사항</th><th>상세</th><th>왜 이 항목이 필요했나</th></tr></thead>
         <tbody>
           <tr><td><b>R-01</b></td><td><b>Single View 통합 조회</b></td><td>로그인 한 번으로 성적(교무) · 역량 성취도(KUSEUM) · 취업 상담 이력 조회</td><td>지능형홈 · KUSEUM · 일자리센터를 따로 확인해야 했음</td></tr>
@@ -1761,7 +1763,7 @@
     <div class="bento">
       <div class="card c4"><h6><a href="#booth">인터내셔널데이 부스</a><span class="pn" data-ref="booth">37</span></h6><p>단위경제 · 낮 → 밤 전환 설계</p></div>
       <div class="card c4"><h6><a href="#mediawall">미디어월 복구</a><span class="pn" data-ref="mediawall">39</span></h6><p>Unity 레거시 원인 추적 · 4K 대응</p></div>
-      <div class="card c4"><h6><a href="#kusso">사회봉사단 KUSSO</a><span class="pn" data-ref="kusso">40</span></h6><p>Global KUSSO Day 225명 · 94.5%</p></div>
+      <div class="card c4"><h6><a href="#kusso">사회봉사단 KUSSO</a><span class="pn" data-ref="kusso">40</span></h6><p>Global KUSSO Day 225명 참여</p></div>
       <div class="card c6"><h6><a href="#teach">T-SUM · Polaris · 교육</a><span class="pn" data-ref="teach">41</span></h6><p>커리큘럼 설계 · 세종지역 기수장</p></div>
       <div class="card c6"><h6><a href="#exp">그 외 Experience</a><span class="pn" data-ref="exp">42</span></h6><p>KUS 서포터즈 · 튜터링 · 발표 · 봉사 캠프 · 창업 동아리</p></div>
       <div class="card c12"><h6>이 장이 증명하는 강점</h6><ul class="dot"><li>현장 운영을 숫자로 계획하는 단위경제 감각 (부스)</li><li>원인을 끝까지 추적하는 기술 이해 (미디어월)</li><li>대상자의 목소리를 기획에 반영하는 협업 (KUSSO · 교육)</li></ul></div>
@@ -1938,7 +1940,7 @@
     </div>
     <div class="bento">
       <div class="card c3 kpi blue"><div class="v">225<small>명</small></div><div class="l">Global KUSSO Day 참여 (147 + 78)</div></div>
-      <div class="card c3 kpi"><div class="v">94.5%</div><div class="l">Global KUSSO Day 만족도</div></div>
+      <div class="card c3 kpi"><div class="v">20<small>명</small></div><div class="l">Global KUSSO Day 봉사자</div></div>
       <div class="card c3 kpi"><div class="v">13<small>건</small></div><div class="l">개인 기획</div></div>
       <div class="card c3 kpi navy"><div class="v">107<small>시간</small></div><div class="l">봉사 · 우수봉사자</div></div>
       <div class="card c12"><div class="pdef"><small>PROBLEM DEFINITION</small>외국인 유학생은 봉사활동에 참여하기 어렵고, 조치원에서 지낼 맛집 · 카페 · 문화생활 · 교통 정보를 얻기 힘들었습니다. 봉사단 활동 기록도 흩어져 있었습니다. 유학생이 지역 사회의 일원으로 참여하게 하고, 활동 기록을 하나로 모으는 것을 목표로 삼았습니다.</div></div>
@@ -2356,7 +2358,6 @@
           <li>기술이 어떻게 작동하는지 이해하고, 그것이 어떤 의사결정을 바꾸는지 숫자로 정리하는 일을 하겠습니다.</li>
           <li>모델은 '1위'로 고르지 않고 트레이드오프로 설명하고, 기능은 사용자 불만에 가장 가까운 것부터 v1에 넣겠습니다.</li>
         </ul>
-        <div class="placeholder">[지원 회사명]에서 ___</div>
       </div>
       <div class="card c12 tint" style="text-align:center"><p class="brand">기록하고, 제3자의 눈으로 분석하고, 사람에게 쓸모 있는 답을 끝까지 만드는 PM</p></div>
     </div>
