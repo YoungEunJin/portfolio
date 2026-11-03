@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>도쿄 산책 수첩</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&family=Noto+Sans+KR:wght@400;500;700&family=Yusei+Magic&family=Kiwi+Maru:wght@500&display=swap">
+<style>
+/* Layout: a hand-held 旅のしおり booklet — one page at a time inside a book frame; pages turn on a left hinge; hanko index strip above, prev/next below */
+:root{
+  --desk:#FFEFF4;      /* strawberry milk desk */
+  --page:#FFFFFF;
+  --ink:#4B3A55;       /* soft plum ink */
+  --soft:#8B7B95;
+  --line:#F7D9E5;
+  --beni:#EE6A92;      /* momo pink accent */
+  --cover:#FFC4D6;
+  --sakura:#FFB8CC;
+  --sakura-bg:#FFE9F0;
+  --matcha:#7FD1B0;
+  --matcha-bg:#E2F7EE;
+  --yuzu:#FFDD7A;
+  --yuzu-bg:#FFF7D6;
+  --sora:#A6D6F5;
+  --sora-bg:#E7F4FD;
+  --lilac:#C9B6F2;
+  --lilac-bg:#F1EBFD;
+  --wood:#D8A988;
+  --on-dark:#FFFFFF;
+  --f-head:"Jua","Noto Sans KR",system-ui,sans-serif;
+  --f-body:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  --f-jp:"Kiwi Maru","Hiragino Maru Gothic ProN","Yu Gothic",serif;
+  --f-hand:"Yusei Magic","Kiwi Maru",sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --desk:#241C2B;--page:#30263A;--ink:#F8EEF5;--soft:#C9B9D2;--line:#4A3B55;
+  --beni:#FF8DB0;--cover:#6B3C55;--sakura:#FFB8CC;--sakura-bg:#4B2E40;--matcha:#8FDDBD;--matcha-bg:#25403A;
+  --yuzu:#FFE08A;--yuzu-bg:#463C22;--sora:#AEDBF7;--sora-bg:#253A4E;--lilac:#C9B6F2;--lilac-bg:#3A3150;--wood:#B88A6A;--on-dark:#FFFFFF;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --desk:#241C2B;--page:#30263A;--ink:#F8EEF5;--soft:#C9B9D2;--line:#4A3B55;
+  --beni:#FF8DB0;--cover:#6B3C55;--sakura:#FFB8CC;--sakura-bg:#4B2E40;--matcha:#8FDDBD;--matcha-bg:#25403A;
+  --yuzu:#FFE08A;--yuzu-bg:#463C22;--sora:#AEDBF7;--sora-bg:#253A4E;--lilac:#C9B6F2;--lilac-bg:#3A3150;--wood:#B88A6A;--on-dark:#FFFFFF;color-scheme:dark}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--desk);color:var(--ink);font-family:var(--f-body);font-size:15.5px;line-height:1.7;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(circle at 12px 12px,var(--line) 2px,transparent 2.5px);background-size:34px 34px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--desk)}
+h1,h2,h3{font-family:var(--f-head);font-weight:400;margin:0;line-height:1.3;text-wrap:balance}
+p{margin:0}
+a{color:inherit}
+.app{max-width:560px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px 18px;display:flex;flex-direction:column;gap:10px;min-height:100%}
+@media (min-width:380px){.app{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
+
+/* hanko index strip */
+.tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:4px 2px 6px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:38px;padding:0 14px;border-radius:999px;border:2.5px solid var(--sakura);background:var(--page);color:var(--ink);font-family:var(--f-head);font-size:15px;display:grid;place-items:center;white-space:nowrap;cursor:pointer;padding:0;transition:transform .2s,background .2s}
+.tab[aria-current="true"]{background:var(--beni);border-color:var(--beni);color:var(--on-dark);transform:rotate(-4deg) scale(1.05)}
+.tab.tip{border-color:var(--lilac)}
+.tab:focus-visible{outline:3px solid var(--yuzu);outline-offset:2px}
+
+/* book */
+.stage{position:relative;overflow:hidden;border-radius:6px 22px 22px 6px;padding:0 0 6px 0}
+.book{position:relative;height:clamp(500px,calc(100dvh - 190px),760px);perspective:2000px}
+.book::before{content:"";position:absolute;inset:6px -2px -6px 4px;border-radius:6px 22px 22px 6px;background:var(--line)}
+.leaf{position:absolute;inset:0;transform-origin:left center;transition:transform .9s cubic-bezier(.45,.05,.25,1),box-shadow .9s;transform-style:preserve-3d;border-radius:6px 22px 22px 6px}
+.leaf .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--page);border-radius:6px 22px 22px 6px;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 2px 0 var(--line),0 10px 28px rgba(120,60,80,.14);
+  background-image:linear-gradient(90deg,rgba(0,0,0,.06),transparent 18px)}
+.leaf .back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform:rotateY(180deg);border-radius:22px 6px 6px 22px;background:var(--sakura-bg);
+  background-image:radial-gradient(circle at 10px 10px,var(--sakura) 2px,transparent 2.5px);background-size:26px 26px}
+.leaf.turned{transform:rotateY(-180deg)}
+.leaf.turned .face{box-shadow:none}
+@media (prefers-reduced-motion:reduce){.leaf{transition:none}}
+.pg{padding:22px 20px 26px;display:flex;flex-direction:column;gap:16px;min-height:100%}
+
+/* controls */
+.ctrl{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.btn{font-family:var(--f-head);font-size:17px;border:2.5px solid var(--ink);background:var(--page);color:var(--ink);border-radius:14px;padding:6px 16px;cursor:pointer;box-shadow:3px 3px 0 var(--ink);min-height:44px}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.btn:disabled{opacity:.35;cursor:default;box-shadow:none}
+.btn:focus-visible{outline:3px solid var(--yuzu);outline-offset:2px}
+.count{font-family:var(--f-head);font-size:15px;color:var(--soft);font-variant-numeric:tabular-nums;text-align:center}
+.hint{font-size:12.5px;color:var(--soft);text-align:center}
+
+/* cover */
+.cover{color:var(--ink)}
+.cover .pg{justify-content:space-between;align-items:center;text-align:center;padding-top:0}
+.rod{height:12px;width:calc(100% + 40px);margin:0 -20px;background:var(--wood);border-radius:0 0 6px 6px}
+.noren{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;width:100%;margin-top:-16px}
+.noren div{background:var(--page);color:var(--beni);box-shadow:inset 0 -5px 0 var(--sakura);border-radius:0 0 14px 14px;height:120px;display:grid;place-items:center;font-family:var(--f-hand);font-size:clamp(44px,13vw,62px)}
+.cover .ttl{display:flex;flex-direction:column;gap:8px;align-items:center}
+.cover .ttl .k{font-family:var(--f-hand);font-size:17px;opacity:.95}
+.cover h1{font-size:clamp(40px,11vw,54px)}
+.cover .sub{font-size:15px;max-width:30ch;opacity:.95}
+.cover .who{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.cover .who span{background:var(--page);border-radius:999px;padding:3px 12px;font-size:13.5px;font-weight:500}
+.tap{font-family:var(--f-head);font-size:16px;background:var(--beni);color:var(--on-dark);border-radius:999px;padding:6px 18px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+
+/* index page */
+.idx{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.idx button{all:unset;box-sizing:border-box;width:100%;display:flex;align-items:center;gap:12px;background:var(--desk);border-radius:16px;padding:9px 12px;cursor:pointer}
+.idx button:focus-visible{outline:3px solid var(--yuzu)}
+.idx .hk{flex:none;min-width:58px;height:34px;padding:0 10px;border-radius:999px;background:var(--beni);color:var(--on-dark);display:grid;place-items:center;font-family:var(--f-head);font-size:15px}
+.idx .hk.tip{background:var(--lilac);color:var(--ink)}
+.idx .tx{min-width:0;display:flex;flex-direction:column;line-height:1.35}
+.idx .tx b{font-family:var(--f-head);font-weight:400;font-size:17px}
+.idx .tx small{color:var(--soft);font-size:13px}
+
+/* day pages */
+.dhead{display:flex;align-items:center;gap:12px}
+.dhead .hk small{font-size:11px;letter-spacing:.08em;margin-bottom:2px}
+.dhead .hk{flex:none;width:62px;height:62px;border-radius:50%;background:var(--beni);color:var(--on-dark);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;font-family:var(--f-head);font-size:28px;transform:rotate(-8deg);box-shadow:0 0 0 3px var(--page),0 0 0 5px var(--beni)}
+.dhead .lbl{font-family:var(--f-hand);color:var(--beni);font-size:14px}
+.dhead h2{font-size:clamp(22px,6vw,27px)}
+.polaroid{align-self:center;width:min(100%,330px);background:var(--page);padding:10px 10px 12px;border-radius:6px;box-shadow:0 6px 18px rgba(90,40,60,.18);transform:rotate(-2deg);position:relative;border:1px solid var(--line)}
+.polaroid::before{content:"";position:absolute;top:-10px;left:50%;width:80px;height:20px;margin-left:-40px;background:var(--yuzu);opacity:.8;transform:rotate(3deg)}
+.polaroid svg{display:block;width:100%;height:auto;border-radius:3px}
+.polaroid .cap{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:8px}
+.polaroid .cap span{font-family:var(--f-hand);font-size:15px}
+.polaroid .cap a{font-size:12.5px;font-weight:700;text-decoration:none;background:var(--ink);color:var(--page);border-radius:999px;padding:3px 10px;white-space:nowrap}
+.fact{background:var(--yuzu-bg);border-radius:16px;padding:13px 15px;position:relative}
+.fact .t{font-family:var(--f-head);color:var(--beni);font-size:15px;display:block;margin-bottom:2px}
+.fact p{font-size:15px}
+.fact p+p{margin-top:6px}
+.stops{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.stop{border:2px solid var(--line);border-radius:16px;padding:11px 13px;display:flex;flex-direction:column;gap:5px;background:var(--page)}
+.stop .row1{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.time{font-family:var(--f-head);font-size:13px;background:var(--sakura-bg);color:var(--beni);border-radius:999px;padding:0 10px}
+.stop h3{font-size:18px;flex:1 1 auto;min-width:0}
+.done{display:flex;align-items:center;gap:4px;font-size:12.5px;color:var(--soft);cursor:pointer;margin-left:auto}
+.done input{width:19px;height:19px;accent-color:var(--matcha);margin:0}
+.stop.is-done{opacity:.55}
+.stop.is-done h3{text-decoration:line-through;text-decoration-color:var(--beni);text-decoration-thickness:2px}
+.stop p{font-size:14.5px;color:var(--soft)}
+.jp-row{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.jp{font-family:var(--f-jp);font-size:15px;border:1.5px dashed var(--sakura);border-radius:9px;padding:0 8px}
+.cp{font-family:var(--f-body);font-size:12px;font-weight:700;border:0;cursor:pointer;background:var(--ink);color:var(--page);border-radius:999px;padding:3px 10px;min-height:28px}
+.cp:focus-visible,.done input:focus-visible{outline:3px solid var(--yuzu);outline-offset:2px}
+.fusen-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.fusen{border-radius:5px 5px 16px 5px;padding:12px 14px;font-size:14.5px;min-width:0}
+.fusen:nth-child(odd){transform:rotate(-1deg)}.fusen:nth-child(even){transform:rotate(1deg)}
+.fusen b{font-family:var(--f-head);font-weight:400;font-size:16px;display:block}
+.f-y{background:var(--yuzu-bg)}.f-s{background:var(--sora-bg)}.f-p{background:var(--sakura-bg)}.f-m{background:var(--matcha-bg)}
+
+/* info pages */
+.ihead{display:flex;align-items:center;gap:12px}
+.ihead .hk small{font-size:11px;letter-spacing:.08em;margin-bottom:2px}
+.ihead .hk{flex:none;width:58px;height:58px;border-radius:18px;background:var(--lilac);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;font-family:var(--f-head);font-size:26px;transform:rotate(-6deg)}
+.ihead h2{font-size:clamp(22px,6vw,26px)}
+.ihead p{color:var(--soft);font-size:14px}
+.box{border:2px solid var(--line);border-radius:16px;padding:13px 14px;display:flex;flex-direction:column;gap:6px}
+.box h3{font-size:17px}
+.rows{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.rows li{padding:9px 0;border-bottom:1.5px dashed var(--line);display:flex;flex-direction:column;gap:2px;min-width:0}
+.rows li:last-child{border-bottom:0;padding-bottom:0}
+.rows li:first-child{padding-top:0}
+.rows .t{font-weight:700;font-size:15px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.rows .m{color:var(--soft);font-size:14px}
+.kv{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:14.5px}
+.kv td{padding:7px 2px;border-bottom:1.5px dashed var(--line)}
+.kv tr:last-child td{border-bottom:0}
+.kv td:last-child{text-align:right;font-family:var(--f-head);font-size:16px}
+.kv tr.sum td{color:var(--beni)}
+
+/* back cover */
+.bc .pg{justify-content:center;align-items:center;text-align:center;gap:14px}
+.bc .hand{font-family:var(--f-hand);font-size:clamp(30px,9vw,40px);color:var(--beni)}
+.bc p{color:var(--soft);max-width:30ch}
+.toast{position:fixed;left:50%;bottom:calc(22px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--page);font-weight:700;padding:9px 18px;border-radius:999px;font-size:14px;z-index:20;max-width:calc(100% - 40px);text-align:center}
+</style>
+
+<div class="app">
+  <div class="tabs" id="tabs" role="tablist" aria-label="페이지 바로가기"></div>
+  <div class="stage"><div class="book" id="book" aria-live="polite"></div></div>
+  <div class="ctrl">
+    <button class="btn" id="prev" type="button" aria-label="이전 장">◀ 이전</button>
+    <div><div class="count" id="count"></div><div class="hint">옆으로 밀어도 넘어가</div></div>
+    <button class="btn" id="next" type="button" aria-label="다음 장">다음 ▶</button>
+  </div>
+</div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+/* ---------- tiny SVG illustrations (one per day) ---------- */
+var ART={
+sento:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--sora-bg)"/><circle cx="250" cy="40" r="18" fill="var(--yuzu)"/><path d="M0 190 V150 H300 V190Z" fill="var(--matcha-bg)"/><rect x="200" y="30" width="16" height="70" fill="var(--wood)"/><path d="M208 26 q-10 -10 0 -20 q10 -10 0 -20" stroke="var(--line)" stroke-width="6" fill="none" stroke-linecap="round" opacity=".9"/><path d="M60 80 L150 40 L240 80Z" fill="var(--ink)"/><rect x="72" y="80" width="156" height="78" fill="var(--page)" stroke="var(--ink)" stroke-width="3"/><rect x="118" y="96" width="64" height="36" rx="4" fill="var(--sora)"/><text x="150" y="122" text-anchor="middle" font-family="Yusei Magic, sans-serif" font-size="26" fill="var(--on-dark)">ゆ</text><rect x="128" y="132" width="44" height="26" fill="var(--wood)"/><circle cx="96" cy="112" r="9" fill="var(--beni)"/><circle cx="204" cy="112" r="9" fill="var(--beni)"/></svg>',
+torinoichi:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--yuzu-bg)"/><rect x="0" y="0" width="300" height="70" fill="var(--ink)" opacity=".85"/><circle cx="40" cy="30" r="2" fill="var(--yuzu)"/><circle cx="90" cy="18" r="1.6" fill="var(--yuzu)"/><circle cx="260" cy="24" r="2" fill="var(--yuzu)"/><rect x="40" y="62" width="220" height="12" fill="var(--wood)"/><ellipse cx="150" cy="120" rx="58" ry="52" fill="var(--beni)" stroke="var(--ink)" stroke-width="3"/><rect x="118" y="64" width="64" height="12" rx="3" fill="var(--ink)"/><rect x="118" y="164" width="64" height="12" rx="3" fill="var(--ink)"/><path d="M98 104 H202 M94 124 H206 M98 144 H202" stroke="rgba(0,0,0,.18)" stroke-width="3"/><text x="150" y="133" text-anchor="middle" font-family="Yusei Magic, sans-serif" font-size="34" fill="var(--on-dark)">福</text><path d="M30 180 L58 110 M58 110 l-14 -10 M58 110 l-4 -16 M58 110 l8 -14 M58 110 l16 -6" stroke="var(--yuzu)" stroke-width="5" stroke-linecap="round"/><circle cx="44" cy="96" r="7" fill="var(--sakura)"/><circle cx="74" cy="100" r="6" fill="var(--matcha)"/><path d="M270 180 L244 112 M244 112 l14 -10 M244 112 l4 -16 M244 112 l-8 -14 M244 112 l-16 -6" stroke="var(--yuzu)" stroke-width="5" stroke-linecap="round"/><circle cx="258" cy="98" r="7" fill="var(--sora)"/></svg>',
+yanaka:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--sakura-bg)"/><circle cx="150" cy="96" r="44" fill="var(--yuzu)" opacity=".9"/><path d="M0 120 H40 V140 H80 V160 H120 V190 H0Z" fill="var(--ink)" opacity=".85"/><path d="M300 120 H260 V140 H220 V160 H180 V190 H300Z" fill="var(--ink)" opacity=".85"/><rect x="0" y="176" width="300" height="14" fill="var(--ink)"/><g transform="translate(150 150)"><ellipse cx="0" cy="12" rx="22" ry="14" fill="var(--ink)"/><circle cx="0" cy="-8" r="13" fill="var(--ink)"/><path d="M-11 -16 L-8 -28 L-2 -19Z M11 -16 L8 -28 L2 -19Z" fill="var(--ink)"/><path d="M20 16 q18 -4 14 -24" stroke="var(--ink)" stroke-width="5" fill="none" stroke-linecap="round"/></g><path d="M40 40 q8 -6 16 0 q8 -6 16 0" stroke="var(--beni)" stroke-width="3" fill="none" stroke-linecap="round"/></svg>',
+nikko:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--matcha-bg)"/><path d="M0 70 L60 30 L120 70 L180 24 L240 66 L300 36 V100 H0Z" fill="var(--matcha)" opacity=".55"/><path d="M0 140 Q150 120 300 140 V190 H0Z" fill="var(--sora)"/><path d="M40 120 Q150 70 260 120" stroke="var(--beni)" stroke-width="12" fill="none"/><path d="M40 120 Q150 70 260 120" stroke="var(--ink)" stroke-width="2" fill="none" transform="translate(0 -8)"/><rect x="60" y="104" width="8" height="40" fill="var(--beni)"/><rect x="110" y="88" width="8" height="54" fill="var(--beni)"/><rect x="182" y="88" width="8" height="54" fill="var(--beni)"/><rect x="232" y="104" width="8" height="40" fill="var(--beni)"/><g fill="var(--beni)"><path d="M40 40 l6 10 l10 -2 l-6 8 l6 8 l-10 -2 l-6 10 l-6 -10 l-10 2 l6 -8 l-6 -8 l10 2Z"/><path d="M250 30 l5 8 l8 -2 l-5 7 l5 7 l-8 -2 l-5 8 l-5 -8 l-8 2 l5 -7 l-5 -7 l8 2Z" fill="var(--yuzu)"/><path d="M200 160 l4 7 l7 -2 l-4 6 l4 6 l-7 -2 l-4 7 l-4 -7 l-7 2 l4 -6 l-4 -6 l7 2Z"/></g></svg>',
+crossing:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--sora-bg)"/><path d="M0 92 H300 V130 H0Z" fill="var(--sora)"/><path d="M0 92 Q60 84 120 92 T300 92" stroke="var(--page)" stroke-width="3" fill="none" opacity=".8"/><circle cx="240" cy="70" r="16" fill="var(--yuzu)"/><path d="M0 130 H300 V190 H0Z" fill="var(--line)"/><path d="M0 150 H300 M0 170 H300" stroke="var(--soft)" stroke-width="3"/><g><rect x="100" y="116" width="120" height="40" rx="10" fill="var(--matcha)" stroke="var(--ink)" stroke-width="3"/><rect x="100" y="140" width="120" height="7" fill="var(--yuzu)"/><rect x="112" y="122" width="22" height="13" rx="3" fill="var(--sora-bg)"/><rect x="140" y="122" width="22" height="13" rx="3" fill="var(--sora-bg)"/><rect x="168" y="122" width="22" height="13" rx="3" fill="var(--sora-bg)"/><rect x="196" y="122" width="14" height="13" rx="3" fill="var(--sora-bg)"/></g><rect x="40" y="96" width="6" height="74" fill="var(--ink)"/><path d="M24 104 L62 124 M62 104 L24 124" stroke="var(--yuzu)" stroke-width="7"/><path d="M24 104 L62 124 M62 104 L24 124" stroke="var(--ink)" stroke-width="2" stroke-dasharray="6 6"/><circle cx="32" cy="138" r="6" fill="var(--beni)"/><circle cx="54" cy="138" r="6" fill="var(--beni)"/></svg>',
+bye:'<svg viewBox="0 0 300 190"><rect width="300" height="190" fill="var(--sora-bg)"/><circle cx="60" cy="50" r="24" fill="var(--page)"/><circle cx="84" cy="56" r="18" fill="var(--page)"/><circle cx="230" cy="40" r="18" fill="var(--page)"/><path d="M150 74 L230 50 L240 58 L170 92 Z" fill="var(--page)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><path d="M188 72 L200 40 L210 44 L204 68Z" fill="var(--beni)" stroke="var(--ink)" stroke-width="2.5"/><path d="M150 74 L140 62 L148 60 L160 70Z" fill="var(--beni)"/><path d="M0 190 V150 Q150 130 300 150 V190Z" fill="var(--matcha-bg)"/><path d="M110 168 L150 120 L190 168Z" fill="var(--page)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><rect x="128" y="146" width="44" height="22" fill="var(--ink)"/><circle cx="140" cy="140" r="2.5" fill="var(--ink)"/><circle cx="160" cy="140" r="2.5" fill="var(--ink)"/><ellipse cx="134" cy="146" rx="4" ry="2" fill="var(--sakura)"/><ellipse cx="166" cy="146" rx="4" ry="2" fill="var(--sakura)"/></svg>'
+};
+function photo(q){return 'https://www.google.com/search?tbm=isch&q='+encodeURIComponent(q);}
+
+var DAYS=[
+{hk:"一",lbl:"DAY 1 · 金曜日",title:"다다미방 입주하고 동네 한 바퀴",art:"sento",cap:"동네 센토에서 첫 목욕",q:"富の湯 立石 銭湯",
+ fact:["숙소가 있는 가츠시카구는 만화 덕후 성지야. 『캡틴 츠바사』 작가의 고향이라 동네 곳곳에 캐릭터 동상이 서 있고, 『이 녀석들 경찰관이야(こち亀)』의 무대 가메아리도 같은 구야.","도쿄 센토 벽에 후지산 그림이 그려진 건 관동 지방 목욕탕의 오랜 전통이야. 탕에 몸 담그고 후지산 보는 게 국룰!"],
+ stops:[["16:00~","Keys House 체크인","東京都葛飾区立石6-24-5","아오토역 오른쪽 출구로 도보 5~7분. 체크인 16~21시라 늦어지면 미리 연락."],
+  ["저녁","사치노야 식당 정식","ユアエルム青戸","역 빌딩 2층. 가라아게·고등어 정식 1,100엔대, 밥 곱빼기 무료."],
+  ["밤","첫 센토 도전","富の湯 立石","금요일엔 키쿠노유가 쉬어서 토미노유나 아쿠아 돌핀 랜드로. 나와서 병 커피우유!"]],
+ notes:[["f-p","상점가는 낮에!","다테이시 상점가는 평일 저녁 7시면 거의 문 닫아."],["f-s","센토 사진","탈의실 천장·벽화는 허락 받고. 탕 안은 촬영 금지."]]},
+{hk:"二",lbl:"DAY 2 · 土曜日",title:"모미지짱이랑 쇼핑 + 酉の市",art:"torinoichi",cap:"酉の市 날의 아사쿠사",q:"浅草 酉の市 鷲神社 熊手",
+ fact:["가미나리몬의 그 거대한 빨간 등은 파나소닉 창업자 마쓰시타 고노스케가 기증한 걸로 유명해. 등 아래쪽 이름도 찾아봐!","酉の市에선 쿠마데(복 긁는 갈퀴)를 해마다 조금씩 큰 걸로 바꿔 사는 게 관례래. 흥정이 끝나면 가게 사람들이 다 같이 박수 치는 '테지메'를 해줘."],
+ stops:[["낮","모미지짱이랑 쇼핑",null,"이번 여행 쇼핑은 이날 하루로 끝. 아사쿠사·우에노는 아오토에서 직통."],
+  ["16:00","무료 전망 테라스","浅草文化観光センター","가미나리몬 앞 건물 8층, 무료. 나카미세랑 스카이트리가 한 컷에."],
+  ["17:00~","酉の市 토리노이치","鷲神社 浅草","하루 종일 열려. 쿠마데 노점 구경하고 저녁은 노점 먹거리로."],
+  ["밤","간논우라 → 스미다강","観音裏 浅草","센소지 뒤 조용한 골목으로 빠져서 아즈마바시에서 강물에 비친 스카이트리."]],
+ notes:[["f-s","📸 사진","쿠마데 노점은 해 진 뒤가 예뻐. 다리 위 반영샷."],["f-y","💴 교통","Suica로. 왕복 몇백 엔."]]},
+{hk:"三",lbl:"DAY 3 · 日曜日",title:"시바마타 참도에서 야나카 일몰까지",art:"yanaka",cap:"유야케 단단의 해질녘",q:"夕やけだんだん 谷中",
+ fact:["시바마타는 일본 국민 영화 『남자는 괴로워(男はつらいよ)』 주인공 토라상의 고향이야. 역 앞에 토라상 동상이 있고, 참도 가게들도 영화 분위기 그대로.","네즈 신사의 지금 건물들은 1700년대 초에 지어진 거라 국가 중요문화재야. 작은 빨간 도리이 터널은 사진 명당."],
+ stops:[["오전","시바마타 다이샤쿠텐","柴又帝釈天","다카사고에서 한 정거장. 참도에서 쑥떡 하나. 나무조각 갤러리 400엔."],
+  ["점심 전","에도가와 강둑 산책","江戸川河川敷 柴又","절 바로 뒤 넓은 둔치. 유후인 같은 한적함."],
+  ["오후","야나카 긴자 & 골목","谷中銀座","게이세이 본선으로 닛포리. 큰길 말고 옆 골목이 진짜."],
+  ["오후","야나카 묘지 → 네즈 신사","根津神社","고양이 많은 묘지길 지나 빨간 도리이 터널까지. 무료."],
+  ["16:30","유야케 단단 일몰","夕やけだんだん","11월은 4시 반쯤 해가 져."]],
+ notes:[["f-y","💴 교통","게이세이만 타서 거의 0엔."],["f-p","일요일이라","큰길은 붐벼. 사진은 골목에서."]]},
+{hk:"四",lbl:"DAY 4 · 月曜日",title:"단풍 든 닛코 숲길 당일치기",art:"nikko",cap:"신쿄 빨간 다리와 단풍",q:"日光 神橋 紅葉",
+ fact:["도쇼구엔 유명한 조각이 두 개 있어. '안 보고 안 듣고 안 말하는' 세 원숭이, 그리고 문 위에서 꾸벅 조는 '잠자는 고양이(眠り猫)'. 고양이 찾기 미션!","칸만가후치 석불길의 지장보살들은 '바케지조'라고 불려. 셀 때마다 숫자가 달라진다는 전설이 있으니 직접 세어봐."],
+ stops:[["아침 일찍","도부 아사쿠사역 출발","東武浅草駅","역 안 관광안내소에서 NIKKO PASS 수령(여권 필수). 편도 약 2시간."],
+  ["오전","신쿄 빨간 다리","神橋 日光","강 위 주홍색 다리. 단풍이랑 같이 찍으면 그림."],
+  ["점심 무렵","닛코 도쇼구","日光東照宮","세계유산. 입장료는 패스에 포함 안 됨."],
+  ["오후","칸만가후치 석불길","憾満ヶ淵","이끼 낀 석불이 줄지어 있는 강변길. 오늘의 진짜 메인."],
+  ["귀가 후","키쿠노유 사우나","菊の湯 東立石","많이 걸은 날엔 600엔 사우나 포함 센토로."]],
+ notes:[["f-y","💴 NIKKO PASS","세계유산 에어리어 3,000엔 · 2일. 아사쿠사 왕복 + 버스 무제한."],["f-p","알아둘 것","주젠지 호수·게곤 폭포는 범위 밖. 아케치다이라 로프웨이 운휴 중."]]},
+{hk:"五",lbl:"DAY 5 · 火曜日",title:"슬램덩크 건널목 → 에노시마 → 시부야",art:"crossing",cap:"바다 앞 그 건널목",q:"鎌倉高校前 踏切 江ノ電",
+ fact:["🏀 가마쿠라코코마에역 옆 '1호 건널목'이 바로 애니 『슬램덩크』 오프닝 첫 장면에 나온 그곳! 바다를 배경으로 초록 에노덴이 지나가는 순간이 그 장면이야.","너무 유명해져서 지금은 건널목 안·차도·고등학교 부지에선 촬영 금지고 경비원이 상주해. 주말이나 오전 9시 이후엔 사람이 확 늘어서, 평일 아침 6~8시가 제일 여유롭대. 학교 정문 앞 인도에서 짧게 조용히 찍는 건 OK."],
+ stops:[["오전 일찍","슬램덩크 건널목","鎌倉高校前 踏切","아오토에서 2시간 가까이 걸리니 첫차급으로 나서면 베스트. 9시 넘으면 사람이 확 늘어. 인도에서 열차 지나가는 타이밍 기다리기."],
+  ["오전","가마쿠라 골목 & 대불","鎌倉大仏 高徳院","에노덴으로 하세역. 큰길보다 옆 주택가가 조용하고 예뻐."],
+  ["16:00","에노시마 노을","江の島","섬 다리 건너면서 바다 노을. 맑으면 후지산 실루엣도."],
+  ["밤","시부야 뒷골목 & 스크램블","奥渋谷","돌아오는 길에 하차. 오쿠시부야 → 스크램블 야경 → 귀가."]],
+ notes:[["f-y","💴 교통","Suica로. 가마쿠라 왕복 2천 엔 안팎, 출발 전 환승 앱 확인."],["f-p","건널목 매너","차도로 나가지 않기, 통행 막지 않기. 어기면 전면 금지될 수도 있대."]]},
+{hk:"六",lbl:"DAY 6 · 水曜日",title:"동네 아침 먹고 바이바이",art:"bye",cap:"또 올게, 도쿄!",q:"喫茶店 モーニング 昭和レトロ",
+ fact:["킷사텐 '모닝'은 커피 한 잔 값에 토스트·삶은 계란을 얹어주는 일본 찻집 문화야. 나고야가 원조로 유명한데 도쿄 동네 노포에서도 만날 수 있어.","아오토역은 공항 가는 열차가 서는 역이라, 캐리어 끌고 멀리 갈 필요가 없어."],
+ stops:[["아침","킷사텐 모닝 세트","喫茶店 モーニング 青砥","동네 찻집에서 마지막 쇼와 감성 아침."],
+  ["~10:00","체크아웃",null,"10시까지. 케이 상한테 인사 꼭!"],
+  ["출발 전","슈퍼에서 간식 털기","オーケー 葛飾","기념 간식은 슈퍼·드러그스토어가 싸고 진짜 현지 맛."],
+  ["공항으로","아오토에서 공항 직행",null,"나리타는 게이세이로 한 번에. 하네다도 직통 열차 있으니 시간표 확인."]],
+ notes:[]}
+];
+
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function jpRow(jp){return jp?'<div class="jp-row"><span class="jp">'+esc(jp)+'</span><button class="cp" type="button" data-t="'+esc(jp)+'">📋 구글맵용 복사</button></div>':'';}
+function fus(list){return list.length?'<div class="fusen-row">'+list.map(function(n){return '<div class="fusen '+n[0]+'"><b>'+n[1]+'</b>'+n[2]+'</div>';}).join('')+'</div>':'';}
+function box(h,inner){return '<div class="box"><h3>'+h+'</h3>'+inner+'</div>';}
+function rows(list){return '<ul class="rows">'+list.map(function(r){return '<li><span class="t">'+r[0]+(r[1]?' <span class="jp">'+esc(r[1])+'</span><button class="cp" type="button" data-t="'+esc(r[1])+'">📋</button>':'')+'</span><span class="m">'+r[2]+'</span></li>';}).join('')+'</ul>';}
+function ihead(hk,t,s){return '<div class="ihead"><div class="hk">'+hk+'</div><div><h2>'+t+'</h2><p>'+s+'</p></div></div>';}
+
+var saved={};try{saved=JSON.parse(localStorage.getItem('tokyo-book-done')||'{}')||{};}catch(e){saved={};}
+
+/* ---------- pages ---------- */
+var PAGES=[];
+PAGES.push({k:"표지",label:"표지",cls:"cover",html:'<div class="pg"><div style="width:100%"><div class="rod"></div><div class="noren"><div>東</div><div>京</div><div>旅</div></div></div><div class="ttl"><span class="k">東京下町 旅のしおり</span><h1>도쿄 산책 수첩</h1><p class="sub">아오토 다다미방을 베이스캠프 삼아, 골목 걷고 강변 보고 센토에서 마무리하는 6일</p><div class="who"><span>🏠 青砥 Keys House</span><span>📸 골목 산책</span><span>💴 저예산</span></div></div><span class="tap">한 장 넘겨볼까? ▶</span></div>'});
+var idx='<div class="pg">'+ihead("<small>INDEX</small>📖","목차","누르면 그 장으로 넘어가")+'<ul class="idx">';
+PAGES.push({k:"목차",label:"목차",html:null});
+DAYS.forEach(function(d,i){
+  var id=i;
+  var html='<div class="pg"><div class="dhead"><div class="hk"><small>DAY</small>'+(i+1)+'</div><div><p class="lbl">'+d.lbl+'</p><h2>'+d.title+'</h2></div></div>'+
+   '<figure class="polaroid" style="margin:0">'+ART[d.art]+'<figcaption class="cap"><span>'+d.cap+'</span><a href="'+photo(d.q)+'" target="_blank" rel="noopener">📷 실제 사진</a></figcaption></figure>'+
+   '<div class="fact"><span class="t">豆知識 · 펀팩트</span>'+d.fact.map(function(f){return '<p>'+f+'</p>';}).join('')+'</div>'+
+   '<ol class="stops">'+d.stops.map(function(s,j){var key='d'+id+'-'+j;var on=saved[key];
+     return '<li class="stop'+(on?' is-done':'')+'" data-k="'+key+'"><div class="row1"><span class="time">'+s[0]+'</span><h3>'+s[1]+'</h3><label class="done"><input type="checkbox" id="c-'+key+'"'+(on?' checked':'')+'>다녀옴</label></div>'+jpRow(s[2])+'<p>'+s[3]+'</p></li>';}).join('')+'</ol>'+fus(d.notes)+'</div>';
+  PAGES.push({k:"Day"+(i+1),label:"Day "+(i+1),html:html,title:d.title});
+});
+PAGES.push({k:"Tip1",tip:1,label:"Tip 1 · 숙소",title:"우리 숙소 Keys House",html:'<div class="pg">'+ihead("<small>TIP</small>1","우리 숙소 Keys House","다다미방 민박 · 구글 4.1점 · 예약 사이트 8점 안팎")+
+ fus([["f-m","👍 좋다는 얘기","주인 케이 상 엄청 친절 · 주방·샤워실 깨끗 · 역 가깝고 나리타 편함"],["f-p","👎 알아둘 것","종이문이라 방음 약함 → 귀마개 · 욕실 공용 · 카드 4% 수수료 → 현금"]])+
+ box("기본 정보",'<table class="kv"><tr><td>체크인</td><td>16:00~21:00</td></tr><tr><td>체크아웃</td><td>~10:00</td></tr><tr><td>가는 길</td><td>아오토역 오른쪽 출구 5~7분</td></tr></table>')+
+ box("♨️ 근처 센토",rows([["키쿠노유","菊の湯 東立石","평점 최고. 600엔 사우나 포함 · 15~23시 · 금 휴무"],["토미노유","富の湯 立石","레트로, 우키요에 벽화 · 15~22시 · 월 휴무"],["아쿠아 돌핀 랜드","アクアドルフィンランド 立石","노천탕 · 15~23:20 · 목 휴무"],["아오토 효소풍욕","青砥酵素風呂","노송나무 톱밥 목욕 · 예약 필수 03-3601-6239"]]))+
+ box("🍚 근처 밥 & 볼거리",rows([["다테이시 나카미세","立石仲見世商店街","갓 튀긴 고로케. 재개발 전 쇼와 풍경."],["사치노야 식당","ユアエルム青戸","역 빌딩 2층 정식집, 밥 곱빼기 무료."],["캡틴 츠바사 동상","若林源三像","숙소에서 700m."],["히키후네가와 공원","曳舟川親水公園","아침 산책용."]]))+'</div>'});
+PAGES.push({k:"Tip2",tip:1,label:"Tip 2 · 교통",title:"교통 & 패스",html:'<div class="pg">'+ihead("<small>TIP</small>2","교통 & 패스","이 일정은 패스보다 Suica가 이득")+
+ box("도쿄 서브웨이 티켓",'<table class="kv"><tr><td>24시간</td><td>1,000엔</td></tr><tr><td>48시간</td><td>1,500엔</td></tr><tr><td>72시간</td><td>2,000엔</td></tr></table>')+
+ fus([["f-p","⚠️ 게이세이선 X","아오토~오시아게(IC 199엔)는 따로 정산."],["f-y","본전 기준","하루 지하철 5번 이상일 때만."],["f-s","시간 기준","첫 개찰부터 24시간. 시작하면 환불 불가."],["f-m","📱 아이폰 Suica","지갑 앱에 추가하면 카드 필요 없음."]])+
+ box("💴 예상 교통비",'<table class="kv"><tr><td>Day 1·2·3</td><td>하루 400~800엔</td></tr><tr><td>Day 4 닛코</td><td>3,000엔대</td></tr><tr><td>Day 5 가마쿠라</td><td>2천 엔 안팎</td></tr><tr class="sum"><td>합계 (공항 제외)</td><td>7,000~9,000엔</td></tr></table>')+'</div>'});
+PAGES.push({k:"Tip3",tip:1,label:"Tip 3 · 로컬 꿀팁",title:"로컬 꿀팁",html:'<div class="pg">'+ihead("<small>TIP</small>3","로컬만 아는 꿀팁","동네 사람처럼 지내는 법")+
+ box("🍙 식비 아끼기",rows([["반값 스티커 타임","半額シール","폐점 1~2시간 전 도시락·초밥 할인."],["싼 슈퍼","業務スーパー","OK스토어(オーケー)·니쿠노하나마사도."],["드러그스토어","ウエルシア","음료·과자가 편의점보다 쌀 때 많아."],["킷사텐 모닝","喫茶店 モーニング","커피값에 토스트·계란."],["마치추카","町中華","동네 중국집. 싸고 양 많음."]]))+
+ box("♨️ 센토 매너",rows([["몸 먼저 씻고 입장",null,"수건은 탕에 넣지 말고 머리 위에."],["샴푸·수건 챙기기",null,"비치 안 된 곳 많아."],["마무리 커피우유","コーヒー牛乳","병으로 원샷이 국룰."]]))+
+ box("⚠️ 덜 당황하기",rows([["쓰레기통 거의 없음",null,"작은 비닐봉지 챙기기."],["현금만 받는 가게","現金のみ","노포·센토·상점가."],["에스컬레이터 왼쪽",null,"도쿄는 왼쪽 서기."],["11월 일교차",null,"얇은 겉옷 겹쳐 입기."]]))+'</div>'});
+PAGES.push({k:"Tip4",tip:1,label:"Tip 4 · 플랜 B",title:"플랜 B 주머니",html:'<div class="pg">'+ihead("<small>TIP</small>4","플랜 B 주머니","비 오거나 시간 남을 때 꺼내 쓰기")+
+ box("꺼내 쓰는 리스트",rows([["새벽 센소지","浅草寺","6~7시엔 텅 빈 경내. 무료."],["기요스미 정원","清澄庭園","징검돌 연못 정원, 150엔."],["츠쿠다지마","佃島","빌딩 옆 옛 어촌 골목."],["츠키지 장외시장","築地場外市場","일찍! 1시 반쯤부터 닫아."],["분쿄 시빅센터","文京シビックセンター","25층 무료 전망, 맑으면 후지산."],["도쿄도청 전망대","東京都庁 展望室","신주쿠 야경 무료. 북쪽 월 휴무."],["도덴 아라카와선","都電荒川線","도쿄 마지막 노면전차."],["다카오산","高尾山","산이 그리울 때. 11월 중순 단풍."]]))+'</div>'});
+PAGES.push({k:"끝",label:"뒷표지",cls:"bc",html:'<div class="pg"><svg width="120" height="96" viewBox="0 0 100 80" aria-hidden="true"><path d="M18 40 L22 12 L40 28 Z" fill="var(--page)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><path d="M82 40 L78 12 L60 28 Z" fill="var(--page)" stroke="var(--ink)" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="50" rx="36" ry="28" fill="var(--page)" stroke="var(--ink)" stroke-width="3"/><path d="M30 46 q5 -5 10 0 M60 46 q5 -5 10 0" stroke="var(--ink)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M45 56 q5 5 10 0" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/><ellipse cx="30" cy="58" rx="6" ry="3.5" fill="var(--sakura)"/><ellipse cx="70" cy="58" rx="6" ry="3.5" fill="var(--sakura)"/></svg><span class="hand">いってらっしゃい!</span><p>일본어 이름은 복사해서 구글맵에 붙여넣기. 다녀온 곳 체크는 이 폰에 기억돼.</p><button class="btn" type="button" data-go="0">처음으로 ↺</button></div>'});
+
+/* build index page */
+PAGES.forEach(function(p,i){if(i<2||p.k==="끝")return;idx+='<li><button type="button" data-go="'+i+'"><span class="hk'+(p.tip?' tip':'')+'">'+p.k+'</span><span class="tx"><b>'+p.label+'</b><small>'+(p.title||'')+'</small></span></button></li>';});
+PAGES[1].html=idx+'</ul></div>';
+
+/* ---------- render book ---------- */
+var book=document.getElementById('book'),tabs=document.getElementById('tabs');
+var N=PAGES.length,cur=0;
+book.innerHTML=PAGES.map(function(p,i){return '<section class="leaf'+(p.cls?' '+p.cls:'')+'" data-i="'+i+'" style="z-index:'+(N-i)+'" aria-label="'+p.label+'"><div class="face">'+p.html+'</div><div class="back"></div></section>';}).join('');
+tabs.innerHTML=PAGES.map(function(p,i){return '<button class="tab'+(p.tip?' tip':'')+'" type="button" data-go="'+i+'" aria-label="'+p.label+'">'+p.k+'</button>';}).join('');
+var leaves=[].slice.call(book.querySelectorAll('.leaf'));
+/* cover keeps its red face */
+leaves[0].querySelector('.face').style.background='var(--cover)';
+leaves[N-1].querySelector('.face').style.backgroundImage='none';
+
+function update(){
+  leaves.forEach(function(l,i){
+    var turned=i<cur;l.classList.toggle('turned',turned);
+    l.style.zIndex=turned?(i+1):(N-i)+N;
+    if(i===cur){l.removeAttribute('inert');l.setAttribute('aria-hidden','false');}else{l.setAttribute('inert','');l.setAttribute('aria-hidden','true');}
+  });
+  document.getElementById('prev').disabled=cur===0;
+  document.getElementById('next').disabled=cur===N-1;
+  document.getElementById('count').textContent=PAGES[cur].label+' · '+(cur+1)+' / '+N;
+  [].forEach.call(tabs.children,function(t,i){t.setAttribute('aria-current',i===cur?'true':'false');});
+  var a=tabs.children[cur];if(a&&a.scrollIntoView)a.scrollIntoView({inline:'center',block:'nearest'});
+  try{history.replaceState(null,'','#p'+cur);}catch(e){}
+}
+var busy=false;
+function go(t){
+  t=Math.max(0,Math.min(N-1,t));if(t===cur)return;
+  if(Math.abs(t-cur)===1){cur=t;update();return;}
+  /* jump: flip through quickly */
+  var dir=t>cur?1:-1;
+  var step=function(){cur+=dir;update();if(cur!==t)setTimeout(step,110);};step();
+}
+document.getElementById('prev').onclick=function(){go(cur-1);};
+document.getElementById('next').onclick=function(){go(cur+1);};
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-go]');if(g){go(+g.getAttribute('data-go'));return;}
+  if(e.target.closest('.cover .face')){go(1);return;}
+  var b=e.target.closest('.cp');if(b){var tx=b.getAttribute('data-t'),pr;try{pr=navigator.clipboard.writeText(tx);}catch(err){pr=Promise.reject(err);}
+    Promise.resolve(pr).then(function(){toast('복사 완료! 구글맵에 붙여넣기 🐾');},function(){toast(tx);});}
+});
+document.addEventListener('change',function(e){if(!e.target.matches('.done input'))return;var li=e.target.closest('.stop');li.classList.toggle('is-done',e.target.checked);saved[li.dataset.k]=e.target.checked;try{localStorage.setItem('tokyo-book-done',JSON.stringify(saved));}catch(err){}});
+document.addEventListener('keydown',function(e){if(e.target.matches('input,button'))return;if(e.key==='ArrowRight')go(cur+1);if(e.key==='ArrowLeft')go(cur-1);});
+var sx=0,sy=0;
+book.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+book.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.3){go(cur+(dx<0?1:-1));}},{passive:true});
+var tt,te=document.getElementById('toast');function toast(m){te.textContent=m;te.hidden=false;clearTimeout(tt);tt=setTimeout(function(){te.hidden=true;},1500);}
+var h=(location.hash||'').match(/^#p(\d+)$/);if(h)cur=Math.min(N-1,+h[1]);
+update();
+</script>
+
+</body>
+</html>
